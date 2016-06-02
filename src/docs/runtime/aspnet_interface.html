@@ -1,0 +1,223 @@
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>ASP.NET Interface</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->ASP.NET 
+  Interface <!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="Requirements"></a>Requirements</h3>
+<p>The ASP.NET interface is designed to run under Windows' IIS, Internet Information 
+  Server, and Microsoft's .NET platform.</p>
+<h3><a name="running_under_iis"></a>Running Under IIS</h3>
+<p>The Java Servlet web server interface is located in the runtime/servlet subdirectory. 
+  Under Unix, Tomcat generally installs in a directory named jakarta-tomcat-X.X. 
+  Under Windows, the directory is called 'Apache Tomcat X.X. The examples below 
+  use the Windows naming. If you are running under Unix, make the appropriate 
+  substitutions.</p>
+<p>In order to run this servlet under Tomcat (where X.X is replaced by the version 
+  of Tomcat you are running, and N.N by the version of Java you are running):</p>
+<ol>
+  <li>Create a new directory in InetPub\wwwroot named 'KW'.</li>
+  <li>Copy the contents of the runtime\asp.net directory to KW (this includes 
+    the \bin subdirectory).</li>
+  <li>Copy amzi.dll, amzi.cfg, aosutils.lsx and aodbc.lsx from knowledgewright4\workshop 
+    to your InetPub\wwwroot\KW\bin directory.</li>
+  <li>Copy a jig, either basic.xpl or support.xpl, from knowledgewright4\workshop\jigs 
+    to your InetPub\webapps\KW directory.</li>
+  <li>Copy your knowledgebase to InetPub\wwwroot\KW modified as described in the 
+    following section.</li>
+  <li>Open the IIS (Internet Services) Manager in your Control Panel. Add a new 
+    virtual directory named 'KW' and browse to the InetPub\wwwroot\KW directory 
+    created above. For permissions make sure click read, execute (ASP.NET) and 
+    write (for KnowledgeWright's session files).</li>
+  <li>In the IIS Manager, make sure your Web site is running. If not, start it.</li>
+</ol>
+<h3><a name="document_format"></a>Question_Top and Output_Continue</h3>
+<p> 
+  <! AMZI_INDEX = question_top, question_bottom, output_continue>
+  There are two options for using the ASP.NET interface. One method is to put 
+  all the HTML for your page layout (e.g. headers, footers, decorative graphics) 
+  in the main knowledgebase object. The advantage to this approach is the ASP.NET 
+  interface can be used out-of-the-box without further modification.</p>
+<p>The other is to put the minimum amount of HTML in the main knowledgebase object, 
+  and use Visual Studio .NET or some other tool to modify the ASP page. This requires 
+  modifying the ASP.NET interface, but is much easier for pages with many additional 
+  elements in addition to KnowledgeWright's inputs and outputs.</p>
+<p>In your main knowledgebase object, you must have these minimal HTML elements 
+  which are inserted above and below all questions asked of the user:</p>
+<table border="1" cellpadding="3">
+  <tr> 
+    <td valign="top">Property Name</td>
+    <td valign="top">Minimal Value</td>
+  </tr>
+  <tr> 
+    <td valign="top"> 
+      <pre><font color="#990000">question_top</font></pre>
+    </td>
+    <td valign="top"> 
+      <pre>&nbsp;</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td valign="top"> 
+      <pre><font color="#990000">question_bottom</font></pre>
+    </td>
+    <td valign="top"> 
+      <pre><font color="#990000">&lt;INPUT NAME=&quot;Submit&quot; TYPE=&quot;Submit&quot; 
+VALUE=&quot;Continue&quot;&gt; &lt;/INPUT&gt; </font></pre>
+    </td>
+  </tr>
+  <tr> 
+    <td valign="top"> 
+      <pre><font color="#990000">output_continue <i><br>(not 
+in all Jigs)</i></font></pre>
+    </td>
+    <td valign="top"> 
+      <pre><font color="#990000">&lt;INPUT NAME="Submit" TYPE="Submit" 
+VALUE="Continue"&gt; <br>&lt;/INPUT&gt; </font></pre>
+    </td>
+  </tr>
+</table>
+<p>In addition, some jigs (notably Basic) also have an output_continue property 
+  in the knowledgebase object. This is used when there is output for the user 
+  and the reasoning process is not complete. That is, some intermediate results 
+  or information are being displayed for the user. In this case the output_continue 
+  contents are added to the web page and are an empty HTML form that continues 
+  the reasoning process. The program name used in question_bottom and output_continue 
+  must be the same and must match the servlet URL.</p>
+<p>In addition the following properties are passed to your web server:</p>
+<table border="1" cellpadding="3" width="100%">
+  <tr> 
+    <td> 
+      <pre><b><font color="#990000"><! AMZI_INDEX = charset>Parameter</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Description</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Examples</font></b></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">charset</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The character set used in your knowledgebase</font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">ISO-8859-1
+big5</font></pre>
+    </td>
+  </tr>
+</table>
+<h3><a name="running_in_your_web_browser"></a>Running in Your Web Browser</h3>
+<p>To run your knowledgebase, type into your browser the following URL:</p>
+<blockquote> 
+  <pre><font color="#990000">http://localhost/KW/KWForm.aspx?kb_file=hello.kb</font></pre>
+</blockquote>
+<p>Replace the 'localhost' with the name (www.company.com) or IP address of the 
+  server you have installed the KnowledgeWright ASP.NET page on.</p>
+<h3><a name="page_parameters"></a>ASP.NET Page Parameters</h3>
+<p>There are additional parameters that you can specify in the query string. Separate 
+  each of the parameters by ampersands (&amp;) and encode them with <a href="http://www.w3.org/International/O-URL-code.html">standard 
+  URL encoding</a>. The full set of parameters are:</p>
+<table border="1" cellpadding="3" width="100%">
+  <tr> 
+    <td> 
+      <pre><b><font color="#990000">Parameter</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Description</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Examples</font></b></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">kb_file</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The name of the knowledgebase file (no quotes)</font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">amzi_website_advisor.kb</font></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">directory</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The directory where the kb_file is located. <i></i></font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">c:\InetPub\webapps\KW</font></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">temp_directory</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The directory where the temporary session files 
+        are created as well as log files (if you have specified one) and any other 
+        temporary files needed by KnowledgeWright. <i><b>Note ASP.NET pages must 
+        have write access to this directory.</b></i></font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">c:\InetPub\webapps\KW\temp 
+</font></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">log_file</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The name of the log file that details the execution. 
+        It will have the same contents as the log in the KnowledgeWright Workshop.</font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">kwrun.log</font></pre>
+    </td>
+  </tr>
+</table>
+<h3><a name="debugging_cgi_problems"></a>Debugging Servlet Problems</h3>
+<p>The first thing to do when you encounter a problem is to specify a log_file 
+  in the query string where you invoke the servlet. </p>
+<p>To specify your kb file and a log file:</p>
+<blockquote> 
+  <pre><font color="#990000">http://localhost/KW/KWForm.aspx?kb_file=hello.kb&amp;log_file=kwrun.log</font></pre>
+</blockquote>
+<p>This will create a log file in the same directory as your knowledgebase file. 
+  Study its contents, especially at the bottom to see if the problem is explained.</p>
+<h4>Open an Amzi! Logic Server Trace File for Amzi! Tech Support</h4>
+<p>If that does not make the problem clear, the next step is to specify a log 
+  file in Amzi! Prolog + Logic Server. To do this, add the following lines to 
+  your amzi.cfg file in the /bin subdirectory:</p>
+<blockquote> 
+  <pre><font color="#990000">apitrace = on <br>logfile = c:\amziapi.log </font></pre>
+</blockquote>
+<p>If you need technical support, please e-mail the browser output when you run 
+  KW, your KnowledgeWright log file and Amzi! Logic Server trace file along with 
+  your knowledgebase to support@amzi.com.</p>
+<h3><a name="modifying_the_aspnet_page"></a>Modifying the ASP.NET Page</h3>
+<p>To modify and rebuild the servlet you can use the VB.NET project, KW.sln. <br>
+</p>
+<h3><a name="references"></a>References</h3>
+<p>See <a href="http://www.asp.net">Microsoft's ASP.NET Website</a>.</p>
+<p>&nbsp;</p>
+<!-- #EndEditable --> 
+<hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

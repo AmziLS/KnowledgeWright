@@ -1,0 +1,675 @@
+knowledgewright_jig(support, 8).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   odbc = "",
+   description = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD>
+<BODY bgcolor=#FFFFFF text=#000000><H2><IMG SRC=""/images/bullet.gif"" HSPACE=10><FONT COLOR=#0000A0> Amzi! Tech Support Knowledgebase</FONT></H2>
+<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgisupport" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> 
+</FORM></BODY></HTML>"),
+   output_top = "<HTML><HEAD></HEAD><BODY bgcolor=#FFFFFF text=#000000><H2><IMG SRC=""/images/bullet.gif"" HSPACE=10><FONT COLOR=#0000A0> Amzi! Tech Support Knowledgebase</FONT></H2>",
+   output_bottom = "<FONT SIZE=-1><I>Copyright (c)2001 Amzi! inc.</I></FONT>
+</BODY></HTML>",
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(additionalComments, /, [
+   description = "",
+   prompt = text("This system is forwarding your problem to Technical Support. If you have any additional information about your problem, please type it here."),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = text,
+   length = 100,
+   default = "none",
+   ask_also = [userName, userEMail],
+   answer_type = text
+   ]).
+
+question(amziSampleName, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What Amzi! sample program are you running?"),
+   question_type = menu_single_choice,
+   choices = ["dbgene", "dbgenevb"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(amziVersion, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What version of Amzi! do you have?<BR>"),
+   question_type = menu_single_choice,
+   choices = ["5.0", "4.1 Feb98", "4.0 May97", "3.3 Jun96"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(apiFunction, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("Is there a particular Logic Server API call that is causing the problem?<BR>"),
+   question_type = menu_single_choice,
+   choices = ["(none)", "(other)", "lsCall", "lsCallStr", "lsExec", "lsExecStr", "lsInit", "lsLoad", "lsMain", "lsGetParmType", "lsGetArgType", "lsUnify", "lsUnifyParm"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(delphiVersion, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What version of Delphi are you using?"),
+   question_type = menu_single_choice,
+   choices = ["5.0", "4.0", "3.0", "2.0", "1.0"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(environmentNameVer, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What environment are you running under?<BR>"),
+   question_type = menu_single_choice,
+   choices = ["Windows 2000", "Windows NT", "Windows ME", "Windows 98", "Windows 95", "Windows 3.x", "Linux", "Solaris", "DOS"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(errorCode, /, [
+   description = "",
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   ask_also = [errorMessage, symptoms],
+   choices = '[]',
+   question_style = listbox,
+   prompt = text("Enter the error number or 'none':"),
+   default = "none",
+   length = 8,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(errorMessage, /, [
+   description = "",
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   ask_also = [errorCode, symptoms],
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What is the Amzi! or Logic Server error message (if any):<BR>"),
+   question_type = menu_single_choice,
+   choices = ["(none)", "(other)", "Atom table disaster", "Bad argument for arithmetic evaluation", "Bad atom in compiled code", "Cannot open file", "Code too long to load", "Control stack full", "Dangerous cut in not or if-then-else", "Error loading .XPL file", "Load buffer overflow", "Local stack full", "[ODBC] Datasource name not found", "Redefining system or compiled predicate", "Read stack full", "System pred - bad argument", "Term too complex to read", "Too many variables"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(ideCommand, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   description = "",
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What IDE command is causing the problem?"),
+   ask_also = [ideProblemType],
+   question_type = menu_single_choice,
+   choices = ["none", "File/Open", "File/Save", "File/Print", "Edit", "View", "Listener/Start End", "Debug/On Off", "Listener/(Re)consult", "Build/Project", "Build/Compile", "Build/Link", "Build/Run", "Window", "Help"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(ideProblemType, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What type of problem are you having in the IDE?"),
+   question_type = menu_single_choice,
+   choices = ["other", "Edit window is blank", "IDE appears to be unstable", "Screen/printer font size is too small/large"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(iniStringEscOff, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   description = "",
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("Is string_esc off in your .INI file or Prolog program?"),
+   question_type = menu_single_choice,
+   choices = ["Yes", "No"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(languageTool, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What language is the program written in or are you working in?  (Select Amzi! Prolog if Prolog is the only language used)<BR>"),
+   question_type = menu_single_choice,
+   choices = ["(other)", "Access", "Amzi! Prolog", "Borland C", "Borland C++", "Delphi", "Digitalk SmallTalk", "Java", "Visual Basic", "Visual C", "Visual C++", "Watcom C", "Watcom C++"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(predicate, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("Is there a particular Prolog predicate that is causing the problem?<BR>"),
+   question_type = menu_single_choice,
+   choices = ["(none)", "(other)", "bagof", "findall", "findfiles", "setof"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(programType, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What program are you running?<BR>"),
+   question_type = menu_single_choice,
+   choices = ["(other)", "Amzi! Hello Program", "Amzi! Sample Program", "Amzi! IDE", "My Program"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(symptoms, /, [
+   description = "",
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   ask_also = [errorMessage, errorCode],
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("Select which symptoms (if any) you are experiencing (press the [ctrl] key while clicking the mouse to choose multiple items):<BR>"),
+   question_type = menu_multiple_choices,
+   choices = ["(none)", "Cannot open or Missing file", "Debugger is not working properly", "Errors linking with the Logic Server libraries", "Prolog code works under the listener, but not embedded in another program", "Prolog code works interpreted, but not compiled", "System crash or GPF (General Protection Fault)"],
+   question_style = listbox,
+   answer_type = text
+   ]).
+
+question(userEMail, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   description = "",
+   ask_also = [userName, additionalComments],
+   choices = '[]',
+   question_style = listbox,
+   default = "",
+   prompt = text("What is your e-mail address (so that tech support can answer your question)?"),
+   length = 20,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(userName, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   description = "",
+   ask_also = [userEMail, additionalComments],
+   choices = '[]',
+   question_style = listbox,
+   default = "",
+   prompt = text("What is your name?"),
+   length = 20,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(usingDCG, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   description = "",
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("Are you using DCG in your Prolog module?"),
+   question_type = menu_single_choice,
+   choices = ["Yes", "No"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(usingImportExport, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   description = "",
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("Are you using import or export directives in your Prolog module?"),
+   question_type = menu_single_choice,
+   choices = ["Yes", "No"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(usingLongFileNames, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   description = "",
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("Are you using long file names (>8 char name and >3 char extension)?"),
+   question_type = menu_single_choice,
+   choices = ["Yes", "No"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+rule_set(callingProlog, /, [
+   type = single_value,
+   rules = [[conditions, value], [apiFunction = "lsCall" or apiFunction = "lsCallStr" or apiFunction = "lsExec" or apiFunction = "lsExecStr" or apiFunction = "lsMain", "Yes"], [true, "unknown"]]
+   ]).
+
+rule_set(language, /, [
+   type = single_value,
+   rules = [[conditions, value], [languageTool = "Visual C++" or languageTool = "Visual C" or languageTool = "Borland C++" or languageTool = "Borland C" or languageTool = "Watcom C" or languageTool = "Watcom C++", "C/C++"], [true, "unknown"]]
+   ]).
+
+rule_set(releaseDate, /, [
+   type = single_value,
+   rules = [[conditions, value], [amziVersion = "3.3 Jun96", "19960601"], [true, "unknown"]]
+   ]).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+
+text(debugEmbed, /, [
+   file = "",
+   type = text,
+   description = "",
+   text = text("For more information on debugging embedded Prolog modules we suggest you see <A HREF=""APIDEBUG.TXT"">Debugging Hints</A>.")
+   ]).
+
+text(modules, /, [
+   file = "",
+   type = text,
+   description = "",
+   text = text("There are two types of compiled predicates, global and local.  Global predicates can be used from other modules, local ones only in the module they are defined in.<P>When you consult a number of interpreted files, all of the interpreted predicates are effectively global.<P>When you compile a file and do not have any :-import or :-export directives, then all the compiled predicates are, by default, global.  So if you don't use any :-import or :-export statements, then when you load a number of compiled files it is the same as consulting those files interpreted.<P>If you add a :-import or :-export directive to a file, then, by default all of the predicates in that file become local.  Only the predicates listed in the :-import or :-export are global.  Note that :-import and :-export have the same function, making a predicate global.  The two forms are just for convenience.<P>If any predicates in a module with :-import/export directives refer to dynamic database predicates, then those predicates must be declared as :-import (or :-export).  Also, any predicates referred to in findall, bagof or setof need to be declared.")
+   ]).
+
+
+
+% external_action
+
+:- indexed external_action(1,0,0).
+
+external_action(emailSupport, /, [
+   description = "",
+   parameters = [[text("parameter"), text("value")], [text("type"), text("sendmail")], [text("command"), text("/usr/sbin/sendmail -t ")], [text("to"), text("support@amzi.com")], [text("from"), text(userEMail)], [text("subject"), text("No Solution in Support Knowledgebase")], ["cc", ""], ["bcc", ""], [text("message"), text(userName + "'s comments:
+" + additionalComments + "
+
+Amzi! Version: " + amziVersion + "
+Operating System: " + environmentNameVer + "
+
+Known facts:
+")]]
+   ]).
+
+
+
+% solution
+
+:- indexed solution(1,0,0).
+
+solution(accessOutOfResources, /, [
+   description = "",
+   priority = 200,
+   environment = [languageTool = "Access"],
+   actions = '[]',
+   conditions = '[]',
+   problem = text("If you have many add-ins, Access can run out of resources for running everything."),
+   fix = text("Remove add-ins and change swap file to permanent.")
+   ]).
+
+solution(apiTypeAlwaysVar, /, [
+   description = "",
+   priority = 400,
+   environment = [releaseDate < "19960302"],
+   actions = '[]',
+   conditions = [apiFunction = "lsGetParmType" or apiFunction = "lsGetArgType"],
+   problem = text("These two functions erroneously report that the type is pVAR no matter what the parm or argument type is. "),
+   fix = text("There is a work around. <P>Use either lsGetArg or lsGetParm to pick up the argument as a TERM.  Then use lsGetTermType on the term.  It, unlike its friends, returns the correct type. <P>For example:<P><PRE>TERM t;<BR>lsGetParm(eid, 2, cTERM, &ampt);<BR>ptype = lsGetTermType(eid, t);</PRE><P>This problem has also been fixed in the upcoming Mar96 update.")
+   ]).
+
+solution(badImport, /, [
+   description = "",
+   priority = 100,
+   environment = [(errorCode = "234" or errorMessage = "Redefining system or compiled predicate") and usingImportExport = "Yes" or errorMessage = "Atom table disaster" or errorMessage = "Bad atom in compiled code"],
+   actions = '[]',
+   conditions = '[]',
+   problem = text("These errors are often triggered by errors in :-import &amp; :-export directives.  "),
+   fix = text("You must use the functor/arity syntax in these directives, e.g. :-import test/3.<P>Also missing quotes, commas, periods, and slashes can all contribute to these errors. <P>If you are using op directives, they must be <B>after</B> the import/export directives.<p>" + modules)
+   ]).
+
+solution(badSysPredArg, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "System pred - bad argument"],
+   problem = text("A system predicate, such as 'write' or 'is' or '=..' or 'sub_string' was called with a bad argument. Unfortunately this same message is put out by all of them. "),
+   fix = text("If you are running in the listener, it will tell you what predicate was called, but if you are running an embedded program you don't automatically get this information.  See <A HREF=""/support/embederr.htm"">Trapping Errors in Embedded Prolog Modules</A>.")
+   ]).
+
+solution(cLargeModelRequired, /, [
+   description = "",
+   priority = 200,
+   environment = [language = "C/C++", environmentNameVer = "Windows 3.x" or environmentNameVer = "DOS"],
+   actions = '[]',
+   conditions = [apiFunction = "lsInit", symptoms include "System crash or GPF (General Protection Fault)"],
+   problem = text("16-bit C/C++ applications require the large memory model. Failure to use it leads to immediate GPFs.<p>"),
+   fix = text(debugEmbed)
+   ]).
+
+solution(cannotFindFile, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Cannot open file"],
+   problem = text("These problems are usually due to path errors. There are 2 possible sources to the problem: "),
+   fix = text("<OL><LI>This happens in Windows 95 and NT environments with Amzi! system .XPL files if the system can't find the AMZI directory. It can also happen very easily in VB or Delphi programs after you've browsed in different directories looking for files.<LI>If you have string_esc turned on (the default case) you need to use double backslashes in path names.  string_esc can be turned on and off in .INI files and by the predicate set_mode/2.</OL>")
+   ]).
+
+solution(dangerousCut, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Dangerous cut in not or if-then-else"],
+   problem = text("Cuts in if-then-else are ill-advised as they don't work the same in compiled and interpreted code for various reasons, one being the compiler generates clever code that makes the if-then-else execute much faster than if it acted like a separate predicate, as it does in the interpreter.  <P>The problem is, you can't tell that you're in a if-then-else and cuts affect the larger predicate rather than being local as they are in the interpreter, so you get different behavior. And, implicit calls generate the same type of compiled code."),
+   fix = text("Don't use dangerous cuts.")
+   ]).
+
+solution(dcgVariableGoal, /, [
+   description = "",
+   priority = 150,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Local stack full", usingDCG = "Yes"],
+   problem = text("This can be caused by attempting to compile a DCG statement with a variable as a goal, e.g.  sentence--&gt;noun, X, verb."),
+   fix = text("Remove the variable as a goal.")
+   ]).
+
+solution(destbufTooSmall, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Load buffer overflow"],
+   problem = text("One of your predicates is too large to load.  "),
+   fix = text("You can either increase 'destbuf' in your .INI file, or break up the predicate into multiple predicates.")
+   ]).
+
+solution(geneNotRegistered, /, [
+   description = "",
+   priority = 300,
+   environment = [programType = "Amzi! Sample Program"],
+   actions = '[]',
+   conditions = [errorMessage = "[ODBC] Datasource name not found", amziSampleName = "dbgene" or amziSampleName = "dbgenevb"],
+   problem = text("These sample programs require that the Access 2.0 database 'gene' be registered in 16 or 32-bit ODBC.  "),
+   fix = text("See the readme file in the sample directory for detailed instructions.")
+   ]).
+
+solution(helloXPL, /, [
+   description = "",
+   priority = 150,
+   environment = [programType = "Amzi! Hello Program"],
+   actions = '[]',
+   conditions = [errorCode = "600" or errorMessage = "Error loading .XPL file"],
+   problem = text("The program is unable to locate the Amzi! Prolog object module, an XPL file. "),
+   fix = text("Make sure the AMZI installation directory is in your path, and that HELLO.XPL file exists in the path or the current directory.")
+   ]).
+
+solution(ideBigEdit, /, [
+   description = "",
+   priority = 150,
+   environment = [programType = "Amzi! IDE"],
+   actions = '[]',
+   conditions = [symptoms include "Cannot open or Missing file"],
+   problem = text("This will happen if the file is greater than 64k or so. It seems the edit control is still constrained by the segmented architecture under Win32s, only rather than presenting a message, it simply fails to load the file."),
+   fix = text("Split your file into multiple smaller files.")
+   ]).
+
+solution(ideCmpUnusedVars, /, [
+   description = "",
+   priority = 300,
+   environment = [programType = "Amzi! IDE"],
+   actions = '[]',
+   conditions = [ideCommand = "Build/Compile", errorMessage = "Bad argument for arithmetic evaluation"],
+   problem = text("This will occur when unifying with variables that are not used. For example: foo(X) :- B = A, X = B.<P>This situation is usually the result of a coding error, but does get the compiler confused, resulting in the error message."),
+   fix = text("Do not unify two variables.")
+   ]).
+
+solution(ideFontSmall, /, [
+   description = "",
+   priority = 300,
+   environment = [programType = "Amzi! IDE"],
+   actions = '[]',
+   conditions = [ideProblemType = "Screen/printer font size is too small/large"],
+   problem = text("The same font is used in the listener, debug and edit windows and for printing. "),
+   fix = text("You can change the font size by using the View/Set Font command.")
+   ]).
+
+solution(ideInstability, /, [
+   description = "",
+   priority = 300,
+   environment = [programType = "Amzi! IDE"],
+   actions = '[]',
+   conditions = [ideCommand = "none", symptoms include "System crash or GPF (General Protection Fault)" or ideProblemType = "IDE appears to be unstable"],
+   problem = text("The IDE, especially in the 16-bit world, can become unstable. This is especially true after failure to respond to listener prompts.  By not answering a prompt for information from the listener, you can sometimes leave the Prolog environment in an unstable state. This is true for various reads and gets in your program as well.  "),
+   fix = text("Unfortunately, because of the way DLLs work in 16-bit windows, it might be necessary to exit the IDE and restart.")
+   ]).
+
+solution(ideLongFileNames, /, [
+   description = "",
+   priority = 300,
+   environment = [programType = "Amzi! IDE", environmentNameVer = "Windows 95", releaseDate <= "19960302"],
+   actions = '[]',
+   conditions = [usingLongFileNames = "Yes"],
+   problem = text("There have been reports of problems with long file names, resulting in instability in the IDE. We have reproduced some of those problems using names with spaces in them. If you have more details of repeatable failures, let us know.  "),
+   fix = text("Using short file names or upgrade to the current release.")
+   ]).
+
+solution(ideStack, /, [
+   description = "",
+   priority = 300,
+   environment = [programType = "Amzi! IDE"],
+   actions = '[]',
+   conditions = [errorMessage = "Local stack full" or errorMessage = "Control stack full"],
+   problem = text("The debugger requires more stack space. "),
+   fix = text("Increase the stack sizes in the AMZI.CFG file (or AMZI.INI file for release 4 or earlier). See help or documentation.")
+   ]).
+
+solution(ideStringEscWin95, /, [
+   description = "",
+   priority = 300,
+   environment = [programType = "Amzi! IDE", environmentNameVer = "Windows 95"],
+   actions = '[]',
+   conditions = [ideCommand = "Listener/(Re)consult", iniStringEscOff = "Yes"],
+   problem = text("Under Win95, if string_esc is off via either the .CFG (or .INI for release 4 or earlier) file or a set_mode/2 call, then reconsult and consult hangs for a few seconds then fails to find the file."),
+   fix = text("Set string_esc on.")
+   ]).
+
+solution(maxVarsOverflow, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Too many variables"],
+   problem = text("The term being read had more variables than the reader could handle.  "),
+   fix = text("Either simplify the term or increase the .CFG (or .INI for version 4.1 and earlier) file parameter 'maxvars'.
+")
+   ]).
+
+solution(missingXPL, /, [
+   description = "",
+   priority = 150,
+   environment = [programType = "My Program"],
+   actions = '[]',
+   conditions = [errorCode = "600" or errorMessage = "Error loading .XPL file"],
+   problem = text("The program is unable to locate the Amzi! Prolog object module, an XPL file. "),
+   fix = text("Make sure the the XPL file exists in your path or the current directory.<P>Note: Some development environments such as Visual Basic and Delphi set the current directory to a directory you might not have expected.")
+   ]).
+
+solution(noSolution, /, [
+   actions = [emailSupport],
+   description = "",
+   priority = 10000,
+   environment = '[]',
+   conditions = '[]',
+   problem = text("We are unable to diagnose your problem at this time. "),
+   fix = text("A description of your problem has been e-mailed to <A HREF=""mailto:support@amzi.com"">support@amzi.com</A>. ")
+   ]).
+
+solution(predFindallExport, /, [
+   description = "",
+   priority = 400,
+   environment = '[]',
+   actions = '[]',
+   conditions = [predicate = "findall" or predicate = "setof" or predicate = "bagof"],
+   problem = text("These predicates cannot find local compiled predicates. "),
+   fix = text("If you have made your source code file into a module by adding the directives :-import or :-export, then you must also :-import any predicates that are referred to in findall, setof or bagof.  This makes them global compiled predicates and everything works as desired.<p>" + modules)
+   ]).
+
+solution(predOSUtils, /, [
+   description = "",
+   priority = 400,
+   environment = '[]',
+   actions = '[]',
+   conditions = [predicate = "findfiles"],
+   problem = text("The predicates findfiles, delfile, mkdir, rmdir, chdir and rename are implemented  in the AOSUTILS.LSX (logic server extension).  This LSX must be loaded before the predicates can be called."),
+   fix = text("To load AWIN.LSX add the line 'lsxload=awin' to your AMZI.CFG (AMZI.INI for release 4 and earlier) file, or call lsAddLSX() in your host program.")
+   ]).
+
+solution(readOverflow, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Term too complex to read"],
+   problem = text("The term being read overflowed the input read buffer. "),
+   fix = text("Either break the term up into smaller components or increase the .CFG (.INI for release 4 or earlier) file parameter 'readbuffer'.")
+   ]).
+
+solution(readStackOverflow, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Read stack full"],
+   problem = text("The term being read overflowed the parse stack.  "),
+   fix = text("Either simplify the term or increase the .CFG (.INI for release 4 or earlier) file parameter 'readdepth'.")
+   ]).
+
+solution(redefiningPredicate, /, [
+   description = "",
+   priority = 150,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorCode = "234" or errorMessage = "Redefining system or compiled predicate", usingImportExport \= "Yes"],
+   problem = text("Besides the obvious reason for this message, there are some subtler reasons why you might get it when the program works in the Listener.  Compiled predicates must have contiguous clauses in their definition.  If you have the clauses split, that is another predicate definition is in between the clauses, then for first set will be compiled, and when the second set is encountered, the system complains of redefinition. <P>This condition can also occur inadvertently.  If you have a punctuation error in a list of clauses, you might have legal Prolog, but not what you mean.  For example, you might have an extra argument in one clause by mistake, or you might have mixed up periods and commas that lead the system to thinking you're defining a comma as a predicate.  You can check for these errors by looking at the output from the compiler, and checking the names and arities of the clauses being compiled."),
+   fix = text("Fix the coding error.
+")
+   ]).
+
+solution(sampleXPL, /, [
+   description = "",
+   priority = 150,
+   environment = [programType = "Amzi! Sample Program"],
+   actions = '[]',
+   conditions = [errorCode = "600" or errorMessage = "Error loading .XPL file"],
+   problem = text("The program is unable to locate the Amzi! Prolog object module, an XPL file. "),
+   fix = text("Some of the Amzi! samples include source only, and the PRO file needs to be compiled and linked into an XPL file.<P>If the XPL file exists, then it must be in your path or the current directory.")
+   ]).
+
+solution(srcbufTooSmall, /, [
+   description = "",
+   priority = 100,
+   environment = '[]',
+   actions = '[]',
+   conditions = [errorMessage = "Code too long to load"],
+   problem = text("One of your predicates is too large to load.  "),
+   fix = text("You can either increase 'srcbuf' in your .CFG (.INI release 4 or earlier) file, or break up the predicate into multiple predicates.")
+   ]).
+

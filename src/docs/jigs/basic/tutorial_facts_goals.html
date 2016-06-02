@@ -1,0 +1,103 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Facts and Goals</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Tutorial: 
+  Facts and Goals<!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="the_first_hello_application"></a>The first 'hello'application</h3>
+<p>samples/basic/tutorial/hello_1</p>
+<p><! AMZI_INDEX = hello>The Basic Jig contains a goal-driven reasoning engine. 
+  That means you specify a goal and the reasoning engine uses the knowledgebase 
+  to try to find a value for that goal.</p>
+<p>For the first sample, the name of the goal will be 'hello', and the value of 
+  the goal with be the text string &quot;Hello&quot;. The &quot;&quot;s indicates 
+  a value which is a text string.</p>
+<p>For all the tutorial samples, we recommend you put your work in a directory, 
+  something like my_kbs. You can also view the pre-built samples for each tutorial 
+  chapter in the samples directory.</p>
+<h3><a name="create_the_goal_hello"></a>Create the goal 'hello'</h3>
+<ol>
+  <ol>
+    <li>Open KnowledgeWright Workshop.</li>
+    <li>Select Knowledgebase/New.</li>
+    <li>Type in the name of knowledgebase, hello_1 and press 'Save'.</li>
+    <li>In the Knowledgebase Type dialog box that appears, choose 'basic' then 
+      press 'OK'.</li>
+    <li>You should see a screen similar to the one below. The tree on the left 
+      shows all the objects in your knowledgebase, and the <a href="../../workshop/authoring_knowledgebases.html#analyzing_knowledgebase_structure">status 
+      window</a> on the bottom provides alot of useful information about the structure 
+      and contents of your knowledgebase.<br>
+      <br>
+      <img src="hello_1a.png" width="698" height="579"><br>
+      <br>
+    </li>
+    <li>Click on the + icon in front of the heading 'knowledgebase'. You should 
+      see one entry, labeled 'main'. Every new knowledgebase starts out with a 
+      knowledgebase object named 'main'. It is where you set the goals.</li>
+    <li>Double-click on 'main'. You'll see an editor for the knowledgebase object 
+      appear. You might have to scroll to see the full editor.</li>
+    <li><! AMZI_INDEX = goal>Above the 'add' button, type over &quot;(Type here 
+      or select)&quot; the word &quot;hello&quot; (no quotes), and press 'Add'. 
+      hello should appear as the only item in the list of goals. <br>
+      <br>
+      <img src="hello_1b.png" width="698" height="579"><br>
+      <br>
+    </li>
+    <li>Select Object/Save &amp; Close from the menu.</li>
+    <li>If you want to see the relationships between objects (as shown above), 
+      press on the spider web tab in the status window.</li>
+  </ol>
+</ol>
+<p>We've now specified a starting goal for the system. When this knowledgebase 
+  is run, the first thing it will do is try to find a value for the fact 'hello'.</p>
+<h3><a name="adding_a_constant_fact_hello"></a>Adding a Constant Fact 'hello'</h3>
+<p><! AMZI_INDEX = fact>There are many types of knowledge objects that might be 
+  used to help satisfy the goal of finding a value for 'hello'. The simplest is 
+  just a constant 'fact', named 'hello', with a pre-specified value. In this case 
+  the value will be the string &quot;Hello&quot;.</p>
+<ol>
+  <ol>
+    <li>Select Object/New from the panel on the left.</li>
+    <li>Select type 'fact'.</li>
+    <li>Type in the name of the <b>fact</b>, <i>hello</i>, and press the 'OK' 
+      button.</li>
+    <li>Type in the value, <b>&quot;</b>Hello<b>&quot;</b>. Your screen should 
+      look like:<br>
+      <br>
+      <img src="hello_1c.png" width="698" height="579"><br>
+      <br>
+    </li>
+    <li>From the object menu, select Object/Save &amp; Close.</li>
+    <li>From the main menu, select Knowledgebase/Save.</li>
+  </ol>
+</ol>
+<p>You've now developed your first knowledgebase.</p>
+<h3><a name="test_running_hello"></a>Test Running Hello</h3>
+<ol>
+  <ol>
+    <li>From the main menu, select Run/Run</li>
+    <li>You'll see a result similar to this:<br>
+      <br>
+      <img src="hello_1d.png" width="698" height="579"></li>
+  </ol>
+</ol>
+<blockquote> 
+  <p>The lower right panel is the answer to find the goal for 'hello', which is 
+    Hello.</p>
+  <p>The upper left panel shows the state of the consultation.</p>
+  <p>The lower left panel shows the trace of the reasoning steps that led to the 
+    result shown.</p>
+</blockquote>
+<p>Congratulations, you've built and run your first knowledge base.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

@@ -1,0 +1,511 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Expressions</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->Expressions<!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><font color="#990000"><a name="description"></a>Description</font></h2>
+<p>Expressions can be used in KnowledgeWright anywhere a value is expected. Expressions 
+  can include any object. If the value for that object is not known, then the 
+  reasoning engine will determine its value before calculating the value of the 
+  expression. </p>
+<h3> <a name="comparators"></a>Comparators</h3>
+<! AMZI_INDEX = comparators; contains; contains_nocase; not>
+You can use these comparators: <br>
+<br>
+<table BORDER cellpadding=3 >
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>=&nbsp;</pre>
+    </td>
+    <td width="427">equal</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>\=</pre>
+    </td>
+    <td width="427">not equal</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>&lt;</pre>
+    </td>
+    <td width="427">less than</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>></pre>
+    </td>
+    <td width="427">greater than</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>&lt;=</pre>
+    </td>
+    <td width="427">less than or equal</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>>=</pre>
+    </td>
+    <td width="427">greater than or equal&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>not(<i>expr</i>)</pre>
+    </td>
+    <td width="427">the expression is false</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>contains &quot;<i>text</i>&quot;</pre>
+    </td>
+    <td width="427"> 
+      <p>checks if a text value contains a particular set of characters, words 
+        or phrases</p>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre>contains_nocase &quot;<i>text</i>&quot;</pre>
+    </td>
+    <td width="427">checks if a text value contains another text value regardless 
+      of case</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="147"> 
+      <pre><i>numberX</i> - <i>numberY</i></pre>
+    </td>
+    <td width="427">the number is greater than or equal to numberX and less than 
+      or equal to numberY</td>
+  </tr>
+</table>
+<p align="left">The comparators &lt;, >, &lt;= and >= sort by numeric value for 
+  numbers and by the ASCII character codes for strings so 'A' &lt; 'B', 'c' > 
+  'D', '2' &lt; 'E'. </p>
+<p>The 'not' operator is especially useful with 'include' (described <a href="#facts_with_multiple_values">below</a>). 
+  For example for 'behavior' rules: </p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">not(dogs include kato and
+dogs include ollie)</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">no_running_around</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>All of the facts on the if-side of the rule must either have questions or rules 
+  defined for them. In the examples above, 'environmentNameVer' is fact that is 
+  defined by question, which means the user is queried for the value. The fact 
+  'language' is defined by a rule, which means its value is derived from other 
+  facts. 
+<h4> <a name="facts_with_multiple_values"></a>Facts with Multiple Values</h4>
+<! AMZI_INDEX = facts; lists; include; exclude; number_of_items>
+<!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> also 
+supports the concept of having a fact with multiple values (for example questions 
+with type menu_multiple_choices, sql queries and rules with multiple values). 
+These special comparators can be used for multi-valued facts: <br>
+<br>
+  <table BORDER cellpadding=3 >
+    <tr> 
+      <td width="109"> 
+        <pre><! AMZI_INDEX = include; exclude; number_of_items>include</pre>
+      </td>
+      <td width="150">included in list</td>
+    </tr>
+    <tr> 
+      <td width="109"> 
+        <pre>exclude</pre>
+      </td>
+      <td width="150">not included in list&nbsp;</td>
+    </tr>
+    <tr> 
+      <td width="109"> 
+        <pre>number_of_items</pre>
+      </td>
+      <td width="150">checks the number of values in a list</td>
+    </tr>
+  </table>
+  <p align="left">For example to check the multivalued fact 'whys' you could use 
+    'include' as follows for the rule 'tool': </p>
+<blockquote> 
+  <div align="left"> 
+    <table border="1" cellpadding="2">
+      <tr valign="top"> 
+        <td> 
+          <pre><b><font color="#990000">conditions</font></b></pre>
+        </td>
+        <td> 
+          <pre><b><font color="#990000">value</font></b></pre>
+        </td>
+      </tr>
+      <tr valign="top"> 
+        <td> 
+          <pre><font color="#990000">whys include &quot;Intelligent components for Internet&quot; or
+what = &quot;Website construction&quot; or
+what = &quot;Other&quot;</font></pre>
+        </td>
+        <td> 
+          <pre><font color="#990000">webls</font></pre>
+        </td>
+      </tr>
+    </table>
+    <br>
+  </div>
+</blockquote>
+<div align="left"> 
+  <h3><a name="functions"></a>Functions</h3>
+  <p>
+    <! AMZI_INDEX = functions; age(); date(); find(); integer(); string_to_date(); system()>
+    You can use these functions:</p>
+  <div align="center"></div>
+  <div align="center"> 
+    <table BORDER cellpadding=3 >
+      <tr valign="top"> 
+        <td width="147"> 
+          <pre>age(<i>birthdate</i>)</pre>
+        </td>
+        <td width="427">the age of someone or something based on the birthdate</td>
+      </tr>
+      <tr valign="top"> 
+        <td width="147"> 
+          <pre>date(<i>year</i>, <i>month</i>, <i>day</i>)</pre>
+        </td>
+        <td width="427">the date value representing the specified year, month 
+          and day</td>
+      </tr>
+      <tr valign="top"> 
+        <td width="147"> 
+          <pre>find(<i>column</i> from <i>data_table</i> where <i>conditions</i>)</pre>
+        </td>
+        <td width="427">returns the value of the named column where the other 
+          columns meet the condtions specified for other columns in the data_table 
+          (note, this returns the first value matching the conditions)</td>
+      </tr>
+      <tr valign="top"> 
+        <td width="147"> 
+          <pre>integer(<i>expression</i>)</pre>
+        </td>
+        <td width="427">returns the integral value of the expression</td>
+      </tr>
+      <tr valign="top"> 
+        <td width="147"> 
+          <pre>string_to_date(<i>string</i>)</pre>
+        </td>
+        <td width="427">converts the text value into a date using the format specified 
+          in the main knowledgebase object</td>
+      </tr>
+      <tr valign="top">
+        <td width="147">
+          <pre>system(<i>paramater</i>)</pre>
+        </td>
+        <td width="427">returns the value of an initial value passed programmatically 
+          into the KWI with kwi(id, initalize(parameters), ...). These can only 
+          be used in text fields. Typically it is used to pass the cgi_parameters 
+          to subsequent invocations of the CGI interface. Other parameters of 
+          interest include the directory, temp_directory and kb_file.</td>
+      </tr>
+    </table>  <br>
+  </div>
+  <h3><a name="constants"></a>Constants</h3>
+  <p> You can use these constants:</p>
+  <table BORDER cellpadding=3 >
+    <tr valign="top"> 
+      <td width="147"> 
+        <pre>default</pre>
+      </td>
+      <td width="427">a constant value for rule_sets that specifies a default 
+        condition that is always matches (synonym for true)</td>
+    </tr>
+    <tr valign="top"> 
+      <td width="147"> 
+        <pre>true</pre>
+      </td>
+      <td width="427">a constant value for rule_sets that specifies a condition 
+        that always matches (synonym for default)</td>
+    </tr>
+    <tr valign="top"> 
+      <td width="147"> 
+        <pre>*</pre>
+      </td>
+      <td width="427">a constant value for rules_tables that matches any value</td>
+    </tr>
+  </table>
+  <p>Also, see the <a href="#date_handling">date constants</a> below.</p>
+  <div align="left"></div>
+  <div align="left"> 
+    <h3><a name="arithmetic_operators"></a>Arithmetic Operators</h3>
+  </div>
+  <div align="left"> 
+    <! AMZI_INDEX = formulas>
+    Formulas can be used in rules for determining the value of a fact. <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> 
+    supports addition, subtraction, multiplication, division and exponentiation 
+    via the following operators: <br>
+    <! AMZI_INDEX = constants; default; true; *>
+    <br>
+  </div>
+  <div align="left"> 
+    <table BORDER cellpadding=3 >
+      <tr> 
+        <td width="109"> 
+          <! AMZI_INDEX = addition; subtraction; division; multiplication, exponentiation>
+          +</td>
+        <td width="150">addition</td>
+      </tr>
+      <tr> 
+        <td width="109"> 
+          <pre>-</pre>
+        </td>
+        <td width="150">subtraction</td>
+      </tr>
+      <tr> 
+        <td width="109"> 
+          <pre>*</pre>
+        </td>
+        <td width="150">multiplication</td>
+      </tr>
+      <tr> 
+        <td width="109"> 
+          <pre>/</pre>
+        </td>
+        <td width="150">division</td>
+      </tr>
+      <tr> 
+        <td width="109"> 
+          <pre>**</pre>
+        </td>
+        <td width="150">exponentiation</td>
+      </tr>
+    </table>
+    <p>For example here's a rule for 'area':</p>
+  </div>
+</div>
+<blockquote> 
+  <div align="left"> 
+    <blockquote> 
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><b><font color="#990000">conditions</font></b></pre>
+          </td>
+          <td> 
+            <pre><b><font color="#990000">value</font></b></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">shape = &quot;circle&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">pi * radius ** 2</font></pre>
+          </td>
+        </tr>
+      </table>
+    </blockquote>
+  </div>
+</blockquote>
+<div align="left"> 
+  <h3><a name="date_handling"></a>Date Handling</h3>
+</div>
+<p> 
+<div align="left">You can use dates in rules and perform arithmetic on them. A 
+  date is represented in KnowledgeWright as date(Year, Month, Day (where the year 
+  is a full, 4-digit number). There are names for special dates as follows:</div>
+<br>
+<table BORDER cellpadding=3 >
+  <tr> 
+    <td width="109"> 
+      <pre><! AMZI_INDEX = today ; yesterday ; tomorrow ; last_week ; next_week ; last_month ; next_month ; last_year ; next_year>today</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre>yesterday</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre>tomorrow</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109" height="25"> 
+      <pre>last_week</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre>next_week</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre>last_month</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre>next_month</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre>last_year</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre>next_year</pre>
+    </td>
+  </tr>
+</table>
+<div align="left"> 
+  <p><br>
+    <! AMZI_INDEX = dates; date_format>
+    Users can enter dates as fill-in-the-blank questions. The format for user 
+    entry is specified in the main knowledgebase object (under date_format) and 
+    defaults to MM/DD/YYYY. This is transformed automatically into date(Year, 
+    Month, Day). For example, you can test if today is before Christmas 2001:</p>
+</div>
+<blockquote> 
+  <div align="left"> 
+    <blockquote> 
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><b><font color="#990000">conditions</font></b></pre>
+          </td>
+          <td> 
+            <pre><b><font color="#990000">value</font></b></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">today &lt; date(2001, 12, 25)</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;before Christmas&quot;</font></pre>
+          </td>
+        </tr>
+      </table>
+    </blockquote>
+  </div>
+</blockquote>
+<div align="left">Once a date is in KnowledgeWright you can perform date arithmetic. 
+  For example, to determine how many days until Christmas:</div>
+<blockquote> 
+  <div align="left"> 
+    <blockquote> 
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><b><font color="#990000">conditions</font></b></pre>
+          </td>
+          <td> 
+            <pre><b><font color="#990000">value</font></b></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">date(2001, 12, 25) - today &lt; 30</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;shop quick&quot;</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">date(2001, 12, 25) - today &lt; 60</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;shop slow&quot;</font></pre>
+          </td>
+        </tr>
+      </table>
+    </blockquote>
+  </div>
+</blockquote>
+You can use the following values in date arithmetic:<br>
+<br>
+<table BORDER cellpadding=3 >
+  <tr> 
+    <td width="109"> 
+      <pre><! AMZI_INDEX = weeks ; days ; months ; years><i>W</i> weeks</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre><i>D</i> days</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre><i>M</i> months</pre>
+    </td>
+  </tr>
+  <tr> 
+    <td width="109"> 
+      <pre><i>Y</i> years</pre>
+    </td>
+  </tr>
+</table>
+<p>This allows you to write: </p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">today + 1 months &gt; date(2001, 12, 25)</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;shop quick&quot;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">today + 1 months &lt; date(2001, 12, 25)</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;shop slow&quot;</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<div align="left"></div>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

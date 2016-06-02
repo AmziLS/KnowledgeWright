@@ -1,0 +1,94 @@
+knowledgewright_jig(basic, 11).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "",
+   goals = [action],
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """><INPUT NAME=""Continue"" TYPE=""Submit"" VALUE=""Submit""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>"),
+   date_format = 'y-m-d',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(christmas, /, [
+   prompt = text("What Christmas do you want to plan for? (Enter YYYY-MM-DD)"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = date,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+rule_set(action, /, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [today >= christmas, text("Too late; find new friends. Your family might forgive you.")], [today = christmas, text("Too late for shopping; bake cookies quick.")], [tomorrow = christmas, text("Go shopping at the mall right this minute.")], [christmas - 1 weeks < today, text("Either order today from the Internet with overnight shipping (hope you've got alot of money) or go shopping as soon as possible at the mall (hope you like crowds).")], [christmas - 1 months < today, text("Order all your presents on the Internet.")], [default, text("Take your time and shop on the 
+Internet.")]]
+   ]).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+

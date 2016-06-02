@@ -1,0 +1,30 @@
+KW_DIR = c:\kw4
+
+.pro.plm:
+        acmp $<
+
+_all: _plm _copy _acgi
+
+_plm: kwcgirun.plm
+
+_copy:
+        @echo *** making kwcgirun ***
+        copy kwcgirun.pro $(KW_DIR)\runtime\cgi
+        copy kwcgirun.plm $(KW_DIR)\runtime\cgi
+        xcopy acgi\amzicgi.c $(KW_DIR)\runtime\cgi\acgi
+        xcopy acgi\amzisub.c $(KW_DIR)\runtime\cgi\acgi
+        xcopy acgi\makefile.lnx $(KW_DIR)\runtime\cgi\acgi
+        xcopy acgi\wacgi.dsw $(KW_DIR)\runtime\cgi\acgi
+        xcopy acgi\wacgi.dsp $(KW_DIR)\runtime\cgi\acgi
+        xcopy acgi\wacgi.mak $(KW_DIR)\runtime\cgi\acgi
+
+_acgi:
+        @echo *** making acgi ***
+        cd acgi
+        NMAKE /a /f "wacgi.mak" CFG="wacgi - Win32 Release"
+        NMAKE /a /f "wacgi.mak" CFG="wacgi - Win32 TestCGI Release"
+        copy ..\kwcgirun.exe $(KW_DIR)\runtime\cgi\kwcgibasic.exe
+        copy ..\kwcgirun.exe $(KW_DIR)\runtime\cgi\kwcgisupport.exe
+        copy ..\kwtestcgi.exe $(KW_DIR)\runtime\cgi\kwtestcgi.exe
+
+

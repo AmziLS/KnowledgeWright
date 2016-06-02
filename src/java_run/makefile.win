@@ -1,0 +1,17 @@
+KW_DIR = c:\kw4
+
+_all: _java
+
+_java:
+        @echo *** making java runtime ***
+        copy %AMZI_DIR%\src\lsapis\java20\amzi\ls\*.java $(KW_DIR)\runtime\java\amzi\ls
+        copy %AMZI_DIR%\lsapis\java20\amzi\ls\*.class $(KW_DIR)\runtime\java\amzi\ls
+        copy Application.java $(KW_DIR)\runtime\java
+        copy AskFieldDialog.java $(KW_DIR)\runtime\java
+        copy AskMenuDialog.java $(KW_DIR)\runtime\java
+        copy MainFrame.java $(KW_DIR)\runtime\java
+        copy Utils.java $(KW_DIR)\runtime\java
+        copy java_run.jpx $(KW_DIR)\runtime\java
+        copy java_run.jar $(KW_DIR)\runtime\java
+
+

@@ -1,0 +1,122 @@
+knowledgewright_jig(support, 8).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "",
+   date_format = 'm/d/y',
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgisupport.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_bottom = text("</BODY></HTML>"),
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(powered_on, /, [
+   description = "",
+   prompt = text("Is the printer plugged in and turned on?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["yes", "no"],
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(symptom, /, [
+   description = "",
+   prompt = text("What problem are you experiencing?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["no output", "light output", "no color"],
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+
+
+
+% external_action
+
+:- indexed external_action(1,0,0).
+
+
+
+% solution
+
+:- indexed solution(1,0,0).
+
+solution(power, /, [
+   description = "",
+   priority = 1,
+   environment = '[]',
+   conditions = [symptom = "no output", powered_on = "no"],
+   problem = text("The printer needs power to operate."),
+   fix = text("Plug in the printer and turn it on."),
+   actions = '[]'
+   ]).
+

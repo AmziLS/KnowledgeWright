@@ -1,0 +1,54 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Default Solution</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Default 
+  Solution<!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="creating_a_solution"></a>Creating a Default Solution</h3>
+<p>knowledgewright4/samples/support/tutorial/printer_2.kb</p>
+<p>
+  <! AMZI_INDEX = solution; priority; default solution>
+  If no solution can be found to match the user's inputs, it would be nice to 
+  display a response nonetheless. To do this, we need a solution that matches 
+  when all else fails. </p>
+<ol>
+  <li>Use Object/New to create a <b>solution</b> named <i>no_solution</i>. </li>
+  <li>Set the priority to 10000. This puts <i>no_solution</i> at the end of the 
+    list of possible <b>solutions</b> (provided you don't set the priority of 
+    any other solution to a value greater than 10000). </li>
+  <li>Leave the environment and conditions blank. This means they will match anything. 
+  </li>
+  <li>Set the problem to &quot;We are unable to find a solution to your problem.&quot; 
+    Set the fix to &quot;Please contact tech support.&quot;</li>
+</ol>
+<div align="left"> 
+  <h3><a name="test_the_knowledgebase"></a>Run the Knowledgebase</h3>
+  <p>Select Run/Run to test your knowledgebase. Select &quot;light_output&quot; 
+    as the <i>symptom</i>. The <i>no_solution </i><b>solution</b> should be displayed. 
+  </p>
+</div>
+<div align="left"> 
+  <div align="left"> 
+    <div align="left"></div>
+  </div>
+  <div align="left"> 
+    <ol>
+    </ol>
+  </div>
+</div>
+<div align="left"> 
+  <ol>
+  </ol>
+</div>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

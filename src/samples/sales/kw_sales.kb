@@ -1,0 +1,206 @@
+knowledgewright_jig(sales, 7).
+
+
+
+% folder
+
+folder(proposal, /, [
+   ]).
+
+folder(benefits, /, [
+   ]).
+
+
+
+% knowledgebase
+
+knowledgebase(main, /, [
+   component_order = [kw_jigs],
+   group_order = [application, web],
+   primary_questions = '[]',
+   goals = [general_benefit_question, benefits, proposal],
+   description = "Knowledge Base for KnowledgeWright product line. Separate knowledge bases deal with specific KnowledgeWright products.",
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgisales.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgisales.exe" + system(cgi_parameters) + """><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Continue""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>")
+   ]).
+
+
+
+% fact
+
+
+
+% question
+
+question(q_application, / benefits, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   prompt = text("What type of knowledge base or expert system are you interested in building?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["sales support", "technical support", "basic advice", "indentification", "configuration", "other"],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+question(organization, / proposal, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   prompt = text("What type of institution will be using the application/software?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["personal", "academic", "consulting", "commercial", "government"],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+question(q_deploy, / benefits, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   prompt = text("How do you intend to deploy the system?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["stand-alone", "Web", "component of larger application"],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+question(general_benefit_question, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   prompt = text(general_benefit_statement + " <p>
+Is this of interest to you?"),
+   question_type = menu_single_choice,
+   question_style = checkbox_radio,
+   choices = ["yes", "no"],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+
+
+% sql
+
+
+
+% rule_set
+
+rule_set(software_download, / proposal, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [true, t_kw_download]]
+   ]).
+
+rule_set(software_use, / proposal, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [true, text("use it")]]
+   ]).
+
+rule_set(commercial_license, / proposal, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [organization = "commercial" or organization = "government", t_commercial], [organization = "academic" or organization = "personal", text("you can use it at no charge")], [organization = "consulting", text("consulting's OK")]]
+   ]).
+
+
+
+% table
+
+
+
+% text
+
+text(t_kw_download, / proposal, [
+   description = "",
+   type = text,
+   file = "",
+   text = text("Download the latest version of KnowledgeWright from the Web site.")
+   ]).
+
+text(t_commercial, / proposal, [
+   description = "",
+   type = text,
+   file = "",
+   text = text("Being in a commercial or government institution, you can download and use the software at no charge during evaluation.  Once you have decided to use the software, then you will need to purchase a commercial license.")
+   ]).
+
+text(proposal, / proposal, [
+   description = "The proposal to provide to the prospect.",
+   type = text,
+   file = "",
+   text = text("Based on what we've determined so far, here's our proposal:
+
+" + software_download + "
+
+" + software_use + "
+
+" + commercial_license + "
+")
+   ]).
+
+text(general_benefit_statement, /, [
+   description = "",
+   type = text,
+   file = "",
+   text = text("The KnowledgeWright product family contains tools for developing and deploying application components that dispense expert advice. It uses intuitive knowledge objects that simplify development and maintenance, and includes a powerful knowledge editing, testing  and debugging environment. Multiple deployment options include CGI scripts for Web deployment and a standard interface that allows embedding in a variety of program development tools, such as Java, C++, VB and Delphi.
+")
+   ]).
+
+
+
+% external_action
+
+
+
+% benefit
+
+benefit(advice_jig, / benefits, [
+   group = application,
+   component = kw_jigs,
+   conditions = [q_application = "basic advice"],
+   benefit = text("KnowledgeWright includes a number of
+pre-built jigs for different types of
+applications. For a basic advice giving
+system such as yours, the Basic Jig will
+provide the right level of tools for expressing
+the application."),
+   feature = "KnowledgeWright Basic Jig, designed for basic
+advice seeking applications."
+   ]).
+
+benefit(html_documents, / benefits, [
+   group = application,
+   component = kw_jigs,
+   conditions = [q_application = "basic advice", q_deploy = "Web"],
+   benefit = text("KnowledgeWright jigs allow for the
+specification of dynamically created output documents,
+which can be HTML.  These documents can contain 'placeholders'
+whose values are filled in as the application gains more
+knowledge about a particular session with a user."),
+   feature = "KnowledgeWright Jigs, document objects."
+   ]).
+
+benefit(html_questions, / benefits, [
+   group = web,
+   component = kw_jigs,
+   conditions = [q_deploy = "Web"],
+   benefit = text("For Web deployment, KnowledgeWright
+question objects are formatted as HTML queries, so
+the dialog between the expert system and the user
+can be carried out on a Web page."),
+   feature = "KnowledgeWright Jigs, question and
+format_document objects."
+   ]).
+

@@ -1,0 +1,378 @@
+knowledgewright_jig(basic, 11).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+folder(resources, /, [
+   ]).
+
+folder(tools, /, [
+   ]).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   odbc = "",
+   description = "",
+   goals = [main_doc],
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD>
+
+
+
+<BODY bgcolor=#FFFFFF text=#000000><H2><IMG SRC=""/images/bullet.gif"" HSPACE=10><FONT COLOR=#0000A0> Amzi! Internet Site Guide</FONT></H2>
+
+
+
+
+
+
+
+<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""submit"" TYPE=""submit"" VALUE=""Continue""></INPUT>
+
+
+
+</FORM>
+
+
+
+</BODY></HTML>
+
+
+
+"),
+   output_top = text("<HTML><HEAD></HEAD><BODY bgcolor=#FFFFFF text=#000000>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """><INPUT NAME=""submit"" TYPE=""submit"" VALUE=""Continue""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>
+
+
+"),
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(commercialDistribution, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("Will you be distributing your Amzi! applications for any commercial, business or government purpose, or charging a fee for them?"),
+   question_type = menu_single_choice,
+   choices = ["yes", "no"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(connections, /, [
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("Which of the following do you want to access from your intelligent components? (check all that apply)"),
+   ask_also = [connectionsOther],
+   question_type = menu_multiple_choices,
+   choices = ["Existing databases", "Network clients/servers", "Other programs, libraries and APIs", "none of the above", "other"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(connectionsOther, /, [
+   ask_also = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   choices = '[]',
+   question_style = listbox,
+   default = "",
+   prompt = text("If ""other"" please specify:"),
+   length = 40,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(embedComponents, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("Do you want to embed intelligent Prolog components in other tools or languages?"),
+   question_type = menu_single_choice,
+   choices = ["yes", "no"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(environments, /, [
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   length = 20,
+   answer_type = text,
+   default = "",
+   prompt = text("What environments do your applications run under?"),
+   ask_also = [environmentsOther],
+   question_type = menu_multiple_choices,
+   choices = ["Windows NT/2000", "Windows 95/98", "Windows 3.x", "Sun Solaris", "Linux", "DOS", "other"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(environmentsOther, /, [
+   ask_also = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   choices = '[]',
+   question_style = listbox,
+   default = "",
+   prompt = text("(please specify)"),
+   length = 40,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(languagesAndTools, /, [
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("What languages and tools do you want to embed components in?"),
+   ask_also = [languagesAndToolsOther],
+   question_type = menu_multiple_choices,
+   choices = ["C/C++", "Java", "Delphi", "Visual Basic", "Web Servers", "Netscape Navigator", "Microsoft Explorer", "Access", "ToolBook", "SmallTalk", "PowerBuilder", "Optima++", "Excel", "Word", "Other"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(languagesAndToolsOther, /, [
+   ask_also = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   choices = '[]',
+   question_style = listbox,
+   default = "",
+   prompt = text("(please specify)"),
+   length = 40,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(prologFamiliarity, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("How familiar are you with Prolog?"),
+   question_type = menu_single_choice,
+   choices = ["Very", "Somewhat", "Not really"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(what, /, [
+   ask_also = [whatOther],
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("What type of work brought you here?"),
+   question_type = menu_single_choice,
+   choices = ["Software development", "Website construction", "Engineering", "Research", "Consulting", "Teaching", "Graduate studies", "Undergraduate/other studies", "Other"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(whatOther, /, [
+   ask_also = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   choices = '[]',
+   question_style = listbox,
+   default = "",
+   prompt = text("If ""other"" please specify:"),
+   length = 40,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(whys, /, [
+   ask_also = [whysOther],
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("What brought you here? (please check all that apply)"),
+   question_type = menu_multiple_choices,
+   choices = ["General interest", "Learning", "Intelligent components for C/C++, Java, Delphi, Visual Basic, etc.", "Intelligent components for Internet", "Logic programming", "Prolog-based development", "Expert/rule-based systems", "Product/service advisors", "Problem diagnosis/resolution", "Scheduling/planning", "Automatic configuration/tuning", "Implementing business rules", "Agents", "Natural language interfaces", "Games", "Other"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+question(whysOther, /, [
+   ask_also = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   choices = '[]',
+   question_style = listbox,
+   default = "",
+   prompt = text("If ""other"" please specify:"),
+   length = 40,
+   question_type = fill_in_the_blank,
+   answer_type = text,
+   answer_type = text
+   ]).
+
+question(workFor, /, [
+   ask_also = '[]',
+   length = 20,
+   answer_type = text,
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   default = "",
+   prompt = text("Who do you work for?"),
+   question_type = menu_single_choice,
+   choices = ["Business/corporation", "Government agency", "Educational institution", "Myself"],
+   question_style = checkbox_radio,
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+rule_set(commercialDevelopment, / tools, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [(what = "Software development" or what = "Website construction" or what = "Engineering" or what = "Consulting") and (workFor = "Business/corporation" or workFor = "Government agency"), text("yes")], [true, text("unknown")]]
+   ]).
+
+rule_set(embeddedDevelopment, /, [
+   type = single_value,
+   rules = [[conditions, value], [whys include "Intelligent components for C/C++, Java, Delphi, Visual Basic, etc." or whys include "Intelligent components for Internet" or embedComponents = "yes", "yes"], [true, "unknown"]]
+   ]).
+
+rule_set(exploreProlog, /, [
+   type = single_value,
+   rules = [[conditions, value], [whys include "General interest" or whys include "Learning" or whys include "Logic programming" or whys include "Prolog-based development", "yes"], [true, "unknown"]]
+   ]).
+
+rule_set(personalOrProfessional, /, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [commercialDistribution = "yes", text("yes")], [true, text("unknown")]]
+   ]).
+
+rule_set(resource, /, [
+   description = "",
+   type = multiple_values,
+   rules = [[conditions, value], [whys include "Intelligent components for Internet" or what = "Website construction", text("For articles on <B>embedding intelligent components on web pages</B> see <A HREF=""/articles/webls_ddj.htm"">Dr. Dobb's Journal Sourcebook</A>, PC AI Magazine, Web Techniques and the <A HREF=""http://clement.info.umoncton.ca/~lpnet/lp-internet/amzi/lspap.html"">JICSLP Conference</A> See <A HREF=""/products/knowledgewright.html"">KnowledgeWright</A>, and the Servlet example, CGI Interface, Java Class, JSP example, and Sockets LSX for the Amzi! <A HREF=""/products/amzi_prolog_logic_server.htm"">Logic Server</A>. Also read how ZigZag is using WebLS to implement an <A HREF=""/customers/zigzag_web.htm"">intelligent front-end on their meta-search service</A>.")], [exploreProlog = "yes" and prologFamiliarity \= "Very", text("For a fun look at <B>Prolog</B>, read the article <A HREF=""/articles/prolog_fun.htm"">Exploring Prolog</A>. See the <A HREF=""/articles/prolog_whitepaper.htm"">White Paper</A> for more on Prolog and rule-base technology. And, <A HREF=""http://www.pcai.com/pcai/"">PC AI</A> magazine is a valuable resource.")], [exploreProlog = "yes" and prologFamiliarity \= "Not really", text("To understand more about Prolog's unique backtracking and unification algorithms see the PC AI article <A HREF=""/articles/prolog_under_the_hood.htm"">Prolog Under the Hood</A>. For more information on <B>Prolog</B>, see the <A HREF=""http://fas.sfu.ca/0/cs/people/ResearchStaff/jamie/personal/prolog-faq.1"">Prolog FAQ</A> and the <A HREF=""news:comp.lang.prolog"">Prolog newsgroup</A>. Find lots of source code in <A HREF=""http://users.ox.ac.uk/~popx/"">Jocelyn Paine's public domain library</A> and the <A HREF=""http://www.cs.cmu.edu/Groups/AI/html/repository.html"">Carnegie Mellon Repository</A>.")], [whys include "Product/service advisors", text("Building <B>advisors</B> is discussed in the article <A HREF=""/articles/rule_engines.htm"">Building Custom Rule Engines</A>. A large computer manufacturer <A HREF=""/customers/learning_edge_sales.htm"">advises prospects and customers on products</A> using a CDROM application built with Amzi! and ToolBook. We built a 'tour guide' for our Web site using <A HREF=""/products/knowledgewright.htm"">KnowledgeWright</A>. There is a shipping advisor sample included with the Java Class.")], [whys include "Problem diagnosis/resolution", text("Prolog is ideal for implementing <B>diagnostic systems</B>. Arla Cheese in Sweden is using Amzi! to <A HREF=""/customers/indra_cheese.htm"">monitor cheese manufacturing</A>. We use <A HREF=""/products/knowledgewright.html"">KnowledgeWright</A> to <A HREF=""/support/webtech.htm"">answer commonly asked tech support questions</A> on our web page.")], [whys include "Scheduling/planning", text("The <A HREF=""/customers/acc_basketball.htm"">Atlantic Coast Conference</A> <B>schedules</B> its men's basketball season with Amzi! So does Big East women's basketball. The <A HREF=""ftp://ftp.amzi.com/pub/demos/delphi_ssched.zip"">round-robin scheduler</A> sample is a simplified version of the program written in Delphi and Amzi! To learn how to solve similar scheduling problems, see the <A HREF=""/acc_basketball.htm"">article on the program that scheduled the ACC</A>.")], [whys include "Automatic configuration/tuning", text("To learn more about <B>configuration &amp; tuning</B> see the <A HREF=""/articles/xircom.htm"">article</A> by Gregg Weismann from Dr. Dobb's Journal. It describes Xircom's use of an Amzi! logic-base to <A HREF=""/customers/xircom_configure.htm"">assist in configuration of network/modem cards</A> during installation.  Also see <A HREF=""/articles/irq_expert_system.htm"">Extending C with Prolog</A>.")], [whys include "Implementing business rules", text("<B>Business rules</B> are expressed clearly in Prolog. Digital Express uses Amzi! to <A HREF=""/customers/digxpr_satellite.htm"">schedule satellite transmissions</A>. <A HREF=""/customers/vertec.htm"">CyberTax</A> uses an Amzi! logic-base to calculate sub-totals and totals on tax forms. The Java Class has a shipping advisor. York University implements <A HREF=""/customers/york_enrollment.htm"">enrollment rules</A>.")], [whys include "Agents", text("The <A HREF=""/customers/otago_agents.htm"">University of Otago</A> is using Prolog in its <B>agents</B> and software tool integration research project. Also see <A HREF=""http://www.cs.umbc.edu/agentnews/"">AgentNews</A> and an interesting <A HREF=""http://www.hermans.org/agents/"">inventory of agents on the internet</A>.")], [whys include "Natural language interfaces", text("Prolog has a powerful feature called Definite Clause Grammars for implementing <B>natural language</B> interfaces. You can learn more about this in the <A HREF=""/AdventureInProlog/index.htm"">Adventure in Prolog</A> tutorial. WordSurf uses Amzi! Prolog to parse queries for finding e-mail and documents in their <A HREF=""/customers/wordsurf_secretary.htm"">Context and MailBot products</A>. Also see the <A HREF=""http://www.cs.columbia.edu/~acl/nlpfaq.txt"">Natural Language FAQ</A> and <A HREF=""news:comp.ai.nat-lang"">Natural Language newsgroup</A>.")], [whys include "Games", text("For a brief introduction on building Adventure <B>Games</B> see <A HREF=""/articles/prolog_fun.htm"">Exploring Prolog</A>. You can also read a detailed explanation of <A HREF=""/articles/rubik.htm"">solving Rubik's cube</A>, or <A HREF=""/articles/cappuzzle.txt"">crypto-arithmetic puzzles</A>. The source code for these is in the <A HREF=""ftp://ftp.amzi.com/pub/demos/prolog.zip"">Amzi! Prolog Samples</A>. Also see the <A HREF=""news:comp.ai.games"">comp.ai.games</A> newsgroup.")], [whys include "Expert/rule-based systems" or what = "Research" or what = "Graduate studies", text("For more on <B>expert/rule-based systems</B>, read the article <A HREF=""/articles/rule_engines.htm"">Building Custom Rule Engines</A>.  You can also download the Prolog source code for <A HREF=""ftp://ftp.amzi.com/pub/demos/xsip.zip"">a number of prototypes</A>. These are explained in detail in the book <A HREF=""/ExpertSystemsInProlog/index.htm"">Building Expert Systems in Prolog</A> (Springer-Verlag). Also see the <A HREF=""news:comp.ai.shells"">comp.ai.shells</A> newsgroup.")], [embeddedDevelopment = "yes" and (languagesAndTools = "Web Servers" or languagesAndTools = "Netscape Navigator" or languagesAndTools = "Microsoft Explorer"), text("<A HREF=""/products/knowledgewright.html"">KnowledgeWright</A> uses Amzi!'s full Standard CGI Interface that makes it easy to write CGI scripts in Prolog. One of our customers has built an <A HREF=""/products/prolog_customer_freeware.htm"">ActiveX interface</A> and we provide both ASP and JSP samples in Amzi! Prolog + Logic Server. E-mail <A HREF=""mailto:info@amzi.com"">info@amzi.com</A> with your interests or needs.")], [embeddedDevelopment = "yes" and languagesAndTools include "C/C++", text("The <B>'C' interface</B> to the Logic Server is introduced in the Dr. Dobb's article <A HREF=""/articles/irq_expert_system.htm"">Extending C with Prolog</A>; it is described fully in <A HREF=""/AmziManual/ls/lsfrtop.htm"">Amzi! Logic Server API</A>. The <B>C++ class</B> is described in <A HREF=""/articles/prolog_cpp.htm"">Objects and Logic--C++ Meets Prolog</A>. The <A HREF=""ftp://ftp.amzi.com/pub/demos/odbc_cppgene.zip"">32-bit ODBC Demo</A> uses C++ for its interface; full source is in the on-line help.")], [embeddedDevelopment = "yes" and languagesAndTools include "Java", text("See the PC AI article on <A HREF=""/articles/java_class.htm"">Java Meets Prolog</A> which describes the <B>Amzi! Java Class</B>. If you have the Sun JDK, you can run the <A HREF=""ftp://ftp.amzi.com/pub/demos/java_ship.zip"">shipping advisor demo</A>.")], [embeddedDevelopment = "yes" and languagesAndTools include "Delphi", text("There are three <B>Delphi</B> demos all with documentation and full source code in the on-line help. There is an <A HREF=""ftp://ftp.amzi.com/pub/demos/delphi_proxs.zip"">identification expert system</A> which lets you examine rules, facts and the operation of the system. Also a <A HREF=""ftp://ftp.amzi.com/pub/demos/delphi_ssched.zip"">round-robin sports scheduler</A> and an <A HREF=""ftp://ftp.amzi.com/pub/demos/delphi_eq.zip"">mathematical equation displayer</A>. <A HREF=""/customers/indra_cheese.htm"">Indra Systems</A> ensures consistent cheese quality with Amzi! and Delphi and <A HREF=""/customers/pacificai_testing.htm"">Pacific AI</A> builds <A HREF=""/articles/assessment_testing.htm"">intelligent testing tools</A>.")], [embeddedDevelopment = "yes" and (languagesAndTools include "Visual Basic" or languagesAndTools include "Access"), text("The <B>Visual Basic/Access interface</B> is described in the article <A HREF=""/articles/vbprolog.htm"">Using Rules to Code the Heart and Soul of VB Applications</A>. There is an accompanying <A HREF=""ftp://ftp.amzi.com/pub/demos/odbc_vbgene.zip>intelligent genealogical database sample</A>. Full source code is included in the help. <A HREF=""/customers/papercon_layout.htm"">PaperCon</A> uses Amzi! and Visual Basic to determine optimal paper cutting strategies. <A HREF=""/customers/york_enrollment.htm"">York University</A> also uses Amzi! and VB to implement enrollment rules.")], [embeddedDevelopment = "yes" and (languagesAndTools include "ToolBook" or languagesAndTools include "SmallTalk" or languagesAndTools include "PowerBuilder" or languagesAndTools include "Optima++" or languagesAndTools include "Excel" or languagesAndTools include "Word"), text("Amzi! customers have written interfaces to <B>SmallTalk, ToolBook, PowerBuilder, Optima++, Excel and Word</B>. The SmallTalk and ToolBook interfaces are currently avaiable from the <A HREF=""/products/prolog_customer_freeware.htm"">Customer Contributed Freeware</A> section  of our web site. The Amzi! Logic Server can be called by any tool or language that can call a 16 or 32-bit DLL. We'd be happy to help you work out any interfaces you need; contact <A HREF=""mailto:support@amzi.com"">support@amzi.com</A>.")], [(commercialDevelopment = "yes" or what = "Research") and connections include "Existing databases", text("You can <B>reason over data</B> from many sources using Amzi!'s ODBC interface.  For an brief introduction see the <A HREF=""/news/odbc.htm"">press release</A>.  For more details, download the <A HREF=""ftp://ftp.amzi.com/pub/demos/odbc_cppgene.zip"">32-bit C++ demo</A> or the <A HREF=""ftp://ftp.amzi.com/pub/demos/odbc_vbgene.zip"">Visual Basic demo</A> (both have full source code in the on-line help).  Get the latest ODBC drivers from <A HREF=""http://www.microsoft.com/kb/softlib/"">Microsoft</A>.")], [(commercialDevelopment = "yes" or what = "Research") and connections include "Network clients/servers", text("We have a sockets interface that lets Prolog components directly <B>communicate with Internet clients and servers</B>.")], [(commercialDevelopment = "yes" or what = "Research") and connections include "Other programs, libraries and APIs", text("You can <B>connect existing C, C++, Java, Delphi and VB 5.0 code</B> to Amzi! by creating 'extended predicates.' This makes it possible for your Prolog components to directly call functions in your application or other libraries or APIs. Extended predicates can be packaged into Logic Server eXtensions (LSXs).")], [what = "Consulting", text("We like working with consultants, and we'll do what we can to support you in your projects.")]]
+   ]).
+
+rule_set(tool, /, [
+   description = "",
+   type = multiple_values,
+   rules = [[conditions, value], [whys include "Intelligent components for Internet" or whys include "General interest" or what = "Website construction" or what = "Other", text("<LI><IMG SRC=""/images/knowledgewright_logo_verysmall.gif"" HSPACE=10> Download <A HREF=""/products/knowledgewright.html"">KnowledgeWright</A>, a reasoning engine with full GUI Workshop for embedding intelligent components on web pages and in applications. This advisor was built with KnowledgeWright.")], [whys exclude "Intelligent components for C/C++, Java, Delphi, Visual Basic, etc." and whys exclude "Intelligent components for Internet" or whys include "General interest" or workFor = "Myself" or what = "Undergraduate/other studies" or what = "Other" or what = "Teaching", text("<LI><IMG SRC=""/images/amzi_icon.gif"" HSPACE=10> Take a look at the <A HREF=""/products/amzi_logic_explorer.htm"">Amzi! Logic Explorer</A>. It is a Windows development environment and tutorial for exploring Prolog, logic-bases and intelligent components. Free.")], [(exploreProlog = "yes" or what = "Research" or embeddedDevelopment = "yes") and commercialDistribution = "no", text("<LI><IMG SRC=""/images/amzi_icon.gif"" HSPACE=10> The Free<A HREF=""/products/amzi_prolog_logic_server.htm"">Amzi! Personal License</A> is ideal for embedding intelligent Prolog components in other tools and languages for research or free distribution. Applications may not be used for any commercial, business or government purpose.")], [what = "Research" or what = "Graduate studies", text("<P>The Free <A HREF=""/products/amzi_prolog_logic_server.htm"">Amzi! Personal License</A> is a popular choice with researchers and graduate students because it includes the same  tools and libraries as the Professional License, and it is free.")], [embeddedDevelopment = "yes" and commercialDistribution = "yes", text("<LI><IMG SRC=""/images/amzi_icon.gif"" HSPACE=10> The <A HREF=""/products/amzi_prolog_logic_server.htm"">Amzi! Professional License</A> is ideal for embedding intelligent Prolog components in any tool or language. It includes an unlimited, royalty-free distribution license.")], [personalOrProfessional = "yes" and (whys include "Learning" or what = "Engineering" or what = "Consulting" or what = "Website construction" or what = "Software development"), text("<LI>The book <A HREF=""/products/learning_products.htm"">Adventure in Prolog</A> is a complete Prolog tutorial and is included with the Amzi! Logic Explorer, Amzi! Prolog + Logic Server, and is available for downloading in HTML format.")], [what = "Teaching", text("<LI>Amzi! is a full featured, Edinburgh (Clocksin & Mellish) standard Prolog, and is compatible with almost all textbooks and curriculums.")], [personalOrProfessional = "yes" and environments include "Sun Solaris", text("<LI>Amzi! Prolog + Logic Server is fully supported on Sun Solaris with both a free Personal License and a Commercial License.")], [personalOrProfessional = "yes" and environments include "Linux", text("<LI>Amzi! Prolog + Logic Server is fully supported on Linux with both a free Personal License and a Commercial License.")], [personalOrProfessional = "yes" and environments include "other", text("<LI>We are available for porting Amzi! to other platforms. It is relatively easy to port the command-line tools as they are all in ANSI C++ and Prolog. We've already created versions for HP/UX and OpenVMS as well as a 64-bit version for Digital Unix. E-mail <A HREF=""mailto:dennis@amzi.com"">dennis@amzi.com</A> with your requirements.")], [what = "Teaching" and workFor = "Educational institution", text("You can use the Amzi! Logic Explorer for a Prolog-only environment and Amzi! Prolog + Logic Server for a Prolog and C/C++, Java, Delphi, VB environment in your classrooms and labs free of charge.")]]
+   ]).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+
+text(main_doc, /, [
+   file = "",
+   description = "",
+   type = text,
+   text = text("<H2><IMG SRC=""/images/bullet.gif"" HSPACE=10><FONT COLOR=#0000A0> Amzi! Internet Site Guide</FONT></H2>
+
+
+
+
+
+
+
+<HR><P><FONT SIZE=3><I><B>We recommend these articles, demos, newsgroups, and other sites for you...</B></I></FONT><P>
+
+
+
+
+
+
+
+" + resource + "
+
+
+
+
+
+
+
+<HR><P><FONT SIZE=3><I><B>We recommend these tools, products and services for you...</B></I></FONT><P><UL>
+
+
+
+
+
+
+
+" + tool + "
+
+
+
+
+
+
+
+</UL><P>All <A HREF=""/company/index.htm"">Amzi!</A> products include free tech support (via internet, phone and fax), are not copy protected and are royalty-free.</P>
+
+
+
+
+
+
+
+")
+   ]).
+

@@ -1,0 +1,24 @@
+HERE = $(AMZI_DEV_DIR)\src\lsapis\cgi
+
+all: _acgi
+
+
+_acgi:
+	echo === making acgi ===
+	-md $(AMZI_DEV_DIR)\lsapis\cgi
+	NMAKE /a /f "wacgi.mak" CFG="wacgi - Win32 Release"
+	acmp acgi.pro
+	copy acgi.plm $(AMZI_DEV_DIR)\abin\acgi.plm
+	del acgi.plm
+
+clean:
+	-del /Q Release\*.*
+	-del /Q Debug\*.*
+	-del /Q *.plm
+
+remove_cvs:
+	-rmdir /S /Q CVS
+
+   
+
+

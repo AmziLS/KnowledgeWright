@@ -1,0 +1,16 @@
+KW_DIR = /home/dennis/kw4
+
+_all: _samples
+
+_samples:
+	@echo *** copying samples ***
+	cp basic/*.kb $(KW_DIR)/samples/basic
+	cp basic/tutorial/*.kb $(KW_DIR)/samples/basic/tutorial
+	cp basic/tutorial/*.mdb $(KW_DIR)/samples/basic/tutorial
+	cp basic/tutorial/hello_1.kb $(KW_DIR)/runtime/cgi/hello_1.kb
+	cp support/*.kb $(KW_DIR)/samples/support
+	cp support/tutorial/*.kb $(KW_DIR)/samples/support/tutorial
+	cp support/tutorial/printer_1.kb $(KW_DIR)/runtime/cgi/printer_1.kb
+
+	
+

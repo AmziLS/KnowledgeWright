@@ -1,0 +1,2 @@
+./jre/bin/java -classic -cp .:kw.jar amzi.ide.App
+

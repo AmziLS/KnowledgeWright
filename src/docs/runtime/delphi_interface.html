@@ -1,0 +1,50 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Delphi Interface</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Delphi 
+Interface (Full Version)<!-- #EndEditable --></font></font> </h2><!-- #BeginEditable "Contents" --> 
+<h3><a name="setting_up_delphi"></a>Setting Up Delphi</h3><p> <! AMZI_INDEX = Delphi> 
+The Delphi interface is in the runtime/delphi subdirectory. Before you can run 
+this program, you must set-up the Amzi! Logic Server.</p><p>You can do this by 
+either:</p><ul> <li>Put the knowledgewright4/workshop directory on your PATH environment 
+variable <p>or </p></li><li>Copy amzi.cfg, amzi.dll, aosutils.lsx, aodbc.lsx to 
+the directory containing the Delphi code. </li></ul><p>Then you need to:</p><ul> 
+<li>Copy the jig reasoning engine (.xpl) file from the workshop/jigs subdirectory. 
+For the basic jig, this is basic.xpl, for the support jig, this is support.xpl, 
+etc. </li><li>Copy the knowledgebase (.kb) file you want to run to the directory 
+containing the Delphi code.</li></ul><p><font color="#990000"></font>This will 
+let you run the sample as provided. In order to write your own Delphi programs, 
+you need to install the Amzi! Logic Server Component. The Logic Server Component, 
+TLSEngine, is implemented in the Object Pascal unit amzi.pas for 32-bit Delphi. 
+You can use it as an Object Pascal unit by simply including a reference to it 
+in the USES section of your application, or you can install it in the Delphi component 
+library. </p><p>It is important to follow the directions carefully when installing 
+amzi.pas as a Delphi component. Delphi must be able to find both amzi.pas and 
+amzi.dll. The directions assume that you set your environment variable PATH to 
+include knowledgewright4\workshop. Replace N in the directions with the version 
+of Delphi you are using. </p><ol> <li>Open Delphi. </li><li>Select from the menu 
+'Component/Install Component…' </li><li>Select the 'Into existing package' tab 
+which will by default install into the "Borland User Components" package in the 
+file \borland\delphiN\Lib\dclusrN0.dpk. </li><li>Press the button marked 'Browse' 
+next to the 'Unit file name' box. </li><li>Select \knowledgewright4\runtime\delphi\amzi.pas 
+</li><li>Note the search path should now include \knowledgewright4\runtime\delphi. 
+</li><li>Select 'OK' on the Install Component dialog box. </li><li>Select 'Yes' 
+on the 'Package dclusrN0.dpk will be rebuilt' confirmation box. </li><li>Select 
+'OK' on the dialog box informing you that TLSEngine has been added to the package. 
+</li><li>You should now see the Amzi! flying squirrel logo in the Additional components. 
+</li></ol><p>Note: When embedding KW in Delphi, make sure your jig (.xpl filename) 
+is different from your Delphi .exe file. This is necessary so that KnowledgeWright 
+does not try to use Delphi's .cfg file and vice versa. </p><!-- #EndEditable --> 
+<hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

@@ -1,0 +1,94 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Embedding Knowledgebases</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+<font color="#990000"><!-- #BeginEditable "Title" -->Embedding Knowledgebases<br> 
+<!-- #EndEditable --></font> </h1><hr> <!-- #BeginEditable "Contents" --> <h2><font color="#990000">(Full 
+Version)</font></h2><h2><a name="introduction"></a><font color="#990000">Introduction</font></h2><p>In 
+order to run a knowledgebase within another programming environment, you need 
+the following:</p><ul> <li>The knowledgebase (.kb file) that you created in the 
+KnowledgeWright Workshop using a particular jig.<br> <br> </li><li>A reasoning 
+engine (.xpl file) from the workshop jigs directory that has the same name as 
+the jig your knowledgebase was created with. For example, the reasoning engine 
+for the Basic jig is basic.xpl.<br> <br> </li><li>Various system files from the 
+workshop directory. These are: amzi.cfg, amzi.dll, amzijni.dll (for Java only), 
+aosutils.lsx and aodbc.lsx (if you use data from an ODBC database in your knowledgebase).</li></ul><h2><font color="#990000"><a name="loading_the_runtime"></a>Loading 
+the KnowledgeWright </font><font color="#990000">Runtime</font> </h2><p> <! AMZI_INDEX = KWI; lsInit; lsInitLSX; lsLoad; lsExecStr; lsClose> 
+A <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> knowledgebase 
+can be embedded in almost any language or tool, including C/C++, Java, Delphi, 
+Visual Basic and web servers. To do this, you use the LogicBase Interface (KWI). 
+The KWI provides functions for managing the reasoning process, asking the user 
+questions and displaying results.</p><!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> 
+is written in <a href="http://www.amzi.com/AmziManual/amzidoc.htm">Amzi! Prolog 
++ Logic Server</a>. If you are familiar with that product, embedding <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem -->will 
+be straightforward. Before running <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem -->, 
+you have to load and initialize the Amzi! Logic Server with the following calls: 
+<blockquote> <pre><font color="#990000">lsInit("");<br></font><font color="#990000">lsInitLSX();<br></font><font color="#990000">lsLoad 
+(&quot;basic.xpl");</font></pre></blockquote><p>Note InitLSX will load the LSX 
+files specified in amzi.cfg. Put the following line in amzi.cfg (no space after 
+the semi-colon):</p><blockquote> <pre><font color="#990000">lsxload = aodbc;aosutils</font></pre></blockquote><p>When 
+you are done interacting with the KWI you need to call:</p><blockquote> <pre><font color="#990000">lsClose();</font></pre></blockquote><h2><font color="#990000"><a name="program_structure"></a>Program 
+Structure</font> </h2><p> <! AMZI_INDEX = initialize; open; new_session; solve; get_action; ask; tell; close> 
+The basic structure of a program that calls the KWI is as follows:</p><blockquote> 
+<pre><font color="#990000">kwi( ... initialize ... )<br></font><font color="#990000">kwi( 
+... open ... )<br></font><font color="#990000">kwi( ... new_session ... )</font></pre><pre><font color="#990000">while 
+( kwi( ... solve ... ) and MORE = more)<br>{<br> while kwi( ... get_action ... 
+) and ACTION != none)<br> { if ( ACTION == ask(user, ... ) ) { ... display prompt, 
+menu, etc. and get value from user kwi( ... assert ... ) } if ( ACTION == tell(user, 
+...) ) ...<br> }<br>} kwi( ... close ... )</font></pre></blockquote><p>The above 
+program structure starts the reasoning process with 'solve'. This usually results 
+in the reasoning engine needing to ask a question or display some intermediate 
+output. These are 'actions' which are processed individually. The answers are 
+asserted to the reasoning engine, and it is asked to 'solve' again.</p><p>There 
+are a number of ways to directly extend the reasoning engine with code written 
+in Amzi! Prolog or your host language (Java, C/C++, Delphi or VB). These techniques 
+require advanced programming techniques and are normally needed only with large 
+knowledgebases or for high-performance web servers. See <a href="kwi_advanced.html">Advanced 
+KWI Programming</a> for details.</p><h3><a name="required_functions"></a>Required 
+Functions</h3><p>You will need two functions to support your interaction with 
+the KWI:</p><ol> <li>A function that converts an Amzi! Prolog list into a property 
+list, collection or other appropriate data structure for your language.</li><li>Under 
+Windows, a function that turns backslashes in pathnames into double backslashes.</li></ol><p>These 
+functions are provided in the runtime directory for each example.</p><h3><a name="using_the_amzi_logic_server"></a>Using 
+the Amzi! Logic Server</h3><p>The reasoning engines for KnowledgeWright are written 
+in Amzi! Prolog. So the KWI uses the Amzi! Logic Server to make calls to the Prolog 
+code. The primary Logic Server function that is used is ExecStr. This executes 
+the predicate passed as the string argument. The term is the result of the execution. 
+ExecStr returns false (0) if it fails (which should not happen in the KWI) and 
+a term pointer (non-zero) if it succeeds.</p><p>Variables in Prolog start with 
+capital letters. When you see a string passed to ExecStr with a variable, the 
+resulting value needs to be retrieved. It is retrieved from the Term returned 
+by ExecStr. The calls GetStrArg and GetArg get the values of these variables. 
+GetStrArg gets a string argument. GetArg is used when a Prolog list is returned, 
+that list is converted into a suitable data structure for the host language (a 
+Vector for Java, a Collection for Basic). You need not concern yourself with the 
+details of the list conversion, just use the host language structure to retrieve 
+the values.</p><p>One KWI call, get_action, returns a Prolog structure that describes 
+the action. The format of the structure is:</p><blockquote> <pre><font color="#990000">functor(atom, 
+[list_item1 = value1, list_item2 = value2...])</font></pre></blockquote><p>The 
+functor is retrieved by the Logic Server call GetFunctor. For get_action, the 
+functor is 'ask' or 'tell'. The atom is the target of the action and is 'user' 
+(additional targets will be supported for performing external actions).</p><h2><font color="#990000"><a name="cgi"></a>CGI</font></h2><p>The 
+CGI web server interface is described <a href="cgi_interface.html">here</a>.</p><h2><font color="#990000"><a name="delphi"></a>Delphi</font></h2><p>The 
+Delphi interface is described <a href="delphi_interface.html">here</a>.</p><h2><font color="#990000"><a name="java"></a>Java</font></h2><p>The 
+Java interface is described <a href="java_interface.html">here</a>.</p><h2><font color="#990000"><a name="visual_basic"></a>Visual 
+Basic</font></h2><p>The Visual Basic interface is described <a href="vb_interface.html">here</a>.</p><!-- #EndEditable --> 
+<hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate --></HTML>

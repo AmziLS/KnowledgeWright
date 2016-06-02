@@ -1,0 +1,56 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Debugging Knowledgebases</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->Debugging 
+  Knowledgebases <!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><a name="starting_the_debugger"></a><font color="#990000">Starting the Debugger</font></h2>
+<p><! AMZI_INDEX = run | run ; run | single step ; run ; single step>To run a 
+  knowledgebase, select Run | Run or Run |Single Step from the main menu. This 
+  will open up two windows. On the left is the current state of the reasoning 
+  process and a log of its progress. On the right is a window that will display 
+  the output for the user, both questions and all output.</p>
+<h2><font color="#990000"><a name="run_vs_single_step"></a>Run vs. Single Step</font></h2>
+<p>You can choose either to run the knowledgebase, in which case it will run until 
+  all solutions have been found. Or, you can step through the reasoning process, 
+  pausing after each set of actions has been processed.</p>
+<p>The reasoning engine uses the facts and the rules in the knowledgebase to determine 
+  what other facts need to be obtained from the user. For each fact, a dialog 
+  box will appear asking you to enter a value. As the reasoning engine proves 
+  its goals, the solutions are displayed in the right hand window.</p>
+<h2><font color="#990000"><a name="log_detail_level"></a>Log Detail Level</font></h2>
+<p><! AMZI_INDEX = run | log detail ; log ; execution log>You can control the 
+  level of detail displayed in the execution log by selecting Run | Log Detail 
+  then Low, Medium or High. You need to select the detail level before running 
+  your knowledgebase.</p>
+<h2><a name="compiling_knowledgebases"></a><font color="#990000">Compiling Knowledgebases</font></h2>
+<p><! AMZI_INDEX = compiling ; run | compile ; kbc>Knowledgebases can be compiled 
+  for execution within the Workshop or under any other environment, including 
+  the Web. Compiled knowledgebases have these advantages:</p>
+<ol>
+  <li>They run faster than interpreted (source code) knowledgebases.</li>
+  <li>The contents of the knowledgebase cannot be read by your users.</li>
+</ol>
+<p>Compiled knowledgebases end in the suffix '.kbc'. To compile a knowledgebase 
+  select the Run | Compile command.</p>
+<p>When running (or single stepping) your knowledgebase in the Workshop, the compiled 
+  version will be used if it is more recent than the source code version (.kb).</p>
+<p>You can also open a compiled knowledgebase in any of the runtimes by specifying 
+  the knowledgebase name with a .kbc suffix. As with the Workshop, if both source 
+  and compiled versions are present, the compiled version will be used only if 
+  it is more recent.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

@@ -1,0 +1,2390 @@
+knowledgewright_jig(joblook,1).
+
+
+
+% folder
+
+
+
+% knowledgebase
+
+knowledgebase(main, /, [
+   description = $$,
+   goals = '[]',
+   odbc = $$
+   ]).
+
+
+
+% fact
+
+
+
+% question
+
+question(holland_traits, /, [
+   prompt = text($Which Holland traits do you want to consider? Pick
+from 1-3 values from r-realistic, i-investigative,
+a-artistic, s-social, e-enterprising, or c-conventional.$),
+   question_type = menu_multiple_choices,
+   question_style = listbox,
+   choices = [$r$,$i$,$a$,$s$,$e$,$c$],
+   answer_type = text,
+   length = 20,
+   default = $$,
+   ask_also = '[]'
+   ]).
+
+question(education, /, [
+   prompt = text($Pick one description of your education.
+he - higher education, st - some training,
+no - no training$),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = [$higher education$,$some training$,$none$],
+   answer_type = text,
+   length = 20,
+   default = $$,
+   ask_also = '[]'
+   ]).
+
+
+
+% sql
+
+
+
+% rule
+
+
+
+% table
+
+
+
+% text
+
+
+
+% document_format
+
+
+
+% job
+
+job('abbattoir worker', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $none$]
+   ]).
+
+job(accountant, /, [
+   description = $$,
+   holland_traits = [[e,c],[i,c],[i,s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('accounting technician', /, [
+   description = $$,
+   holland_traits = [[c],[r,c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(acrobat, /, [
+   description = $$,
+   holland_traits = [[a,e],[r,a],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(acting, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(actuary, /, [
+   description = $$,
+   holland_traits = [[i],[i,c],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(administrator, /, [
+   description = $$,
+   holland_traits = [[e,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('adult education teacher', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(advertising, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('advice/welfare worker', /, [
+   description = $$,
+   holland_traits = [[s],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('agricultural scientist', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('air traffic control', /, [
+   description = $$,
+   holland_traits = [[e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('airport worker', /, [
+   description = $$,
+   holland_traits = [[r,s],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('alternative therapist', /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('ambulance driver', /, [
+   description = $$,
+   holland_traits = [[r,i,s],[r,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('animal care', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,s,c],[r,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('animal trainer', /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(anthropologist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(archaeologist, /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(architect, /, [
+   description = $$,
+   holland_traits = [[r,a],[r,i,a]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('armed forces', /, [
+   description = $$,
+   holland_traits = [[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(artist, /, [
+   description = $$,
+   holland_traits = [[a],[r,i,a,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('assembly work', /, [
+   description = $$,
+   holland_traits = [[r,c],[r,s,c],[s,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(astronomer, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(auctioneer, /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e],[e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(auditor, /, [
+   description = $$,
+   holland_traits = [[i,c],[r,i,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('auto-electrician', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('baby-sitter', /, [
+   description = $$,
+   holland_traits = [[s],[s,e],[s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('baggage handler', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,s,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(bailiff, /, [
+   description = $$,
+   holland_traits = [[s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(baker, /, [
+   description = $$,
+   holland_traits = [[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('ballistics expert', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(banking, /, [
+   description = $$,
+   holland_traits = [[e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('bar person', /, [
+   description = $$,
+   holland_traits = [[s],[s,e],[s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(beautician, /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('bill poster', /, [
+   description = $$,
+   holland_traits = [[r],[r,e]],
+   constraints = [education = $none$]
+   ]).
+
+job(biochemist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(biologist, /, [
+   description = $$,
+   holland_traits = [[i],[i,a],[r,i,a]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(bodyguard, /, [
+   description = $$,
+   holland_traits = [[s],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('bookbinder (print finisher)', /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(botanist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(bottler, /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $none$]
+   ]).
+
+job(brewing, /, [
+   description = $$,
+   holland_traits = [[r,e],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(bricklayer, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(broadcasting, /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('broadcasting engineer', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,a]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('broadcasting technician', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,a]],
+   constraints = [education = $some training$]
+   ]).
+
+job('builder''s merchant', /, [
+   description = $$,
+   holland_traits = [[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('builder''s yard assistant', /, [
+   description = $$,
+   holland_traits = [[r,e],[r,s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('building societies', /, [
+   description = $$,
+   holland_traits = [[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('business manager', /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(butcher, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(buyer, /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('cabin crew', /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('cabinet maker', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('cafe worker', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[r,s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('cake decorator', /, [
+   description = $$,
+   holland_traits = [[r,a],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('call centre operator', /, [
+   description = $$,
+   holland_traits = [[s],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('car sales', /, [
+   description = $$,
+   holland_traits = [[r,s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('care worker', /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('careers / educational guidance', /, [
+   description = $$,
+   holland_traits = [[i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('careers / educational guidance ', /, [
+   description = $$,
+   holland_traits = [[i,a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('careers / guidance assistant', /, [
+   description = $$,
+   holland_traits = [[s],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('careers guidance', /, [
+   description = $$,
+   holland_traits = [[i,a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('caretaker (janitor)', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('carpenter/joiner', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $some training$]
+   ]).
+
+job('carpet layer', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('cartographer / draughting', /, [
+   description = $$,
+   holland_traits = [[r,i,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(cartoonist, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(cashier, /, [
+   description = $$,
+   holland_traits = [[c],[e,c],[s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(checking, /, [
+   description = $$,
+   holland_traits = [[r,c],[r,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('chemical engineer', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(chemist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('chiropodist (podiatrist)', /, [
+   description = $$,
+   holland_traits = [[i,s],[r,i,s],[s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(chiropractor, /, [
+   description = $$,
+   holland_traits = [[i],[i,s],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('civil engineer', /, [
+   description = $$,
+   holland_traits = [[i],[i,e],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(cleaner, /, [
+   description = $$,
+   holland_traits = [[r,e],[r,s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(clergy, /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(clerical, /, [
+   description = $$,
+   holland_traits = [[c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('clinical / counselling psychologist', /, [
+   description = $$,
+   holland_traits = [[s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('clinical/counselling psychologist', /, [
+   description = $$,
+   holland_traits = [[i,a,s],[i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(coastguard, /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $some training$]
+   ]).
+
+job(cobbler, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(comedian, /, [
+   description = $$,
+   holland_traits = [[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('communications operator', /, [
+   description = $$,
+   holland_traits = [[s],[s,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('community/youth worker', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[s],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(composer, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('computer games designer', /, [
+   description = $$,
+   holland_traits = [[a],[a,s],[a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('computer networking', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('computer operator', /, [
+   description = $$,
+   holland_traits = [[c],[r,c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('computer programmer', /, [
+   description = $$,
+   holland_traits = [[r,i,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('computer sales/support', /, [
+   description = $$,
+   holland_traits = [[r,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('computer scientist', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('computer security specialist', /, [
+   description = $$,
+   holland_traits = [[c],[i,s,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('computer servicing', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('computer systems analyst', /, [
+   description = $$,
+   holland_traits = [[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('computer systems engineer', /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('conference organiser', /, [
+   description = $$,
+   holland_traits = [[a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(construction, /, [
+   description = $$,
+   holland_traits = [[r],[r,s],[r,s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job(cook, /, [
+   description = $$,
+   holland_traits = [[r],[r,a],[r,a,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job(coroner, /, [
+   description = $$,
+   holland_traits = [[i],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(costumer, /, [
+   description = $$,
+   holland_traits = [[a],[r,a],[r,i,a]],
+   constraints = [education = $some training$]
+   ]).
+
+job(counsellor, /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('court usher', /, [
+   description = $$,
+   holland_traits = [[s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(critic, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('curator (museums)', /, [
+   description = $$,
+   holland_traits = [[i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('customs officer', /, [
+   description = $$,
+   holland_traits = [[c],[e,c],[i,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('dance instructor', /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(dancer, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(decorator, /, [
+   description = $$,
+   holland_traits = [[r],[r,a],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('dental assistant', /, [
+   description = $$,
+   holland_traits = [[a,s],[i,a,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('dental hygienist', /, [
+   description = $$,
+   holland_traits = [[i,a,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(dentist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(designer, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[r,a,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('desktop publishing', /, [
+   description = $$,
+   holland_traits = [[a,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(detective, /, [
+   description = $$,
+   holland_traits = [[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(dietician, /, [
+   description = $$,
+   holland_traits = [[i],[i,s],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('display maker', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job(diver, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(doctor, /, [
+   description = $$,
+   holland_traits = [[i],[i,s],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('driver, bus', /, [
+   description = $$,
+   holland_traits = [[r,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('driver, general', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $none$]
+   ]).
+
+job('driver, lorry', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('driver, public service', /, [
+   description = $$,
+   holland_traits = [[r,s],[r,s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('driving instructor', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('dry cleaner', /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('early years teacher', /, [
+   description = $$,
+   holland_traits = [[s],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('ecological scientist', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(economist, /, [
+   description = $$,
+   holland_traits = [[i],[i,a,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(editor, /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('editorial assistant', /, [
+   description = $$,
+   holland_traits = [[a,c],[i,a,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('educational guidance', /, [
+   description = $$,
+   holland_traits = [[i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('educational psychologist', /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('educational welfare officer', /, [
+   description = $$,
+   holland_traits = [[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(electrician, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('electronic engineer', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(engineer, /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e],[r,i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('environmental conservation officer', /, [
+   description = $$,
+   holland_traits = [[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('environmental health officer', /, [
+   description = $$,
+   holland_traits = [[r,e],[r,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('equipment servicing', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,s,e],[r,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('estate agent', /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('fairground/arcade worker', /, [
+   description = $$,
+   holland_traits = [[s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('farm worker', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(farmer, /, [
+   description = $$,
+   holland_traits = [[r,e],[r,i,e],[r,i,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(farmworker, /, [
+   description = $$,
+   holland_traits = [[r,s]],
+   constraints = [education = $none$]
+   ]).
+
+job('fashion designer', /, [
+   description = $$,
+   holland_traits = [[a],[a,s],[r,a,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(financial, /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e,c],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('fire fighter', /, [
+   description = $$,
+   holland_traits = [[r],[r,s],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('fireworks display specialist', /, [
+   description = $$,
+   holland_traits = [[r],[r,a,e],[r,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('fish farmer', /, [
+   description = $$,
+   holland_traits = [[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('fitness instructor', /, [
+   description = $$,
+   holland_traits = [[r,s],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(florist, /, [
+   description = $$,
+   holland_traits = [[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('flying instructor', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('food scientist or technologist', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(forester, /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('fork lift truck operator', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $some training$]
+   ]).
+
+job(fumigator, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('fund raiser', /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('funeral director (undertaker)', /, [
+   description = $$,
+   holland_traits = [[r,s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(gamekeeper, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(gardener, /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job(geneticist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(geographer, /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(geologist, /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(geophysicist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('glass blower', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(glazier, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('graphic design / desktop publishing', /, [
+   description = $$,
+   holland_traits = [[a],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('grounds keeper', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(gunsmith, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('hairdresser / barber', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[s],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('health and safety inspector', /, [
+   description = $$,
+   holland_traits = [[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('health promotion / education', /, [
+   description = $$,
+   holland_traits = [[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('health technician', /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('health visitor', /, [
+   description = $$,
+   holland_traits = [[i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('home help', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[s],[s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('horse groom', /, [
+   description = $$,
+   holland_traits = [[r],[r,a,e],[r,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('hospital porter', /, [
+   description = $$,
+   holland_traits = [[r,s],[r,s,e],[s]],
+   constraints = [education = $none$]
+   ]).
+
+job(hospitality, /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(housekeeper, /, [
+   description = $$,
+   holland_traits = [[e,c],[r,c],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(housing, /, [
+   description = $$,
+   holland_traits = [[r,a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(illustrator, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[r,a,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('immigration officer', /, [
+   description = $$,
+   holland_traits = [[c],[s,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('import export', /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(indexer, /, [
+   description = $$,
+   holland_traits = [[i,a,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('information technology', /, [
+   description = $$,
+   holland_traits = [[r,i,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('insurance agent', /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('insurance broker', /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('insurance claims assessor', /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('insurance clerk', /, [
+   description = $$,
+   holland_traits = [[c],[s,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('insurance loss adjuster', /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('insurance underwriter', /, [
+   description = $$,
+   holland_traits = [[c],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('interior designer', /, [
+   description = $$,
+   holland_traits = [[a],[r,a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(interpreter, /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('investment analyst', /, [
+   description = $$,
+   holland_traits = [[i,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('investment fund manager', /, [
+   description = $$,
+   holland_traits = [[i,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('jeweller / silversmith', /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(jockey, /, [
+   description = $$,
+   holland_traits = [[r,e],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(journalist, /, [
+   description = $$,
+   holland_traits = [[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('kennel worker', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('kitchen worker', /, [
+   description = $$,
+   holland_traits = [[r],[r,a,s]],
+   constraints = [education = $none$]
+   ]).
+
+job('laboratory technician', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('landscape architect', /, [
+   description = $$,
+   holland_traits = [[i,a],[r,i,a]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('launderette operative', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job(lawyer, /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('leather worker', /, [
+   description = $$,
+   holland_traits = [[r],[r,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(lecturer, /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('legal executive', /, [
+   description = $$,
+   holland_traits = [[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('legal executive / conveyancer', /, [
+   description = $$,
+   holland_traits = [[e,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(librarian, /, [
+   description = $$,
+   holland_traits = [[r,s,e,c],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('library assistant', /, [
+   description = $$,
+   holland_traits = [[c],[s,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('lift repairer', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,s],[r,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('lighting equipment operator', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,a]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('literary agent', /, [
+   description = $$,
+   holland_traits = [[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(locksmith, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(logistics, /, [
+   description = $$,
+   holland_traits = [[c],[r,s,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(lyricist, /, [
+   description = $$,
+   holland_traits = [[a],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('machine operator', /, [
+   description = $$,
+   holland_traits = [[r,c],[r,s,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(magician, /, [
+   description = $$,
+   holland_traits = [[a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('make-up artist', /, [
+   description = $$,
+   holland_traits = [[a],[a,s],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('management accountant', /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('management consultant', /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('marine architect', /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('marine biologist', /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('marine engineer', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('market research analyst', /, [
+   description = $$,
+   holland_traits = [[i,s],[i,s,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('marketing manager', /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(mason, /, [
+   description = $$,
+   holland_traits = [[r],[r,a],[r,a,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(mathematician, /, [
+   description = $$,
+   holland_traits = [[i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(mechanic, /, [
+   description = $$,
+   holland_traits = [[r],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('media executive', /, [
+   description = $$,
+   holland_traits = [[a],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('media production', /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('media technician', /, [
+   description = $$,
+   holland_traits = [[r,i,a]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('medical records clerk', /, [
+   description = $$,
+   holland_traits = [[c],[i,s,c],[s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('medical technologist', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(metallurgist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(meteorologist, /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('meter reader', /, [
+   description = $$,
+   holland_traits = [[c],[s,c],[s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(microbiologist, /, [
+   description = $$,
+   holland_traits = [[i],[i,s,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(midwife, /, [
+   description = $$,
+   holland_traits = [[i,s],[r,i,s],[s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(miner, /, [
+   description = $$,
+   holland_traits = [[r],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('mobility/rehabilitation worker', /, [
+   description = $$,
+   holland_traits = [[s],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(model, /, [
+   description = $$,
+   holland_traits = [[a],[a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('model maker', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,a]],
+   constraints = [education = $some training$]
+   ]).
+
+job(multimedia, /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(musician, /, [
+   description = $$,
+   holland_traits = [[a],[a,s,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(neurologist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(nurse, /, [
+   description = $$,
+   holland_traits = [[i,s],[r,i,a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('nursery nurse / nanny', /, [
+   description = $$,
+   holland_traits = [[s],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('nursing assistant / auxiliary', /, [
+   description = $$,
+   holland_traits = [[r,s],[r,s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('occupational psychologist', /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('occupational therapist', /, [
+   description = $$,
+   holland_traits = [[r,s],[r,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(optician, /, [
+   description = $$,
+   holland_traits = [[i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(orthoptist, /, [
+   description = $$,
+   holland_traits = [[r],[r,i,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(osteopath, /, [
+   description = $$,
+   holland_traits = [[i],[i,s],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(painter, /, [
+   description = $$,
+   holland_traits = [[r,a]],
+   constraints = [education = $some training$]
+   ]).
+
+job('painter, construction', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(paramedic, /, [
+   description = $$,
+   holland_traits = [[r],[r,i,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('park warden', /, [
+   description = $$,
+   holland_traits = [[r,a,e,c],[r,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('parking attendant', /, [
+   description = $$,
+   holland_traits = [[r,s,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('patent agent', /, [
+   description = $$,
+   holland_traits = [[r,a,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(pathologist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('payroll clerk', /, [
+   description = $$,
+   holland_traits = [[c],[r,c],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(perfumer, /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('personnel (human resources)', /, [
+   description = $$,
+   holland_traits = [[s,c],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('pest controller (exterminator)', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(pharmacist, /, [
+   description = $$,
+   holland_traits = [[i],[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(pharmacologist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('pharmacy technician', /, [
+   description = $$,
+   holland_traits = [[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(photographer, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[r,a,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job(photojournalist, /, [
+   description = $$,
+   holland_traits = [[a],[a,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(physicist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(physiologist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(physiotherapist, /, [
+   description = $$,
+   holland_traits = [[i,s],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('piano tuner or technician', /, [
+   description = $$,
+   holland_traits = [[a],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('picture framer', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('picture researcher', /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(pilot, /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e,c]],
+   constraints = [education = $higher education$,education = $some training$]
+   ]).
+
+job(plasterer, /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(playworker, /, [
+   description = $$,
+   holland_traits = [[i,s,e],[s]],
+   constraints = [education = $some training$]
+   ]).
+
+job(playwright, /, [
+   description = $$,
+   holland_traits = [[a],[a,s],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(plumber, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(police, /, [
+   description = $$,
+   holland_traits = [[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('political researcher', /, [
+   description = $$,
+   holland_traits = [[i],[i,e],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(politician, /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('post office counter clerk', /, [
+   description = $$,
+   holland_traits = [[c],[s,c],[s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('post room clerk', /, [
+   description = $$,
+   holland_traits = [[c],[r,c],[r,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('postal worker', /, [
+   description = $$,
+   holland_traits = [[c],[r,c],[r,s,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(potter, /, [
+   description = $$,
+   holland_traits = [[a],[r,a],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('printing and publishing', /, [
+   description = $$,
+   holland_traits = [[r,a,e],[r,a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('prison governor', /, [
+   description = $$,
+   holland_traits = [[i,s,e],[s],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('prison officer', /, [
+   description = $$,
+   holland_traits = [[r,s,e],[s],[s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('private investigator', /, [
+   description = $$,
+   holland_traits = [[i,s,e],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('probation assistant', /, [
+   description = $$,
+   holland_traits = [[s]],
+   constraints = [education = $none$]
+   ]).
+
+job('probation officer', /, [
+   description = $$,
+   holland_traits = [[i,s,e],[s],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('producer / promoter', /, [
+   description = $$,
+   holland_traits = [[a],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('proof reader', /, [
+   description = $$,
+   holland_traits = [[c],[i,c],[i,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('property developer', /, [
+   description = $$,
+   holland_traits = [[i,s,e],[i,s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('prosthetist / orthoptist', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(psychiatrist, /, [
+   description = $$,
+   holland_traits = [[i,a,s],[i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(psychologist, /, [
+   description = $$,
+   holland_traits = [[i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(psychotherapist, /, [
+   description = $$,
+   holland_traits = [[i,a,s],[i,s],[s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('public relations', /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(puppeteer, /, [
+   description = $$,
+   holland_traits = [[a,e],[i,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('racing driver', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $some training$]
+   ]).
+
+job(radiographer, /, [
+   description = $$,
+   holland_traits = [[i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(receptionist, /, [
+   description = $$,
+   holland_traits = [[s,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(recruiter, /, [
+   description = $$,
+   holland_traits = [[s,e],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('refrigeration mechanic', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('refuse collection', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $none$]
+   ]).
+
+job('registrar, college/university', /, [
+   description = $$,
+   holland_traits = [[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(removals, /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('reprographics worker', /, [
+   description = $$,
+   holland_traits = [[c],[r,a,c],[r,c]],
+   constraints = [education = $none$]
+   ]).
+
+job('research interviewer', /, [
+   description = $$,
+   holland_traits = [[i],[i,s],[i,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(researcher, /, [
+   description = $$,
+   holland_traits = [[i],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('restaurant worker', /, [
+   description = $$,
+   holland_traits = [[s,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(retail, /, [
+   description = $$,
+   holland_traits = [[a,s,e,c],[e],[s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job(roofer, /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('safety manager', /, [
+   description = $$,
+   holland_traits = [[i,e],[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(sales, /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e,c],[s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('screen writer', /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[i,a,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(secretarial, /, [
+   description = $$,
+   holland_traits = [[c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('securities trader', /, [
+   description = $$,
+   holland_traits = [[e],[e,c],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('security guard', /, [
+   description = $$,
+   holland_traits = [[c],[s,c],[s,e,c]],
+   constraints = [education = $none$]
+   ]).
+
+job(seismologist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('set decorator', /, [
+   description = $$,
+   holland_traits = [[a],[a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('shipping clerk', /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('sign writer', /, [
+   description = $$,
+   holland_traits = [[a],[a,s],[a,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(silversmith, /, [
+   description = $$,
+   holland_traits = [[r],[r,s,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(singer, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('social researcher', /, [
+   description = $$,
+   holland_traits = [[i],[i,e],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('social worker', /, [
+   description = $$,
+   holland_traits = [[a,s,e],[s],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('software engineer', /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('sound technician', /, [
+   description = $$,
+   holland_traits = [[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('speech therapist', /, [
+   description = $$,
+   holland_traits = [[i,a,s],[i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('sports coach', /, [
+   description = $$,
+   holland_traits = [[r],[r,s],[r,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('stables worker', /, [
+   description = $$,
+   holland_traits = [[r],[r,a,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('stage manager', /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('stage technician', /, [
+   description = $$,
+   holland_traits = [[a],[r,a],[r,a,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job(statistician, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(steeplejack, /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $some training$]
+   ]).
+
+job('stock administration', /, [
+   description = $$,
+   holland_traits = [[c],[r,c],[r,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(stockbroker, /, [
+   description = $$,
+   holland_traits = [[e],[i,e],[i,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('street cleaner', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $none$]
+   ]).
+
+job('studio management', /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(surveyor, /, [
+   description = $$,
+   holland_traits = [[r,i],[r,i,a,e],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(tailor, /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job(tattooist, /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('tax official', /, [
+   description = $$,
+   holland_traits = [[e,c],[i,e],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('taxi controller', /, [
+   description = $$,
+   holland_traits = [[s],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(teacher, /, [
+   description = $$,
+   holland_traits = [[a,s,e],[e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('teacher of art or drama', /, [
+   description = $$,
+   holland_traits = [[a,e],[a,s],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('technical writer', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('telecommunications engineer', /, [
+   description = $$,
+   holland_traits = [[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('telephone sales', /, [
+   description = $$,
+   holland_traits = [[e],[s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('television aerial installer', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,i,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('television repair', /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('television technician', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,a]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('theatrical technician', /, [
+   description = $$,
+   holland_traits = [[r,a],[r,a,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('ticket agent', /, [
+   description = $$,
+   holland_traits = [[e],[e,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job(tourism, /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('traffic warden', /, [
+   description = $$,
+   holland_traits = [[c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('trainer, sports', /, [
+   description = $$,
+   holland_traits = [[r],[r,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(translator, /, [
+   description = $$,
+   holland_traits = [[i,s,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('travel agency manager', /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('travel agent', /, [
+   description = $$,
+   holland_traits = [[e],[e,c],[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('travel guide', /, [
+   description = $$,
+   holland_traits = [[e],[s,e],[s,e,c]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('tree surgeon', /, [
+   description = $$,
+   holland_traits = [[r],[r,e],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('tyre/exhaust fitter', /, [
+   description = $$,
+   holland_traits = [[r]],
+   constraints = [education = $some training$]
+   ]).
+
+job(upholsterer, /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('vehicle body repair', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('vehicle parts clerk', /, [
+   description = $$,
+   holland_traits = [[r],[r,c],[r,s,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('veterinary livestock inspector', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('veterinary surgeon', /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,s]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('video production', /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(waiter, /, [
+   description = $$,
+   holland_traits = [[s,e,c]],
+   constraints = [education = $some training$]
+   ]).
+
+job('warehouse manager', /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job('warehouse worker', /, [
+   description = $$,
+   holland_traits = [[e],[r,s,e],[s,e]],
+   constraints = [education = $none$]
+   ]).
+
+job('watch/clock repairer', /, [
+   description = $$,
+   holland_traits = [[r],[r,i],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('water operative', /, [
+   description = $$,
+   holland_traits = [[r],[r,i,e]],
+   constraints = [education = $some training$]
+   ]).
+
+job('web design', /, [
+   description = $$,
+   holland_traits = [[a],[a,e],[a,s,e]],
+   constraints = [education = $higher education$,education = $some training$]
+   ]).
+
+job('web master', /, [
+   description = $$,
+   holland_traits = [[i,s,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(welder, /, [
+   description = $$,
+   holland_traits = [[r],[r,i,s]],
+   constraints = [education = $some training$]
+   ]).
+
+job('window cleaner', /, [
+   description = $$,
+   holland_traits = [[r],[r,e]],
+   constraints = [education = $none$]
+   ]).
+
+job(writer, /, [
+   description = $$,
+   holland_traits = [[i,a],[i,a,e]],
+   constraints = [education = $higher education$]
+   ]).
+
+job(zoologist, /, [
+   description = $$,
+   holland_traits = [[i],[r,i],[r,i,e]],
+   constraints = [education = $higher education$]
+   ]).
+

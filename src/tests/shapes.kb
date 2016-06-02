@@ -1,0 +1,135 @@
+knowledgewright_jig(basic, 10).
+
+knowledgewright_license(personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "A knowledgebase that illustrates the use of formulas in rules.  The rules are used to calculate the area and perimeter of different shapes.",
+   goals = [area, perimeter],
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """><INPUT NAME=""Continue"" TYPE=""Submit"" VALUE=""Submit""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>"),
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+fact(pi, /, [
+   description = "The constant value for pi",
+   value = 3.14159
+   ]).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(shape, /, [
+   prompt = text("What shape are you interested in?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["circle", "rectangle"],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+question(height, /, [
+   prompt = text("What is the height?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+question(width, /, [
+   prompt = text("What is the width?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+question(radius, /, [
+   prompt = text("What is the radius?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]'
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+rule_set(perimeter, /, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [shape = "circle", 2*pi*radius], [shape = "rectangle", 2*(height + width)]]
+   ]).
+
+rule_set(area, /, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [shape = "circle", pi*radius**2], [shape = "rectangle", height*width]]
+   ]).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+

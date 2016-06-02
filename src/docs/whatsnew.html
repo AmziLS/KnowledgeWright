@@ -1,0 +1,159 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/chapter_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Release Notes</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+<font color="#990000"><!-- #BeginEditable "Title" -->Release Notes <!-- #EndEditable --></font> 
+</h1><hr> <!-- #BeginEditable "Contents" --> 
+<h3>Version 4-2-8</h3>
+<ul>
+  <li>Added a new <a href="runtime/aspnet_interface.html">ASP.NET runtime interface</a> 
+    with source code.</li>
+</ul>
+<h3>Version 4-2-7</h3>
+<UL> <LI>Added 
+a new <A HREF="runtime/vbnet_interface.html">VB.NET runtime interface</A> with 
+source code.<BR></LI><LI>If no browser is specified in preferences, the default 
+web browser will be used to display help. Added tutorial and support options to 
+the help menu.</LI><LI>Fixed a bug that would not save some knowledgebases with 
+multibyte characters in them.</LI></UL><H3></H3><h3>Version 4-2-6</h3><UL> <LI>Added 
+answer_type to question objects of all types so that numeric, date and boolean 
+values are properly asserted.</LI></UL><h3>Version 4-2-5</h3><UL> <LI>Fixed a 
+bug that displayed garbage (Windows) or crashed (Linux) when running a knowledgebase 
+that has a blank question_bottom or output_bottom specified in the main knowledgebase.</LI><LI>Fixed 
+a bug that misspelled the jig to load when running as a Java Servlet.</LI></UL><h3>Version 
+4-2-4</h3><UL> <LI>Fixed a variety of problems in the Basic Jig tutorial.</LI></UL><h3>Version 
+4-2-3</h3><UL> <LI>Fix scrolling of rule_sets, rules_tables and data_tables when 
+adding/inserting new rows.</LI><LI>Added amzi.dcr for Delphi runtime.</LI></UL><h3>Version 
+4-2-2</h3><ul> <li>Eliminate crashes that occur over long periods of use by fixing 
+a garbage collection bug.</li><li>Better installation program.</li></ul><h3>Version 
+4-2-1</h3><ul> <li>New product packaging and pricing.</li><li>Fixed bugs in arithmetic.</li><li>Fixed 
+Java Servlet to process both user inputs and knowledgebase outputs in national 
+languages.</li></ul><h3></h3><h3>Version 4-2-0</h3><ul> <li>Final touches to documentation 
+and samples.</li></ul><h3>Version 4-1-28</h3><ul> <li>Fixed compiler.</li></ul><h3>Version 
+4-1-28</h3><ul> <li> Fixed bug that hangs the workshop when deleting objects.</li><li>Fixed 
+various bugs in the Workshop that generated Java errors when clicking on unrecognized 
+items.</li><li>In the KWI before creating a new session, the session id must be 
+'kw_init' not 0.</li><li>When using the KWI to assert facts, pass them all as 
+strings and let the KWI convert them into the proper types (for all the runtime 
+interfaces: Java, Delphi, VB).</li><li>Fixed the Java Servlet to use the charset 
+in the main knowledgebase object, and improve error handling.</li></ul><h3>Version 
+4-1-27</h3><ul> <li>Fixed 'bad_initialization_parameters' bug in CGI.</li><li>Add 
+results logging to CGI interface.</li><li>Fixed table editing of expanded rows 
+for large tables.</li></ul><h3>Version 4-1-26</h3><ul> <li>Added Java servlet 
+runtime.</li><li>Added Copy command on the Object menu to duplicate an object.</li><li>Added 
+pop-up menu for knowledgebase tree for Edit, Rename, Delete, Copy and Move.</li><li>Added 
+Print Log button to knowledgebase run.</li><li>Improve table editing by removing 
+one set of scroll bars, and adding a Row | Expand All command to expand all the 
+cells in the rule_set table.</li><li>Make Unicode an optional format for knowledgebases. 
+Unicode should be enabled when using multiple character sets in the same knowledgebase. 
+</li><li>Fixed bug that did not set object as modified (with a * in the window 
+title bar) when changing a list.</li><li>Added a new KWI call to 'backup' the 
+reasoning process to a prior fact.</li><li>Added a save_session flag to the KWI 
+initialization parameters to save the session file to disk. This will speed up 
+execution under non-CGI environments.</li><li>Documented how to extend KW by advanced 
+programming techniques to improve efficiency and add new capabilities.</li></ul><h3>Version 
+4-1-25</h3><ul> <li> Added charset to knowledgebase object for use with the Web. 
+The charset specifies the character set designation to be sent to the webserver 
+for a KnowledgeWright application. For example, if you are using Chinese characters 
+you will probably use 'big5'. Also fixed the CGI interface to properly convert 
+all text and fact names/values in KnowledgeWright between Unicode and the language 
+in the Window's locale setting.</li><li>Fixed an internal problem with the sorting 
+of knowledgebase objects that causes the Workshop to hang and/or GPF.</li><li>Do 
+a better job of garbage collection when closing a knowledgebase.</li><li>Don't 
+check the integrity of a knowledgebase when opening it if auto-update of the status 
+window is off. This improves performance when working with large knowledgebases. 
+</li></ul><h3>Version 4-1-24</h3><ul> <li> Added new data_table object that can 
+be queried with the find() function like a SQL object queries an ODBC database.</li><li>Renamed 
+table objects to rules_table.</li><li>Expanded the documentation.</li></ul><h3>Version 
+4-1-23</h3><ul> <li> Use Unicode files for knowledgebases, sessions and logs to 
+support international characters.</li><li>Added date_format to main knowledgebase 
+object to support the input of dates in different formats. Fixed bugs in questions 
+for answer_type date.</li></ul><h3>Version 4-1-22</h3><ul> <li> Fixed the CGI 
+interface to &quot;back-up&quot; properly under IIS/PWS (and any web server) by 
+retracting all the user's answers following the ones on the screen the user backed 
+up to and resume the reasoning process from there.</li></ul><h3>Version 4-1-21</h3><ul> 
+<li> Supports international characters in knowledgebases.</li><li>Added Support 
+Jig to the base product.</li></ul><h3>Version 4-1-20</h3><ul> <li>Allow the run 
+process to be driven entirely from the keyboard without mouse clicks, and allow 
+double-clicking on the menu to select and continue.</li><li>Fixed X (close) button 
+to do nothing during run on the question dialog boxes.</li><li>Fixed confirmation 
+about saving an object where just one table cell is modified.</li><li>Allow two 
+variables to be used next to each other, e.g. %server%%path%.</li><li>Fix renaming 
+of objects that are 2 or more levels deep in subfolders.</li><li>Disallow creating 
+folders with the same name.</li><li>Disallow blank cells in rule_sets and other 
+tables.</li><li>During rename, also change table column names and variables (in 
+percents).</li><li>Allow the user to enter numbers with decimal point as question 
+values used in formulas.</li></ul><h3>Version 4-1-18,19</h3><ul> <li>Fixed a large 
+number of memory leaks and the use of some operators in tables.</li></ul><h3>Version 
+4-1-17</h3><ul> <li> Allow printing of the object/folder trees and object forms.</li><li>Allow 
+the specification of goals when invoking a knowledgebase via the KWI.</li><li>Fixed 
+'contains' and 'contains_nocase' comparators.</li></ul><h3>Version 4-1-16</h3><ul> 
+<li>Fixed a variety of problems with moving/renaming objects and folders. </li></ul><h3>Version 
+4-1-14</h3><ul> <li>Added Delphi runtime interface example.</li><li>Fixed 'default' 
+to work like 'true' in rule_sets.</li><li> Fixed text objects that use files instead 
+of text within the object itself.</li></ul><h3>Version 4-1-12</h3><ul> <li>Added 
+a Tools | Preferences item to optionally save knowledgebases in Unicode format 
+so that international characters can be used. This makes .kb files unreadable 
+under Win98 editors like notepad, and UNICODE FILES WILL NOT WORK UNDER LINUX 
+FOR THIS RELEASE.</li><li>Added Run | Compile command to compile knowledgebases 
+for faster execution and for distribution. Compiled files end in .kbc. When running 
+a knowledgebase in the Workshop the compiled form is run instead of the source 
+form if the date of the compiled file is more recent than the date of the source 
+file. When running a knowledgebase under the CGI interface, you can specify a 
+.kbc file instead of a .kb for kb_file. When running an embedded knowledgebase 
+under the KWI, you can open a .kbc file instead of a .kb.</li><li>When running 
+knowledgebases, answers are returned as they are available, so the Workshop runs 
+exactly the same way the KWI does (and hence the web, Java, Delphi and VB interfaces).</li><li>Added 
+number_of_items to check the number of values in a list.</li><li>Automatically 
+re-open last opened knowledgebase or prompt for one to open.</li><li>Remember 
+more window sizes and locations between sessions.</li><li>Fixed HTML output window 
+during run to not contain any spurious &lt;p&gt;'s.</li><li>Fixed various UI problems 
+for Linux and built first Linux distribution.</li><li>Fixed bug that returned 
+a bad value when no rows in a table match (now it properly displays an error message).</li><li>Fixed 
+bug that ignored setting of auto-update status window.</li></ul><h3>Version 4-1-11</h3><ul> 
+<li> Almost finished the Basic tutorial.</li><li>All Jigs: Added date handling 
+and documented it.</li><li>All Jigs: Added output_top, continue and bottom to 
+the knowledgebase object for formatting output to be displayed for the user.</li><li>Fixed 
+a bug that caused the Workshop to GPF and exit when incorrect condition syntax 
+was entered into a rule_set or table and saved.</li><li>Fixed the list of return 
+types for SQL queries.</li></ul><h3>Version 4-1-10</h3><ul> <li>Converted to Amzi! 
+6.1 for the underlying system. This uses double-quotes (&quot;) instead of dollar 
+signs ($) to denote text strings. </li><li>Added Tools | Font command to set the 
+font for the object/folder trees, status window and object edit windows.</li><li>All 
+Jigs: Allowed variables in question prompts, with the restriction that ask-also 
+questions must not contain any unknown variables.</li><li>Support Jig: Added solution_top 
+and solution_bottom to format the output for the web.</li></ul><h3>Version 4-1-6</h3><ul> 
+<li>Added Row | Insert Above command.</li><li>Renamed and reorganzed CGI files 
+for better handling of multiple jigs.</li><li>When renaming objects, prompts to 
+replace the name for all other occurances within the knowledgebase.</li><li>Fixed 
+Search | Find to work when not matching case.</li><li>Fixed disappearing cursor 
+when switching between object windows.</li><li>Support Jig: Added sendmail action 
+to CGI interface.</li></ul><h3>Version 4-1-5</h3><ul> <li>Added the ability to 
+specify two different text values for menus. One is used for display to the user 
+and the other is used in conditions in rule_sets and tables.</li><li>Added Alt-keys 
+for invoking menu choices and hot keys for the more commonly used menu commands.</li><li>Turned 
+off the button panel on the bottom of the object window and allow object windows 
+to be closed via the 'X' in the upper right corner.</li></ul><h3>Version 4-1-4</h3><ul> 
+<li> <p>Added a Preferences option to turn off the automatic update of the status 
+window. </p></li></ul><h3>Version 4-1-3</h3><ul> <li>Merged the document_format 
+object with the knowledgebase object. You will be prompted when you open an old 
+knowledgebase if it is OK to convert it to the new format. We recommend you make 
+a backup copy of your knowledgebase first.</li><li>Re-organized view problems 
+and connections onto status tabs at the bottom of the screen. Improved the reporting 
+of both items.</li><li>Added a Search | Find command with its results displayed 
+on the status tabs.</li><li>Reworked the CGI interface so that it will work with 
+any jig.</li><li>Added a full source code Java runtime sample.</li><li>Small ease-of-use 
+enhancements.</li></ul><h3>Version 4-1-2</h3><ul> <li>First public beta release.</li></ul><!-- #EndEditable --> 
+<hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

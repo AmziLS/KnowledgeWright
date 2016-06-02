@@ -1,0 +1,273 @@
+knowledgewright_jig(ucwa,3).
+
+
+
+% folder
+
+folder(start, /, [
+   ]).
+
+folder(finish, /, [
+   ]).
+
+folder(distance_factors, /, [
+   ]).
+
+folder(preliminary, /, [
+   ]).
+
+folder(predefined_facts, / distance_factors, [
+   ]).
+
+folder(supporting_data, / distance_factors, [
+   ]).
+
+
+
+% knowledgebase
+
+knowledgebase(main, /, [
+   description = $A sample logic base that illustrates the capabilities of the FitCentric Ultra Coach Reasoning Engine.  It uses the sample database as a test case.
+
+When running the test case, you are prompted for a date to begin with.  This is the date the system will consider to be 'today', and will base its recommendations on the sample database, using that date.  So for example, three week average weight is the three weeks before that date.
+
+The system still maintains some of its own information in Prolog text file database, and that is what the db_header information contains.  On start up, the system will attempt to get values for those fields, in a user.db file if it exists, or else from the user directly.
+
+The goals are what the system will calculate during a consultation.$,
+   goals = [workout_type,avg_weight_3_weeks,db_weight,workout_distance,age],
+   odbc = $uc_sample$
+   ]).
+
+
+
+% fact
+
+fact(long, / distance_factors / predefined_facts, [
+   value = 4
+   ]).
+
+fact(medium, / distance_factors / predefined_facts, [
+   value = 3
+   ]).
+
+fact(rest, / distance_factors / predefined_facts, [
+   value = 0
+   ]).
+
+fact(short, / distance_factors / predefined_facts, [
+   value = 2
+   ]).
+
+fact(ultra_short, / distance_factors / predefined_facts, [
+   value = 1
+   ]).
+
+fact(very_long, / distance_factors / predefined_facts, [
+   value = 5
+   ]).
+
+fact(target_date, / preliminary, [
+   value = string_to_date(target_date_string)
+   ]).
+
+fact(target_yesterday, / preliminary, [
+   value = target_date - 1 days
+   ]).
+
+fact(target_3_weeks_ago, / preliminary, [
+   value = target_date - 3 weeks
+   ]).
+
+fact(weight_loss_3_weeks, / distance_factors / supporting_data, [
+   value = integer(100 * (avg_weight_3_weeks - this_weight) / avg_weight_3_weeks)
+   ]).
+
+fact(percent_weight_loss, / distance_factors / supporting_data, [
+   value = integer(100 * (db_weight - this_weight) / db_weight)
+   ]).
+
+fact(age, / preliminary, [
+   value = age(birthday)
+   ]).
+
+
+
+% question
+
+question(percent_illness, / start, [
+   ask_also = '[]',
+   choices = '[]',
+   question_style = listbox,
+   prompt = text($What percent well are you? (0-100) $),
+   question_type = fill_in_the_blank,
+   answer_type = number,
+   length = 20,
+   default = $100$
+   ]).
+
+question(query_cycling_event, / preliminary, [
+   ask_also = '[]',
+   default = $$,
+   length = 20,
+   answer_type = text,
+   question_style = listbox,
+   prompt = text($What event do you cycle? $),
+   question_type = menu_single_choice,
+   choices = [$50 mile criterium$,$100 mile road race$]
+   ]).
+
+question(query_running_event, / preliminary, [
+   ask_also = '[]',
+   default = $$,
+   length = 20,
+   answer_type = text,
+   question_style = listbox,
+   prompt = text($What event do you run? $),
+   question_type = menu_single_choice,
+   choices = [$10k$,$marathon$]
+   ]).
+
+question(query_swimming_event, / preliminary, [
+   ask_also = '[]',
+   default = $$,
+   length = 20,
+   answer_type = text,
+   question_style = listbox,
+   prompt = text($What event do you swim? $),
+   question_type = menu_single_choice,
+   choices = [$ocean mile$]
+   ]).
+
+question(sport, / preliminary, [
+   ask_also = '[]',
+   default = $$,
+   length = 20,
+   answer_type = text,
+   question_style = listbox,
+   prompt = text($What sport are you training for? $),
+   question_type = menu_single_choice,
+   choices = [$running$,$swimming$,$cycling$]
+   ]).
+
+question(target_date_string, / preliminary, [
+   ask_also = '[]',
+   question_style = listbox,
+   choices = '[]',
+   prompt = text($What date to you want to consider (M/D/Y)? Check database for dates that are one day past a given workout record date.  Some reasonable ones to play with are 9/17/93, 3/29/94, 5/30/95, 8/27/96, 7/30/97, 1/13/98, 2/28/99, 9/18/00.$),
+   question_type = fill_in_the_blank,
+   length = 50,
+   answer_type = text,
+   default = $$
+   ]).
+
+question(this_weight, / distance_factors / supporting_data, [
+   ask_also = '[]',
+   default = $$,
+   length = 20,
+   choices = '[]',
+   question_style = listbox,
+   prompt = text($What do you weigh today? $),
+   question_type = fill_in_the_blank,
+   answer_type = number
+   ]).
+
+
+
+% sql
+
+sql(avg_weight_3_weeks, / distance_factors / supporting_data, [
+   length = 20,
+   description = $$,
+   query = text($select avg(Weight) from Main where Date > $ + target_3_weeks_ago + $ and Date < $ + target_date),
+   type = float
+   ]).
+
+sql(db_weight, / distance_factors / supporting_data, [
+   length = 20,
+   description = $The weight from the last workout record$,
+   query = text($select Weight from Main where Date = $ + target_yesterday),
+   type = integer
+   ]).
+
+sql(birthday, / preliminary, [
+   length = 20,
+   description = $$,
+   query = $select Birthday from Personal$,
+   type = date
+   ]).
+
+
+
+% rule_set
+
+rule_set(event, / preliminary, [
+   description = $Depending on the sport, the user will be presented with different menu choices of events.  So the swimmer won't be asked about marathons, and runners about ocean swims.$,
+   type = single_value,
+   rules = [[conditions,value],[sport = $running$,query_running_event],[sport = $swimming$,query_swimming_event],[sport = $cycling$,query_cycling_event]]
+   ]).
+
+rule_set(workout_type, / start, [
+   description = $$,
+   type = single_value,
+   rules = [[conditions,value],[sport = $running$,$run$],[sport = $swimming$,$swim$],[sport = $cycling$,$bike$]]
+   ]).
+
+rule_set(recommended_distance, / start, [
+   description = $If the athlete is ill or injured, then the recommended distance is direct, for all other cases, we start the calculation using the distance factors.$,
+   type = single_value,
+   rules = [[conditions,value],[percent_illness < 100,illness_distance],[true,calculate(distance)]]
+   ]).
+
+rule_set(generic_distance, / start, [
+   description = $The generic distance could be just the recommended distance, calculated from the distance factors, but there are rules that might modify that recommendation, such as the age factor rules.
+
+Note that we can do arithmetic on recommended_distance because it is a fact such as short or long, which has a numeric value, like 2 or 3.$,
+   type = single_value,
+   rules = [[conditions,value],[age <= 65,recommended_distance],[age > 65 and recommended_distance > ultra_short,recommended_distance - 1]]
+   ]).
+
+
+
+% table
+
+table(workout_distance, / start, [
+   description = $This table defines the workout distance corresponding to short, medium, etc. for various sports and their events.  It is called to solve the goal, 'workout_distance', but it first must come up with a value for 'generic_distance', which is the name for the computed distance as a value such as short, medium, long.$,
+   type = single_value,
+   rules = [[sport,event,generic_distance,workout_distance],[*,*,rest,0],[text($running$),text($10k$),ultra_short,1],[text($running$),text($10k$),short,2],[text($running$),text($10k$),medium,3],[text($running$),text($10k$),long,4],[text($running$),text($10k$),very_long,5],[text($running$),text($marathon$),ultra_short,2],[text($running$),text($marathon$),short,4],[text($running$),text($marathon$),medium,7],[text($running$),text($marathon$),long,10],[text($running$),text($marathon$),very_long,15],[text($swimming$),text($ocean mile$),ultra_short,100],[text($swimming$),text($ocean mile$),short,250],[text($swimming$),text($ocean mile$),medium,500],[text($swimming$),text($ocean mile$),long,700],[text($swimming$),text($ocean mile$),very_long,800],[text($cycling$),text($50 mile criterium$),ultra_short,5],[text($cycling$),text($50 mile criterium$),short,10],[text($cycling$),text($50 mile criterium$),medium,25],[text($cycling$),text($50 mile criterium$),long,40],[text($cycling$),text($50 mile criterium$),very_long,50],[text($cycling$),text($100 mile road race$),ultra_short,10],[text($cycling$),text($100 mile road race$),short,30],[text($cycling$),text($100 mile road race$),medium,50],[text($cycling$),text($100 mile road race$),long,70],[text($cycling$),text($100 mile road race$),very_long,100]]
+   ]).
+
+table(illness_distance, / start, [
+   description = $$,
+   type = single_value,
+   rules = [[percent_illness,illness_distance],[75 - 99,short],[50 - 74,ultra_short],[< 50,rest]]
+   ]).
+
+
+
+% text
+
+
+
+% document_format
+
+
+
+% factor
+
+factor(dist_percent_weight_loss, / distance_factors, [
+   goal = distance,
+   conditions = (sport \= $cycling$),
+   weight = [if sport = $swimming$ or sport = $running$ then weight = 20,if sport = $cycling$ then weight = 10],
+   data = [[percent_weight_loss,dist_percent_weight_loss],[< 1,long],[1,long],[2,medium],[3 - 4,short * 2],[5,ultra_short * 3],[> 5,rest]]
+   ]).
+
+factor(dist_3_week_weight_loss, / distance_factors, [
+   id = dist_3_week_weight_loss,
+   path = '[]',
+   description = $Based on the percentage weight lost today compared to the last three weeks average.  Not sure this is what was intended for this factor or not.$,
+   goal = distance,
+   conditions = true,
+   weight = [weight = 15],
+   data = [[weight_loss_3_weeks,dist_3_week_weight_loss],[< 5,long],[5 - 9,medium],[10,short],[> 10,ultra_short]]
+   ]).
+

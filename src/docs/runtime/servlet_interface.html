@@ -1,0 +1,233 @@
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Servlet Interface</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Java 
+Servlet Interface <!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="Requirements"></a>Requirements</h3>
+<p>The Java Servlet interface conforms to version 2.3 of the Servlet Specification 
+  and will run under any web server that supports that Servlet interface.</p>
+<h3><a name="running_under_tomcat"></a>Running Under Tomcat</h3>
+<p>The Java Servlet web server interface is located in the runtime/servlet subdirectory. 
+  Under Unix, Tomcat generally installs in a directory named jakarta-tomcat-X.X. 
+  Under Windows, the directory is called 'Apache Tomcat X.X. The examples below 
+  use the Windows naming. If you are running under Unix, make the appropriate 
+  substitutions.</p>
+<p>In order to run this servlet under Tomcat (where X.X is replaced by the version 
+  of Tomcat you are running, and N.N by the version of Java you are running):</p>
+<ol>
+  <li>Create a sudirectory in ...Apache Tomcat X.X\webapps named 'amzi'. </li>
+  <li>Copy the knowledgewright4\runtime\servlet\WEB-INF subdirectory tree to ...Apache 
+    Tomcat X.X\webapps\amzi so now you have ...Apache Tomcat X.X\webapps\amzi\WEB-INF...</li>
+  <li>Copy amzi.dll, amzijni.dll, amzi.cfg, aosutils.lsx and aodbc.lsx (Windows 
+    only) from knowledgewright4\workshop to ...Apache Tomcat X.X\webapps\amzi\WEB-INF\classes 
+  </li>
+  <li>Copy a jig, either basic.xpl or support.xpl, from knowledgewright4\workshop\jigs 
+    to ..Apache Tomcat X.X\webapps\amzi.</li>
+  <li>Copy your knowledgebase to ..Apache Tomcat X.X\webapps\amzi modified as 
+    described in the following section.</li>
+  <li>Add ...Apache Tomcat X.X\webapps\amzi\WEB-INF\classes to your PATH environment 
+    variable. </li>
+  <li>Stop and restart Tomcat </li>
+</ol>
+<h3><a name="document_format"></a>Question_Top and Output_Continue</h3>
+<p> 
+  <! AMZI_INDEX = question_top, question_bottom, output_continue>
+  In your main knowledgebase object, you must have these minimal HTML elements 
+  which are inserted above and below all questions asked of the user:</p>
+<table border="1" cellpadding="3">
+  <tr> 
+    <td valign="top">Property Name</td>
+    <td valign="top">Minimal Value</td>
+  </tr>
+  <tr> 
+    <td valign="top"> 
+      <pre><font color="#990000">question_top</font></pre>
+    </td>
+    <td valign="top"> 
+      <pre><font color="#990000">&lt;HTML&gt;<br>&lt;HEAD&gt;&lt;/HEAD&gt;<br>&lt;BODY&gt; 
+&lt;FORM METHOD=&quot;GET&quot; ACTION=<br>&quot;/amzi/KW&quot;&gt;</font></pre>
+    </td>
+  </tr>
+  <tr> 
+    <td valign="top"> 
+      <pre><font color="#990000">question_bottom</font></pre>
+    </td>
+    <td valign="top"> 
+      <pre><font color="#990000">&lt;INPUT NAME=&quot;Submit&quot; TYPE=&quot;Submit&quot; 
+VALUE=&quot;Continue&quot;&gt; &lt;/INPUT&gt; &lt;/FORM&gt; &lt;/BODY&gt; &lt;/HTML&gt;</font></pre>
+    </td>
+  </tr>
+  <tr> 
+    <td valign="top"> 
+      <pre><font color="#990000">output_continue <i><br>(not 
+in all Jigs)</i></font></pre>
+    </td>
+    <td valign="top"> 
+      <pre><font color="#990000">&lt;FORM 
+METHOD="GET" ACTION=<br>"/amzi/KW"> <br>&lt;INPUT NAME="Submit" TYPE="Submit" 
+VALUE="Continue"&gt; <br>&lt;/INPUT&gt; <br>&lt;/FORM&gt; </font></pre>
+    </td>
+  </tr>
+</table>
+<p>In addition, some jigs (notably Basic) also have an output_continue property 
+  in the knowledgebase object. This is used when there is output for the user 
+  and the reasoning process is not complete. That is, some intermediate results 
+  or information are being displayed for the user. In this case the output_continue 
+  contents are added to the web page and are an empty HTML form that continues 
+  the reasoning process. The program name used in question_bottom and output_continue 
+  must be the same and must match the servlet URL.</p>
+<p>In addition the following properties are passed to your web server:</p>
+<table border="1" cellpadding="3" width="100%">
+  <tr> 
+    <td> 
+      <pre><b><font color="#990000"><! AMZI_INDEX = charset>Parameter</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Description</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Examples</font></b></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">charset</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The character set used in your knowledgebase</font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">ISO-8859-1
+big5</font></pre>
+    </td>
+  </tr>
+</table>
+<h3><a name="running_in_your_web_browser"></a>Running in Your Web Browser</h3>
+<p>To run your knowledgebase, type into your browser one of the following URLs:</p>
+<blockquote> 
+  <pre><font color="#990000">Unix: http://127.0.0.1:8080/amzi/KW?kb_file=hello.kb<br>Windows: http://localhost:8080/amzi/KW?kb_file=hello.kb</font></pre>
+</blockquote>
+<p>Replace the 127.0.0.1 or 'localhost' with the name (www.company.com) or IP 
+  address of the server you have installed the KnowledgeWright servlet on.</p>
+<h3><a name="servlet_parameters"></a>Servlet Parameters</h3>
+<p>There are additional parameters that you can specify in the query string. Separate 
+  each of the parameters by ampersands (&amp;) and encode them with <a href="http://www.w3.org/International/O-URL-code.html">standard 
+  URL encoding</a>. The full set of parameters are:</p>
+<table border="1" cellpadding="3" width="100%">
+  <tr> 
+    <td> 
+      <pre><b><font color="#990000">Parameter</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Description</font></b></pre>
+    </td>
+    <td> 
+      <pre><b><font color="#990000">Examples</font></b></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">kb_file</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The name of the knowledgebase file (no quotes)</font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">amzi_website_advisor.kb</font></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">directory</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The directory where the kb_file is located. <i></i></font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">c:\Tomcat\webapps\amzi 
+/usr/local/tomcat/webapps/amzi</font></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">temp_directory</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The directory where the temporary session files 
+        are created as well as log files (if you have specified one) and any other 
+        temporary files needed by KnowledgeWright. <i><b>Note Java Servlets must 
+        have write access to this directory.</b></i></font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">c:\Tomcat\temp 
+/usr/local/tomcat/temp</font></pre>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td> 
+      <pre><font color="#990000">log_file</font></pre>
+    </td>
+    <td> 
+      <p><font color="#990000">The name of the log file that details the execution. 
+        It will have the same contents as the log in the KnowledgeWright Workshop.</font></p>
+    </td>
+    <td> 
+      <pre><font color="#990000">kwrun.log</font></pre>
+    </td>
+  </tr>
+</table>
+<h3><a name="debugging_cgi_problems"></a>Debugging Servlet Problems</h3>
+<p>The first thing to do when you encounter a problem is to specify a log_file 
+  in the query string where you invoke the servlet. </p>
+<p>To specify your kb file and a log file:</p>
+<blockquote> 
+  <pre><font color="#990000">Unix</font><font color="#990000">: http://127.0.0.1:8080/amzi/KW?kb_file=hello.kb&amp;log_file=kwrun.log<br>Windows: http://localhost:8080/amzi/KW?kb_file=hello.kb&amp;log_file=kwrun.log</font></pre>
+</blockquote>
+<p>This will create a log file in the same directory as your knowledgebase file. 
+  Study its contents, especially at the bottom to see if the problem is explained.</p>
+<h4>Open an Amzi! Logic Server Trace File for Amzi! Tech Support</h4>
+<p>If that does not make the problem clear, the next step is to specify a log 
+  file in Amzi! Prolog + Logic Server. To do this, add the following lines to 
+  your amzi.cfg file in the WEB-INF/classes directory:</p>
+<blockquote> 
+  <pre><font color="#990000">apitrace = on <br>logfile = c:\amziapi.log </font></pre>
+</blockquote>
+<p>If you need technical support, please e-mail the browser output when you run 
+  KW, your KnowledgeWright log file and Amzi! Logic Server trace file along with 
+  your knowledgebase to support@amzi.com.</p>
+<h3><a name="modifying_the_java_servlet"></a>Modifying the Java Servlet (Full 
+  Version)</h3>
+<p>To modify and rebuild the servlet you can use the JBuilder project, servlet_run.jpx. 
+  Alternatively:</p>
+<h2></h2>
+<ol>
+  <li>Set JAVA_HOME=c:\jdk<i>N.N</i></li>
+  <li>Set the CLASSPATH to include knowledgewright4/runtime/servlet/WEB-INF/classes 
+    and servlet.jar. For Tomcat, servlet.jar is found in jakarta-tomcat-<i>X.X</i>\common\lib.</li>
+  <li> Compile the java source files with javac.</li>
+  <li>Copy the class files to the WEB-INF/classes directory as described at the 
+    beginning of this section.<br>
+  </li>
+</ol>
+<h3><a name="references"></a>References</h3>
+<p>See the Java Tutorial to learn <a href="http://java.sun.com/docs/books/tutorial/servlets/index.html">How 
+  to Write Servlets</a>.</p>
+<p>To learn about configuring servlets under Tomcat, see the <a href="http://java.sun.com/docs/books/tutorial/servlets/servletrunner/index.html">Java 
+  Tutorial Lesson on Running Servlets</a>.</p>
+<p>For information on how to install and run Tomcat under IIS and Windows see 
+  <a href="http://members.ozemail.com.au/~lampante/howto/tomcat/iisnt/index.html">How 
+  To Setup TOMCAT 4.0.1 on Windows 2000 with IIS and NT Service</a></p>
+<!-- #EndEditable --> 
+<hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

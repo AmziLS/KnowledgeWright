@@ -1,0 +1,60 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Introduction to the Support Jig</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->Introduction to the Support 
+  Jig <!-- #EndEditable --></font> </h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<p>A jig consists of two things:</p>
+<ul>
+  <li>The objects that comprise the knowledgebase.</li>
+  <li>A process of reasoning over those objects.</li>
+</ul>
+<p>When you are creating objects in the <a href="../workshop/workshop_manual.html">KnowledgeWright 
+  Workshop</a>, you can press F1 to get the help detailed here.</p>
+<h2><a name="knowledgebase_objects"></a><font color="#990000">Knowledgebase Objects</font></h2>
+<p>The Support Jig is a reasoning engine that is designed for diagnosing problems 
+  and presenting their solution. The primary object in the Support Jig is a <a href="support/object_solution.html">solution</a>. 
+  A solution defines the environment the problem occurs in (operating system, 
+  product version, etc.) and the precise conditions under which the problem occurs. 
+  Included in each solution is a description of the problem and the workaround 
+  or fix to it. Solutions can optionally include external actions to be taken, 
+  such as to send an e-mail to tech support when a solution is not found.</p>
+<p>The Support Jig also includes knowledge objects for:</p>
+<ul>
+  <li>the <a href="support/object_knowledgebase.html">knowledgebase</a> itself 
+    which defines the goals for reasoning,</li>
+  <li><a href="basic/object_rule_set.html">rule sets</a> and <a href="basic/object_rules_table.html">rules_tables</a>, 
+    which define relationships,</li>
+  <li><a href="basic/object_fact.html">facts</a> which define fixed values</li>
+  <li>user <a href="basic/object_question.html">questions</a>, <a href="basic/object_data_table.html">data_table</a> 
+    queries and <a href="basic/object_sql.html">database queries</a>, which are 
+    called to gather information when needed,</li>
+  <li>dynamic <a href="basic/object_text.html">text</a>, which can be used to 
+    dynamically construct output documents,</li>
+  <li><a href="support/object_external_action.html">external actions</a>, which 
+    dictate actions a calling program should take, such as send an e-mail.</li>
+</ul>
+<p>Objects can be organized into <a href="basic/folders.html">folders</a>. Folders 
+  have no effect on the reasoning process, they are simply an aid to knowledgebase 
+  development. </p>
+<h2><font color="#990000"><a name="reasoning_process"></a>Reasoning Process</font></h2>
+<p>The reasoning engine starts with the list of all possible solutions and orders 
+  them by the priority specified within each one. It then examines the environment 
+  constraints and the conditions under which the problem occurs. If it needs additional 
+  information, questions are asked of the user. The reasoning engines walks through 
+  each solution looking for the ones that match. When found, the problem and its 
+  resolution are displayed and any actions specified for that solution are taken.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

@@ -1,0 +1,105 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Dates</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Dates<!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="using_dates_in_conditions"></a>Using Dates in Conditions</h3>
+<p>samples/basic/tutorial/shopping.kb</p>
+<p> 
+  <! AMZI_INDEX = date ; rule_set ; table>
+  KnowledgeWright supports a wide variety of date calculations that can be used 
+  in conditions in rule_sets and rules_tables.</p>
+<p>The full set of date capabilities are described under <a href="expressions.html">Expressions</a>.</p>
+<p>As an example, we'll create a knowledgebase that helps plan your shopping activities 
+  for Christmas.</p>
+<ol>
+  <li>Create a fill_in_the_blank <b>question</b> named <i>christmas</i> that asks 
+    for the Christmas date to plan for. Make sure you set answer_type to date. 
+    Also set the date_format to whatever form you want your user to enter the 
+    date in.</li>
+  <li>Create a <b>rule_set</b> named <i>action</i> with the following table:<br>
+    <blockquote> 
+      <table border="1" cellpadding="0">
+        <tr> 
+          <td> 
+            <pre><b><font color="#990000">conditions</font></b></pre>
+          </td>
+          <td> 
+            <pre><b><font color="#990000">value</font></b></pre>
+          </td>
+        </tr>
+        <tr> 
+          <td> 
+            <pre><font color="#990000">today >= christmas</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">"Too late; find new friends. <br>Your family might forgive you."</font></pre>
+          </td>
+        </tr>
+        <tr> 
+          <td> 
+            <pre><font color="#990000">today = christmas</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">"Too late for shopping; <br>bake cookies quick."</font></pre>
+          </td>
+        </tr>
+        <tr> 
+          <td> 
+            <pre><font color="#990000">tomorrow = christmas</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">"Go shopping at the mall right <br>this minute."</font></pre>
+          </td>
+        </tr>
+        <tr> 
+          <td> 
+            <pre><font color="#990000">christmas - 1 weeks < today
+</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">"Either order today from the <br>Internet with overnight shipping <br>(hope you've got alot of money)<br>or go shopping as soon as possible <br>at the mall (hope you like crowds)."</font></pre>
+          </td>
+        </tr>
+        <tr> 
+          <td> 
+            <pre><font color="#990000">christmas - 1 months < today</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">"Order all your presents on the <br>Internet."</font></pre>
+          </td>
+        </tr>
+        <tr> 
+          <td> 
+            <pre><font color="#990000">true</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">"Take your time and shop on the 
+Internet."</font></pre>
+          </td>
+        </tr>
+      </table>
+      <p>Notice the last row the conditions are true, so if none of the other 
+        rows match, this one will.</p>
+    </blockquote>
+  </li>
+  <li>In <b>knowledgebase</b> <i>main</i>, set the goals to action. Note that 
+    you can select action from the pull-down menu rather than typing it in.</li>
+  <li>Run the knowledgebase. If it's not near Christmas, try making Christmas 
+    2 days from today, or a week and a half from today.</li>
+</ol>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate -->
+</HTML>

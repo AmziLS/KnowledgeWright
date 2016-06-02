@@ -1,0 +1,1 @@
+<p><i>This is the contents of the file stuff.txt.</i></p>

@@ -1,0 +1,155 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Authoring Knowledgebases</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->Authoring 
+  Knowledgebases <!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><a name="starting_the_knowledgebase_developer"></a><font color="#990000">Starting 
+  the Knowledgebase Workshop</font></h2>
+<p>Under Windows, double-click on 'kw.bat' in your installation directory. Under 
+  Linux/Solaris type 'kw'.</p>
+<h2><font color="#990000"><a name="opening_a_knowledgebase"></a>Opening a Knowledgebase</font></h2>
+<p>
+  <! AMZI_INDEX = knowledgebase | open>
+  There are two ways to open a knowledgebase for editing:</p>
+<ul>
+  <li>Open an existing knowledgebase</li>
+  <li>Create a new knowledgebase</li>
+</ul>
+<p>Both options are available on the 'Knowledgebase' menu. Once a knowledgebase 
+  is opened a tabbed pane will appear on the left side. The 'Object View' shows 
+  all the objects in the knowledgebase sorted by object type. The 'Folder View' 
+  shows all the objects sorted by folder. Only one knowledgebase can be opened 
+  for editing at a time.</p>
+<h2><a name="creating_and_editing_objects"></a><font color="#990000">Creating 
+  and Editing Objects</font></h2>
+<p>
+  <! AMZI_INDEX = object view; folder view; Object | New>
+  You can create and edit objects from either the 'Object View' or 'Folder View' 
+  by double-clicking on the object name. A form will open to display all the properties 
+  of the object. The following types of fields are used to edit the properties:</p>
+<ul>
+  <li>Text Boxes: Allows the entry of multiples lines of text.</li>
+  <li>Text Lines: Allows the entry of a single line of text.</li>
+  <li>List: Allows the entry of an ordered list of items. The 'Add' button adds 
+    the item in the box to the list. 'Delete' removes the highlighted item from 
+    the list. The up and down arrows move the selected item up and down within 
+    the list.</li>
+  <li>Table: Allows the entry of items in a row and column format. You can move 
+    columns by dragging the column header left or right. Rows and columns can 
+    be added or deleted via the 'Row' and 'Column' menus. Columns can be renamed 
+    via the 'Column' menu.</li>
+  <li>Text Box Table: Allows the entry of multiple lines of text in each cell. 
+    The column names and positions are fixed, however, the 'Row' menu can be used 
+    to add and delete rows.</li>
+</ul>
+<h3><a name="right_mouse_button"></a>Right Mouse Button</h3>
+<p>When you are editing in text boxes or text lines, the right mouse button has 
+  2 special functions:</p>
+<blockquote> 
+  <p>Make Link - This turns the currently highlighted word or words into a link 
+    (surrounded by percents (%)).</p>
+  <p>Open Object - This opens the object named in the link where the mouse pointer 
+    is. </p>
+</blockquote>
+<h2><a name="managing_folders"></a><font color="#990000">Managing Folders</font></h2>
+<p>Folders let you organize your objects into a tree structure that fits your 
+  knowledgebase's application. You can create, rename, delete and move folders 
+  with the 'Folder' menu. You can also move objects between folders with the 'Object' 
+  menu. To perform these operations, first highlight one or more objects or folders, 
+  then select the command from the menu. </p>
+<h3><a name="right_mouse_button"></a>Right Mouse Button</h3>
+<p>If you right click on an object in the tree, the menu of actions that can be 
+  performed is displayed.</p>
+<h2><font color="#990000"><a name="finding_things"></a>Finding Things</font></h2>
+<h3><a name="find_text"></a><img src="../images/find.gif" width="20" height="20"> 
+  Find </h3>
+<p> 
+  <! AMZI_INDEX =search | find>
+  The Search | Find command will locate text anywhere it appears in the knowledgebase. 
+  Each instance is displayed in the tabbed status window at the bottom of the 
+  screen. </p>
+<h3><a name="replace"></a><img src="../images/replace.gif" width="20" height="20"> 
+  Replace</h3>
+<p>When you rename an object, you are given the option of replacing all occurances 
+  of the old object name with the new one. When this is done, a list of all the 
+  replacements is displayed under this tab in the status window.</p>
+<h2><a name="analyzing_knowledgebase_structure"></a><font color="#990000">Analyzing 
+  Knowledgebase Structure</font></h2>
+<!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> provides 
+two tools to assist you in building knowledgebases. These are displayed in a tabbed 
+status window at the bottom of the screen. 
+<h3><a name="object_connections"></a><img src="../images/web.gif" width="20" height="20"> 
+  Object Connections</h3>
+<p>The web icon shows you how any object is connected to other objects. Select 
+  the object type and name from the center column. On the left you will get a 
+  list of all the objects that use that object. On the right you will get a list 
+  of all the objects that object uses.</p>
+<h3><a name="structural_problems"></a><img src="../images/exclaim.gif" width="20" height="20"> 
+  Structural Problems</h3>
+<p>The red exclamation mark tells you about inconsistencies and circular loops 
+  in your knowledgebase. It lists these things:</p>
+<ul>
+  <li>Objects that have been defined, but are not used by any other object.</li>
+  <li>Objects that are referenced in another object, but have not been defined.</li>
+  <li>Values for objects that are: 1) not found in the choice list for the question 
+    or 2) are the wrong type (i.e. a number instead of text).</li>
+  <li>Circular loops in your rules, where a rule eventually ends up calling itself. 
+    Such loops mean the reasoning engine can never find a solution.</li>
+</ul>
+<h2><a name="using_the_keyboard"></a><font color="#990000">Using the Keyboard</font></h2>
+<p>All the menu items have mnemonic keys that can be pressed inconjunction with 
+  Alt key to invoke that item. The most commonly used commands also have accelerator 
+  keys that are listed to the right of the menu item.</p>
+<p>For each environment (Windows &amp; Unix), the Workshop uses the default Look 
+  &amp; Feel as determined by the Java runtime. The standard key assignments can 
+  be found at <a href="http://java.sun.com/j2se/1.3/docs/api/javax/swing/doc-files/Key-Index.html">http://java.sun.com/j2se/1.3/docs/api/javax/swing/doc-files/Key-Index.html</a>. 
+  The following entries will probably be of the most interest:</p>
+<ul>
+  <li>JMenuBar, JMenu and JMenuItem -- for navigating menus.</li>
+  <li>JTree -- for using the Object and Folder trees.</li>
+  <li>JTextField, JTextArea -- for editing single line and multi-line text boxes 
+    in KnowledgeWright objects.</li>
+  <li>JTable -- for using tables when editing KnowledgeWright objects.</li>
+  <li>JList -- for selecting items in list boxes when editing KnowledgeWright 
+    objects.</li>
+  <li>JDesktopPane, JInternalFrame-- for managing the various open windows within 
+    the Workshop.</li>
+</ul>
+<h2><font color="#990000"><a name="preferences"></a>Preferences</font></h2>
+<p>The Tool | Preferences command lets you customize how the Workshop runs. You 
+  can specify the following items:</p>
+<ul>
+  <li><b>Web Browser Path</b>: The pathname of the web browser you want to use 
+    to view help. </li>
+  <li><b>Run Log Detail</b>: The default detail level for the log when running 
+    your knowledgebases.</li>
+  <li><b>Auto-Update Status Window</b>: Whether or not the status window is updated 
+    to show the connections for the currently open object and to check if there 
+    are problems in your knowledgebase.</li>
+  <li><b>Save kb files in Unicode Format</b>: Whether or not kb files are saved 
+    in Unicode format which fully supports the use of multiple international characters 
+    and fonts. Under some versions of Windows (except NT, 2000 and XP) and most 
+    versions of Unix/Linux, you will be unable to view/edit knowledgebases in 
+    regular text editors when this option is enabled.</li>
+  <li><b>Locale</b>: The Java Locale to use. This setting affects the use of the 
+    keyboard, fonts and perhaps display, but it does not change the language for 
+    the Workshop menus and forms.</li>
+</ul>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

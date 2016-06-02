@@ -1,0 +1,252 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: External Actions</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->External 
+  Actions <!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="creating_a_solution"></a>Creating an External_Action</h3>
+<p>knowledgewright4/samples/support/tutorial/printer_3.kb</p>
+<p> 
+  <! AMZI_INDEX = external_action; CGI; sendmail; email>
+  If your knowledgebase runs on your website, and no solution can be found for 
+  a user, wouldn't it be nice to forward the problem to support personnel via 
+  e-mail.Use Object/New to create an <b>external_action</b> named <i>email</i>. 
+  Enter the following parameters into the table:</p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000"><b>parameter</b></font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000"><b>value</b></font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">type</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">sendmail</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">command</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">/usr/sbin/sendmail -t</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">to</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">support@company.com</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">from</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">%user_email%</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">subject</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">No Solution in Support Knowledgebase</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">cc</font></pre>
+      </td>
+      <td> 
+        <pre>&nbsp;</pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">bcc</font></pre>
+      </td>
+      <td> 
+        <pre>&nbsp;</pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">message</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">Known facts:</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>This particular external action has been implemented in the CGI interface. 
+  The parameters are recognized and processed by that interface. Also, it appends 
+  a list of all the known facts and their values onto the end of the message parameter. 
+  This means the support person can see all the answers entered by the user as 
+  well as any intermediate results deduced by the reasoning engine.</p>
+<p>All the entries in the parameters table are text strings, so double-quotes 
+  are not needed. However, you can use percent signs around object names to include 
+  their values instead. For example, %user_email% will be replaced with the value 
+  of the object named <i>user_email</i>. To make this work, we need to create 
+  a <b>question</b> called <i>user_email</i> as follows:</p>
+<blockquote> 
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">user_email</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">prompt</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">What is your e-mail address?</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">fill_in_the_blank</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">answer_type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">text</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">length</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">50</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">default</font></pre>
+      </td>
+      <td width="306"> 
+        <pre>&nbsp; </pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">ask_also</font></pre>
+      </td>
+      <td width="306"> 
+        <pre>&nbsp;  </pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>Finally, open the <i>no_solution</i> <b>solution</b> and under actions add 
+  <i>email</i>. Change the fix text to read &quot;We are forwarding your problem 
+  to tech support.&quot;</p>
+<h3><a name="implementing_external_actions"></a>Implementing External Actions</h3>
+<p>
+  <! AMZI_INDEX = KWI; JSP; ASP; Delphi; Java; C/C++; Visual Basic; Prolog>
+  You can implement your own external actions with any needed parameters. This 
+  can be done in the CGI interface, in a JSP or ASP interface, or a Delphi, Java, 
+  C/C++ or Visual Basic application.</p>
+<p>Here's some of the Prolog code that implements the sendmail external_action 
+  (from runtime/cgi/kwcgirun.pro). First, the KWI is used to get the actions. 
+  If there are no actions, then 'none' is returned by the get_action KWI call:</p>
+<blockquote> 
+  <pre><font color="#990000">cgi_take_actions(SID) :-
+   once kwi(SID, get_action, ACTION),
+   ACTION \= none,
+   once cgi_take_action(SID, ACTION),
+   cgi_take_actions(SID).
+   cgi_take_actions(_).</font></pre>
+</blockquote>
+<p>The following code looks for an external action, and if the type parameter 
+  is set to sendmail, it executes it.<br>
+</p>
+<blockquote> 
+  <pre><font color="#990000">% Take external actions
+cgi_take_action(SID, tell(external, PROPS)) :-
+   member(type = sendmail, PROPS),
+   !,
+   cgi_sendmail(SID, PROPS).</font></pre>
+</blockquote>
+<p> The email is sent by this code which uses the KWI to get the current state 
+  of the reasoning engine (called a session). All the known facts are extracted 
+  from the session and the email contents are written to a file by calling cgi_email_write_file() 
+  (not shown). Finally the command parameter is extracted and the command is executed 
+  and the email file is deleted.</p>
+<blockquote> 
+  <pre><font color="#990000">% Email Action<br>cgi_sendmail(SID, PropList) :-<br>   once kwi(SID, get_session, ILIST),<br>   once member(known = FactList, ILIST),<br>   (once(cgi_email_write_file(PropList, FactList, FileName)) -&gt;<br>      true<br>   ;  throw([$ERROR: Unable to write email to a temporary file$]) ),<br>   (member(command = EMailCommand, PropList) -&gt;<br>      true<br>   ;  throw([$ERROR: No command specified for sendmail action$]) ),<br>   stringlist_concat([EMailCommand, $ &lt;$, FileName], MailCmdLine),<br>   (system(MailCmdLine) -&gt;<br>      true<br>   ;  throw([$ERROR: Unable to execute command line for sendmail action$]) ),<br>   (delfile(FileName, _) -&gt;<br>      true<br>   ;  throw([$ERROR: Unable to delete temporary email file$]) ),<br>   true.<br>cgi_sendmail(_, PropList) :-<br>   (member(goal = NAME, PropList) -&gt;<br>      true<br>   ; NAME = $*unknown action*$ ),<br>   throw([$ERROR: Unable to execute sendmail action: $, NAME]).</font></pre>
+</blockquote>
+<p>You can implement your own external actions by adapting the code in any of 
+  the runtime interfaces. Full source code is provided for each.</p>
+<div align="left"> 
+  <h3><a name="test_the_knowledgebase"></a>Run the Knowledgebase</h3>
+  <p>Select Run/Run to test your knowledgebase. Select &quot;light_output&quot; 
+    as the <i>symptom</i>. You should be asked for your e-mail address, then the 
+    <i>no_solution </i><b>solution</b> will be displayed as well as a dialog box 
+    displaying the parameters and their values for the <i>email</i> <b>external_action</b>. 
+  </p>
+  <h3><a name="exercises"></a>Exercises</h3>
+</div>
+<ol>
+  <li> 
+    <div align="left">Read the <a href="../basic/tutorial_rules_table.html">tutorial 
+      lesson on rules_tables</a>. Change the 'to' parameter from &quot;support@company.com&quot; 
+      to &quot;%support_email%. Then create a rules_table named support_email 
+      that selects a person to email to based on the symptom. For example, &quot;light 
+      output&quot; problems go to sally@company.com, whereas &quot;no output&quot; 
+      problems go to fred@company.com.</div>
+  </li>
+</ol>
+<div align="left"> 
+  <div align="left"> 
+    <div align="left"></div>
+  </div>
+  <div align="left"> 
+    <ol>
+    </ol>
+  </div>
+</div>
+<div align="left"> 
+  <ol>
+  </ol>
+</div>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

@@ -1,0 +1,43 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/chapter_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Converting WebLS Logicbases</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->Converting WebLS Logicbases<!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><a name="tools_convert_knowledgebase"></a><font color="#990000">Tools | Convert 
+  Knowledgebase</font></h2>
+<p><! AMZI_INDEX = tools | convert ; WebLS ; converting>The Workshop has the ability 
+  to convert many WebLS logicbases to KnowledgeWright knowledgebases. If you do 
+  not use modules in your logicbase, then the convert command should work without 
+  modification. If you have modules, you have two choices:</p>
+<ul>
+  <li>Convert each module into a separate knowledgebase. In this case, you need 
+    to edit each of your module files to include a 'main' module, with all the 
+    appropriate attributes. </li>
+  <li>Merge all the modules into one knowledgebase. In this case, you need to 
+    rework all your module definitions into one 'main' module.</li>
+</ul>
+<p>The convert command will create a new text object called 'main_doc' that incorporates 
+  all your headers, footers and goal list into a single output document. As such, 
+  'main_doc' becomes the single goal of the new knowledgebase. Rules are grouped 
+  together by goal and one rule_set object is created for each goal. Answers are 
+  converted into text objects.</p>
+<h2><a name="running_on_the_web"></a><font color="#990000">Running on the Web</font></h2>
+<p><! AMZI_INDEX = CGI ; Web>To deploy your knowledgebase on the Web, see the 
+  instructions for <a href="../runtime/cgi_interface.html">using the CGI interface</a>.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate -->
+</HTML>

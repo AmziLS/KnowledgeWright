@@ -1,0 +1,194 @@
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Writing Knowledgebases for the Web</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Writing 
+  Knowledgebases for the Web<!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3>Formatting Question Pages</h3>
+<p> 
+  <! AMZI_INDEX = question; knowledgebase; HTML>
+  The format of the web pages that ask questions of the user are controlled by 
+  four entries in your <i>main</i> <b>knowledgebase</b>. These are:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_top</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&lt;HTML&gt;&lt;HEAD&gt;&lt;/HEAD&gt;
+</font><font color="#990000">&lt;BODY bgcolor=#FFFFFF text=#000000&gt;
+&lt;H2&gt;&lt;IMG SRC=&quot;/images/bullet.gif&quot; HSPACE=10&gt;&lt;FONT COLOR=#0000A0&gt;
+Amzi! Internet Site Guide
+&lt;/FONT&gt;&lt;/H2&gt;
+</font><font color="#990000">&lt;FORM METHOD=&quot;POST&quot; ACTION=&quot;/cgi-bin/kwcgibasic.exe%system(cgi_parameters)%&quot;&gt;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_separator</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&lt;P&gt;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">value_separator</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&lt;BR&gt;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_bottom</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&lt;P&gt;&lt;INPUT NAME=&quot;submit&quot; TYPE=&quot;submit&quot; VALUE=&quot;Continue&quot;&gt;&lt;/INPUT&gt;
+</font><font color="#990000">&lt;/FORM&gt;
+&lt;BODY&gt;&lt;/HTML&gt;</font></pre>
+      </td>
+    </tr>
+  </table>
+</center>
+<p><br>
+  In question_top you need to specify the correct URL to run KnowledgeWright. 
+  Note the special system goal, system(cgi_parameters), this is used to pass the 
+  CGI parameters from one form to the next. The example above is for running the 
+  CGI interface. For, a Java Servlet, the &lt;FORM&gt; tag might read:</p>
+<blockquote> 
+  <pre><font color="#990000">&lt;FORM METHOD=&quot;&quot;GET&quot;&quot; ACTION=&quot;&quot;/amzi/KW&quot;&quot;&gt;</font></pre>
+</blockquote>
+<p>A question separator is inserted between each question and a value separator 
+  is inserted between each menu choice in a question.</p>
+<h3>Building Output Pages</h3>
+<p>
+  <! AMZI_INDEX = text; knowledgebase; goal; HTML>
+  The preferred way to dynamically build a web page is to create a <b>text</b> 
+  object that is the goal of your <b>knowledgebase</b>. Typically you set output_top 
+  and output_bottom in your <i>main</i> <b>knowledgebase</b> object to include 
+  your &lt;HTML&gt;, &lt;HEAD&gt; and &lt;BODY&gt; tags. For example:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">output_top</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&lt;HTML&gt;&lt;HEAD&gt;&lt;/HEAD&gt;&lt;BODY bgcolor=#FFFFFF text=#000000&gt;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">output_bottom</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&lt;/BODY&gt;&lt;/HTML&gt;</font></pre>
+      </td>
+    </tr>
+  </table>
+</center>
+<p>&nbsp;</p>
+<p>Then in your text object you would include the dynamically generated sections 
+  along with fixed text and HTML tags. For example, the Amzi! Website Advisor 
+  has a text object with the following contents:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">text</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&lt;H2&gt;&lt;IMG SRC=&quot;/images/bullet.gif&quot; HSPACE=10&gt;
+&lt;FONT COLOR=#0000A0&gt; Amzi! Internet Site Guide&lt;/FONT&gt;&lt;/H2&gt;
+</font><font color="#990000">&lt;HR&gt;&lt;P&gt;&lt;FONT SIZE=3&gt;&lt;I&gt;&lt;B&gt;
+We recommend these articles, demos, newsgroups, and other sites for you...
+&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;P&gt;</font></pre>
+        <pre><font color="#990000">%resource%</font></pre>
+        <pre><font color="#990000">&lt;HR&gt;&lt;P&gt;&lt;FONT SIZE=3&gt;&lt;I&gt;&lt;B&gt;
+We recommend these tools, products and services for you...
+&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;P&gt;&lt;UL&gt;</font></pre>
+        <pre><font color="#990000">%tool%</font></pre>
+        <pre><font color="#990000">&lt;/UL&gt;&lt;P&gt;All &lt;A HREF=&quot;/company/index.htm&quot;&gt;Amzi!&lt;/A&gt; products include 
+free tech support (via internet, phone and fax), are not copy 
+protected and are royalty-free.&lt;/P&gt;</font></pre>
+      </td>
+    </tr>
+  </table>
+</center>
+<p><br>
+  Note, the %resource% and %tool% in the text. These are sub-goals. So the reasoning 
+  engine will try to determine values for these objects. For the Website Advisor, 
+  <i>resource</i> and <i>tool</i> are <b>rule_sets</b>. The values of the rules 
+  are text that have embedded HTML tags. For example, here are some entries in 
+  the <i>resource</i> <b>rule_set</b>:</p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">exploreProlog = &quot;yes&quot; and 
+prologFamiliarity \= &quot;Very&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;To understand more about Prolog's unique 
+backtracking and unification algorithms 
+see the PC AI article 
+&lt;A HREF=&quot;&quot;/articles/prolog_under_the_hood.htm&quot;&quot;&gt;
+Prolog Under the Hood&lt;/A&gt;. For more information on 
+&lt;B&gt;Prolog&lt;/B&gt;, see the 
+&lt;A HREF=&quot;&quot;http://fas.sfu.ca/0/cs/people/ResearchStaff/jamie/personal/prolog-faq.1&quot;&quot;&gt;
+Prolog FAQ&lt;/A&gt; and the 
+&lt;A HREF=&quot;&quot;news:comp.lang.prolog&quot;&quot;&gt;Prolog newsgroup&lt;/A&gt;. 
+Find lots of source code in 
+&lt;A HREF=&quot;&quot;http://users.ox.ac.uk/~popx/&quot;&quot;&gt;Jocelyn Paine's 
+public domain library&lt;/A&gt; and the 
+&lt;A HREF=&quot;&quot;http://www.cs.cmu.edu/Groups/AI/html/repository.html&quot;&quot;&gt;
+Carnegie Mellon Repository&lt;/A&gt;.&quot;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">embeddedDevelopment = &quot;yes&quot; and 
+languagesAndTools include &quot;Java&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;See the PC AI article on 
+&lt;A HREF=&quot;&quot;/articles/java_class.htm&quot;&quot;&gt;Java Meets Prolog&lt;/A&gt; 
+which describes the &lt;B&gt;Amzi! Java Class&lt;/B&gt;. If you have 
+the Sun JDK, you can run the 
+&lt;A HREF=&quot;&quot;ftp://ftp.amzi.com/pub/demos/java_ship.zip&quot;&quot;&gt;
+shipping advisor demo&lt;/A&gt;.&quot;</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>Note, that these text values could also include further sub-goals in percent 
+  signs. This provides alot of flexibility for generating and formatting your 
+  documents.</p>
+<p>If you choose to have multiple goals in your knowledgebase, then the HTML in 
+  output_continue is used to continue the reasoning process and to proceed onto 
+  the next goal. In this case the user will see a series of questions followed 
+  by some results, then another series of questions and more results.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

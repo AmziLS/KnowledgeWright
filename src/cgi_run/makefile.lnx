@@ -1,0 +1,28 @@
+.SUFFIXES: .plm .pro
+
+OBJECTS = kwcgirun.plm
+KW_DIR = /home/dennis/kw4
+
+_all: _plm _acgi _copy
+
+.pro.plm:
+	acmp $<
+
+_plm: 	$(OBJECTS)
+
+_acgi:
+	@echo *** making acgi ***
+	cd acgi; make -f makefile.lnx
+
+_copy:
+	@echo *** making kwcgirun ***
+	cp kwcgirun.pro $(KW_DIR)/runtime/cgi
+	cp kwcgirun.plm $(KW_DIR)/runtime/cgi
+	cp kwcgirun $(KW_DIR)/runtime/cgi/kwcgibasic
+	cp kwcgirun $(KW_DIR)/runtime/cgi/kwcgisupport
+	cp kwtestcgi $(KW_DIR)/runtime/cgi/kwtestcgi
+	cp acgi/amzicgi.c $(KW_DIR)/runtime/cgi/acgi
+	cp acgi/amzisub.c $(KW_DIR)/runtime/cgi/acgi
+	cp acgi/makefile.lnx $(KW_DIR)/runtime/cgi/acgi
+
+

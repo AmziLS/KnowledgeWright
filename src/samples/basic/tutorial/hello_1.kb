@@ -1,0 +1,79 @@
+knowledgewright_jig(basic, 11).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "",
+   goals = [hello],
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """><INPUT NAME=""Continue"" TYPE=""Submit"" VALUE=""Submit""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>"),
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+fact(hello, /, [
+   description = "",
+   value = "Hello"
+   ]).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+

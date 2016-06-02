@@ -1,0 +1,231 @@
+knowledgewright_jig(basic, 6).
+
+
+
+% folder
+
+folder(fold, /, [
+   ]).
+
+
+
+% knowledgebase
+
+knowledgebase(main, /, [
+   description = ``,
+   goals = [area, age, things, color_report, mood, thing, surname, mother],
+   odbc = `gene2`,
+   question_separator = `<P>`,
+   menu_separator = `<BR>`,
+   value_separator = `<P>`,
+   question_top = text(`<HTML><HEAD></HEAD><BODY><FORM METHOD="POST" ACTION="/cgi-bin/kwcgi.exe">`),
+   question_bottom = text(`<INPUT NAME="Submit" TYPE="Submit" VALUE="Submit"></INPUT><INPUT TYPE="Reset" VALUE="Reset"></INPUT></FORM></BODY></HTML>`)
+   ]).
+
+
+
+% fact
+
+fact(pi, /, [
+   description = ``,
+   value = 3.14159
+   ]).
+
+fact(myfact, /, [
+   description = ``,
+   value = 3
+   ]).
+
+fact('Ella''s fact', / 'my folder', [
+   description = ``,
+   value = 10
+   ]).
+
+
+
+% question
+
+question(radius, /, [
+   question_style = listbox,
+   ask_also = '[]',
+   default = ``,
+   length = 20,
+   choices = '[]',
+   question_type = fill_in_the_blank,
+   prompt = text(`What's the radius of the circle?`),
+   answer_type = number
+   ]).
+
+question(birthday, /, [
+   prompt = text(`What's your Birthday (m/d/y)?`),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = date,
+   length = 20,
+   default = ``,
+   ask_also = '[]'
+   ]).
+
+question(side, /, [
+   question_style = listbox,
+   ask_also = '[]',
+   default = ``,
+   length = 20,
+   choices = '[]',
+   question_type = fill_in_the_blank,
+   prompt = text(`What's the side of the square?`),
+   answer_type = number
+   ]).
+
+question(name, /, [
+   'rule-display_choices' = [[`rule_text`, `display_text`]],
+   question_style = listbox,
+   ask_also = [birthday],
+   default = ``,
+   length = 20,
+   answer_type = text,
+   question_type = menu_single_choice,
+   prompt = text(`What's your name?`),
+   choices = [`Sandra`, `Phyllis`, `Matilda`, `Fred`, `Cindy`, `William`, `Edward`, `Bob`, `Gina`, `Tom`, `Joe`, `Missy`, `Charlie`, `Samantha`, `Peter`, `Harriet`, `Ronda`, `Wanda`, `Amanda`, `Todd`]
+   ]).
+
+question(colors, /, [
+   'rule-display_choices' = [[`rule_text`, `display_text`]],
+   question_style = listbox,
+   ask_also = [name],
+   default = ``,
+   length = 20,
+   answer_type = text,
+   question_type = menu_multiple_choices,
+   prompt = text(`What colors do you like?`),
+   choices = [`red`, `orange`, `yellow`, `green`, `blue`, `indigo`, `violet`]
+   ]).
+
+question(shape, /, [
+   'rule-display_choices' = [[`rule_text`, `display_text`], [`circle`, `A Circle!`], [`square`, `A Square!`]],
+   question_style = listbox,
+   ask_also = '[]',
+   default = ``,
+   length = 20,
+   answer_type = text,
+   question_type = menu_single_choice_display_separate,
+   prompt = text(name + `, what shape?`),
+   choices = '[]'
+   ]).
+
+
+
+% sql
+
+sql(surname, /, [
+   length = 20,
+   description = ``,
+   query = text(`select surname from person where name = '` + name + `'`),
+   type = text
+   ]).
+
+sql(mother, /, [
+   length = 20,
+   description = ``,
+   query = text(`select name from person where pid =
+   type = text
+   ]).
+
+
+
+% rule_set
+
+rule_set(area, /, [
+   description = ``,
+   type = single_value,
+   rules = [[conditions, value], [shape = `circle`, pi*radius**2], [shape = `square`, side*side]]
+   ]).
+
+rule_set(things, /, [
+   description = ``,
+   type = multiple_values,
+   rules = [[conditions, value], [colors include `blue`, sky], [colors include `red`, fire], [colors include `green`, trees], [colors include `orange`, oranges]]
+   ]).
+
+rule_set(age, /, [
+   description = ``,
+   type = single_value,
+   rules = [[conditions, value], [true, age(birthday)]]
+   ]).
+
+rule_set(mood, /, [
+   description = ``,
+   type = single_value,
+   rules = [[conditions, value], [colors include `blue`, sad], [colors include `red`, mad], [true, text(`Hi ` + name + `, This is a bunch of text to see what happens when we have alot of text in a small editing box.
+
+What do you think?`)]]
+   ]).
+
+
+
+% table
+
+table(thing, /, [
+   type = single_value,
+   description = ``,
+   rules = [[colors, area, thing], [include `red`, > 10, text(`big red thing`)], [include `blue`, > 10, text(`big blue thing`)], [include `red`, <= 10, text(`small red thing`)], [include `blue`, <= 10, text(`small blue thing`)], [*, > 10, text(`big thing`)], [*, <= 10, text(`small thing`)]]
+   ]).
+
+
+
+% text
+
+text(fire, /, [
+   file = ``,
+   type = text,
+   description = ``,
+   text = text(`Fire burning bright`)
+   ]).
+
+text(mad, /, [
+   file = ``,
+   type = text,
+   description = ``,
+   text = text(name + ` is mad`)
+   ]).
+
+text(sky, /, [
+   file = ``,
+   type = text,
+   description = ``,
+   text = text(`Sky on a clear day`)
+   ]).
+
+text(trees, /, [
+   file = ``,
+   type = text,
+   description = ``,
+   text = text(`Trees in the summer`)
+   ]).
+
+text(sad, /, [
+   file = ``,
+   type = text,
+   description = ``,
+   text = text(name + ` is sad`)
+   ]).
+
+text(oranges, /, [
+   file = ``,
+   type = text,
+   description = ``,
+   text = text(`Duh, oranges`)
+   ]).
+
+text(color_report, /, [
+   description = ``,
+   type = text,
+   file = ``,
+   text = text(`These are your colors:
+  ` + colors + `
+Hope you like them.
+This is some more text to fill up this box so we can see what happens when we try to edit it.
+`)
+   ]).
+

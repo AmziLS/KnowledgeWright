@@ -1,0 +1,47 @@
+
+KW_DIR = c:\kw4
+HERE = c:\amzi\dev\kw4\src\docs
+
+_all: _htmlidx _docs
+
+_htmlidx:
+        @echo *** indexing documents ***
+        cd $(HERE)\jigs
+        copy fig_basic.pro fig.pro
+        arun $(AMZI_DIR)\src\docs\htmlidx\htmlidx
+        copy fig_support.pro fig.pro
+        arun $(AMZI_DIR)\src\docs\htmlidx\htmlidx
+        cd $(HERE)\runtime
+        arun $(AMZI_DIR)\src\docs\htmlidx\htmlidx
+        cd $(HERE)\workshop
+        arun $(AMZI_DIR)\src\docs\htmlidx\htmlidx
+
+_docs:
+        @echo *** copying documents ***
+        copy $(HERE)\faq.html $(KW_DIR)\docs
+        copy $(HERE)\install.html $(KW_DIR)\docs
+        copy $(HERE)\license.html $(KW_DIR)\docs
+        copy $(HERE)\whatsnew.html $(KW_DIR)\docs
+	copy $(HERE)\knowledgewright_enterprise.html $(KW_DIR)\docs\knowledgewright_manual.html
+        - copy $(HERE)\*.png $(KW_DIR)\docs
+        copy $(HERE)\images\*.* $(KW_DIR)\docs\images
+        copy $(HERE)\jigs\*.html $(KW_DIR)\docs\jigs
+        - copy $(HERE)\jigs\*.png $(KW_DIR)\docs\jigs
+	copy $(HERE)\jigs\jigs_basic_tutorial.html $(KW_DIR)\docs\jigs\jigs_tutorial.html
+        copy $(HERE)\jigs\basic\*.html $(KW_DIR)\docs\jigs\basic
+        - copy $(HERE)\jigs\basic\*.png $(KW_DIR)\docs\jigs\basic
+        copy $(HERE)\jigs\support\*.html $(KW_DIR)\docs\jigs\support
+        - copy $(HERE)\jigs\support\*.png $(KW_DIR)\docs\jigs\support
+        copy $(HERE)\overview\*.html $(KW_DIR)\docs\overview
+        - copy $(HERE)\overview\*.png $(KW_DIR)\docs\overview
+        copy $(HERE)\runtime\*.html $(KW_DIR)\docs\runtime
+        - copy $(HERE)\runtime\*.png $(KW_DIR)\docs\runtime
+        copy $(HERE)\workshop\*.html $(KW_DIR)\docs\workshop
+        - copy $(HERE)\workshop\*.png $(KW_DIR)\docs\workshop
+        copy $(HERE)\jigs\basic\object_data_table.html $(KW_DIR)\docs\jigs\support
+        copy $(HERE)\jigs\basic\object_fact.html $(KW_DIR)\docs\jigs\support
+        copy $(HERE)\jigs\basic\object_question.html $(KW_DIR)\docs\jigs\support
+        copy $(HERE)\jigs\basic\object_rule_set.html $(KW_DIR)\docs\jigs\support
+        copy $(HERE)\jigs\basic\object_rules_table.html $(KW_DIR)\docs\jigs\support
+        copy $(HERE)\jigs\basic\object_sql.html $(KW_DIR)\docs\jigs\support
+        copy $(HERE)\jigs\basic\object_text.html $(KW_DIR)\docs\jigs\support

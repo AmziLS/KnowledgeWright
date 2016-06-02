@@ -1,0 +1,51 @@
+Bug fixes version 4-2 final
+
+- Ship amzi.dcr
+
+- kw.cfg is not created properly if it does not exist.
+
+- can't share one install amoung multiple users (rewrites kw.cfg)..
+
+
+Enhancements version 4-2 final
+
+
+Enhancements version 4-3
+
+- Add database action object to insert/update via ODBC
+
+- Add analyze program.
+
+- rippling ask_also
+
+- Compile .jigs and load them
+
+- Save results to a file for JSP.
+
+- Status box does not display message saying it is xrefing...
+  (must restructure code to do xref in a thread and lock ls)
+
+- xref needs to identify objects in conditions
+
+- OK to save dialog boxes not appearing (works with -classic).
+
+- make a jig builder, actually, maybe the jig should
+  go right in the .xpl and the .xpl becomes the jig!
+  No, need alibless .xpls for that... :( r6.1... anyway
+  jig builder should put a jig version as well in the
+  .xpl and .jig that are in sync.
+
+- fix jig version & convert, put a jig-version number
+  in each knowledge object, and have convert code
+  exist in the jig itself.
+
+- SQL query multiple values returned.
+
+- for national language, 'dictionary' objects, useful for menus:
+  dictionary(colors, /, [
+     table = [
+       [code,   $English$, $Spanish$, $Japanese$],
+
+       [red,    $red$,     $rojo$,    $akai$],
+       [black,  $black$,   $negra$,   $kuroi$] ]
+  ]).

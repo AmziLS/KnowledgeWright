@@ -1,0 +1,119 @@
+knowledgewright_jig(basic, 11).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "",
+   goals = [max_loan_amount],
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """><INPUT NAME=""Continue"" TYPE=""Submit"" VALUE=""Submit""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>"),
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(debt, /, [
+   prompt = text("How much money do you current owe others?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(income, /, [
+   prompt = text("What is your income?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(rating, /, [
+   prompt = text("What is your credit rating?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["poor", "good"],
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+rules_table(max_loan_amount, /, [
+   description = "",
+   type = single_value,
+   rules = [[income, debt, rating, max_loan_amount], [> 50000, < 10000, text("poor"), 75000], [> 50000, < 10000, text("good"), 150000], [> 35000, < 5000, text("poor"), 50000], [> 35000, < 5000, text("good"), 100000], [*, *, *, 0]]
+   ]).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+

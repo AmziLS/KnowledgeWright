@@ -1,0 +1,603 @@
+% schema.pro
+
+/*
+Types:
+
+id - Name and path of the object.
+atom - Prolog atoms.
+string - String data, such as titles and description.
+term - Prolog terms.
+number - Numbers in any Prolog format.
+list_of_atoms, list_of_strings, list_of_numbers, list_of_terms - 
+   editable lists, such as menu choices, that are passed as lists.
+table - editable table, passed as list of lists.
+fixed_table - table with predefined columns.
+
+Display Types:
+
+Special Facets:
+
+default is used to generate new frames and must be defined.
+helpURL on the id is the help for that frame.
+help is the tool tip text for that field.
+
+Definitions:
+
+All frames have the structure type(id, path, slotlist). Hence the
+slots named id and path are special and identify the name and folder
+location of the object.
+*/
+
+%------------------------------------------------
+% CVS history
+%
+% $Log: ucwa.jig,v $
+% Revision 1.9  2002/03/04 20:51:38  mary
+% Retract everything when closing KB. Added charset to knowledgebase. Moved
+% CGI header to kwcgirun. Don't do xref if auto-update is off.
+%
+% Revision 1.8  2002/02/22 22:50:54  dennis
+% Fix xref in query and data_table objects.
+%
+% Revision 1.7  2002/02/22 18:27:48  dennis
+% Add data_table and find() function. Rename table to rules_table.
+%
+% Revision 1.6  2002/02/21 04:39:14  dennis
+% added data_table query support, used new :- include directive for
+% operators in each file
+%
+% Revision 1.5  2002/02/14 23:06:38  dennis
+% Fixed xref as much as possible for UCWA. Error on bad xrefs.
+%
+% Revision 1.4  2002/02/14 20:09:24  dennis
+% Final UCWA changes.
+%
+% Revision 1.3  2002/02/13 23:33:04  dennis
+% Replaced date_time with library. Added date_format to knowledgebase.
+%
+% Revision 1.2  2002/02/12 23:04:20  dennis
+% Updated to current release.
+%
+% Revision 1.1.1.1  2000/12/15 18:27:11  dennis
+% added Fitcentric's Ultra Coach Workout Advisor jig
+%
+%
+%------------------------------------------------
+
+% Ultra Coach Workout Advisor Jig
+
+/*  Basic Jig
+
+Types:
+
+id - Name and path of the object.
+atom - Prolog atoms.
+string - String data, such as titles and description.
+term - Prolog terms.
+rules - Rules that are formatted (DO NOT USE--NOT WORKING).
+number - Numbers in any Prolog format.
+list_of_atoms, list_of_strings, list_of_numbers, list_of_terms - 
+   editable lists, such as menu choices, that are passed as lists.
+
+Display Types:
+
+menu - a fixed listed of choices.
+list_object - a user modifiable list of single line entries
+text_line - a single line entry
+text_box - multiple line entry with scrollbars
+table - editable table, passed as list of lists and edited with 
+   text lines for cells.
+text_table - table with predefined columns and edited with text 
+   boxes for cells--the default value is the column headers.
+
+Special Facets:
+
+helpURL on the id is the help for that frame.
+vars indicates if the string or list_of_strings fields is processed
+   for variable names enclosed in percent's.
+default is used to generate new frames and must be defined.
+help is the tool tip text for that field.
+related_slots is a list of fields to enable and disable for each
+   value of a menu.
+
+Definitions:
+
+All frames have the structure type(id, path, slotlist). Hence the
+slots named id and path are special and identify the name and folder
+location of the object.
+
+The global first_object specifies which frame is created in a new
+knowledgebase with the name first_object_name.
+*/
+
+%------------------------------------------------
+% CVS history
+%
+% $Log: ucwa.jig,v $
+% Revision 1.9  2002/03/04 20:51:38  mary
+% Retract everything when closing KB. Added charset to knowledgebase. Moved
+% CGI header to kwcgirun. Don't do xref if auto-update is off.
+%
+% Revision 1.8  2002/02/22 22:50:54  dennis
+% Fix xref in query and data_table objects.
+%
+% Revision 1.7  2002/02/22 18:27:48  dennis
+% Add data_table and find() function. Rename table to rules_table.
+%
+% Revision 1.6  2002/02/21 04:39:14  dennis
+% added data_table query support, used new :- include directive for
+% operators in each file
+%
+% Revision 1.5  2002/02/14 23:06:38  dennis
+% Fixed xref as much as possible for UCWA. Error on bad xrefs.
+%
+% Revision 1.4  2002/02/14 20:09:24  dennis
+% Final UCWA changes.
+%
+% Revision 1.3  2002/02/13 23:33:04  dennis
+% Replaced date_time with library. Added date_format to knowledgebase.
+%
+% Revision 1.2  2002/02/12 23:04:20  dennis
+% Updated to current release.
+%
+% Revision 1.1.1.1  2000/12/15 18:27:11  dennis
+% added Fitcentric's Ultra Coach Workout Advisor jig
+%
+% Revision 1.20  2000/12/14 22:02:56  dennis
+% Changed rule to rule_set in hopefully all the places
+%
+% Revision 1.19  2000/12/13 17:12:33  mary
+% Fixed related slots for questions.
+%
+% Revision 1.18  2000/12/11 02:04:15  dennis
+% basic jig to v2, added kw_consult to convert so that
+% kbs are automatically updated to new jigs. colors_1.kb
+% is the test file in v1 format.
+%
+% Revision 1.17  2000/12/10 04:06:49  mary
+% Reversed conditions and values in rules and tables.
+%
+% Revision 1.16  2000/12/04 02:46:13  mary
+% Fixed default for document_format.
+%
+% Revision 1.12  2000/11/30 04:13:31  mary
+% Change answer_separator to value_separator.
+%
+% Revision 1.11  2000/11/30 04:07:20  mary
+% Fixed text objects to be text boxes not tables.
+%
+% Revision 1.10  2000/11/29 23:07:34  dennis
+% added version number
+%
+% Revision 1.9  2000/11/29 22:55:04  dennis
+% changed old text to translation, but commented out
+% of .jig for now, and made simpler new text object
+%
+% Revision 1.8  2000/11/29 22:25:06  dennis
+% Changed question_document object to document_format object,
+% modified slots to reflect questionness of items.
+%
+% Revision 1.7  2000/11/29 19:09:51  dennis
+% Added CVS logging to source files
+%
+%------------------------------------------------
+
+
+schema_global(version, 6).
+schema_global(first_object, knowledgebase).
+schema_global(first_object_name, main).
+schema_global(xref_roots, [knowledgebase,factor]).
+schema_global(help_url, $jigs_basic_manual.html$).
+
+schema_definition(id, id).
+schema_definition(path, path).
+
+schema(knowledgebase, [
+   id : [
+      type = id,
+      display = id,
+      icon = $pencil.gif$,
+      help_url = $object_knowledgebase.html$,
+      help = $The name of this object$, 
+      object_help = $The global definitions for this knowledgebase$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$],
+   goals : [
+      type = list_of_atoms,
+      display = list_object,
+      listof = [rule_set, text],
+      xref = list,
+      default = []],
+   date_format : [
+      type = atom,
+      display = menu,
+      choices = ['m/d/y', 'd/m/y', 'y/m/d', 'm-d-y', 'd-m-y', 'y-m-d', 'd mon y', 'month d, y'],
+      default = 'm/d/y'],
+   odbc : [
+      type = string,
+      display = text_line,
+      default = $$],
+   charset : [
+      type = string,
+      display = text_line,
+      default = $$],
+   question_separator : [
+      type = string,
+      display = text_line,
+      default = $<P>$],
+   menu_separator : [
+      type = string,
+      display = text_line,
+      default = $<BR>$],
+   value_separator : [
+      type = string,
+      display = text_line,
+      default = $<P>$],
+   question_top : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<HTML><HEAD></HEAD><BODY><FORM METHOD="POST" ACTION="/cgi-bin/kwcgiucwa.exe$ + system(cgi_parameters) + $">$)],
+   question_bottom : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<P><INPUT NAME="Submit" TYPE="Submit" VALUE="Submit"></INPUT> <INPUT TYPE="Reset" VALUE="Reset"></INPUT></FORM></BODY></HTML>$)],
+   output_top : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<HTML><HEAD></HEAD><BODY>$)],
+   output_continue : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<FORM METHOD="POST" ACTION="/cgi-bin/kwcgiucwa.exe$ + system(cgi_parameters) + $"><INPUT NAME="Submit" TYPE="Submit" VALUE="Continue"></INPUT></FORM>$)],
+   output_bottom : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($</BODY></HTML>$)]
+   ]).
+
+schema(fact, [
+   id : [
+      type = id,
+      display = id,
+      icon = $diamond.gif$,
+      help = $The name of this object$, 
+      help_url = $object_fact.html$,
+      object_help = $The definition of a fact$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$,
+      help = $A description of this object for people$],
+   value : [
+      type = term,
+      display = text_line,
+      xref = expression,
+      default = '',
+      help = $The value of this object. Use double-quotes for text.$]
+   ]).
+
+schema(question, [
+   id : [
+      type = id,
+      display = id,
+      icon = $question.gif$,
+      help = $The name of this object$,
+      help_url = $object_question.html$,
+      object_help = $The definition of a fact$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   prompt : [
+      type = string,
+      display = text_box,
+      vars = true,
+      xref = text,
+      default = $$,
+      help = $The text prompt for the user$],
+   question_type : [
+      type = atom,
+      display = menu, 
+      choices = [menu_single_choice, menu_multiple_choices, fill_in_the_blank,
+         menu_single_choice_display_separate, menu_multiple_choices_display_separate],
+      default = menu_single_choice,
+      help = $The way the question is presented to the user$,
+      related_slots = [
+         menu_single_choice : [choices, question_style] : ['rule-display_choices', length, answer_type],
+         menu_multiple_choices : [choices, question_style] : ['rule-display_choices', length, answer_type],
+         menu_single_choice_display_separate : ['rule-display_choices', question_style] : [choices, length, answer_type],
+         menu_multiple_choices_display_separate : ['rule-display_choices', question_style] : [choices, length, answer_type],
+         fill_in_the_blank : [length, answer_type] : [choices, 'rule-display_choices', question_style] ]
+      ],
+   question_style : [
+      type = atom,
+      display = menu,
+      choices = [listbox, checkbox_radio],
+      default = list,
+      help = $For HTML formatting, the style to use$],
+   choices : [
+      type = list_of_strings,
+      display = list_object,
+      default = [],
+      help = $The list of possible choices for a menu$],
+   'rule-display_choices' : [
+      type = list_of_strings, 
+      display = text_table, 
+      default = [[rule_text, display_text]] ],
+   answer_type : [
+      type = atom,
+      display = menu, 
+      choices = [text, number, boolean],
+      default = text,
+      help = $The type of response required$],
+   length : [
+      type = number,
+      display = text_line,
+      default = 20,
+      help = $The length of the field for the user to type the answer into$],
+   default : [
+      type = string,
+      display = text_line,
+      default = $$,
+      help = $The default answer for this question$],
+   ask_also : [
+      type = list_of_atoms,
+      display = list_object,
+      listof = [question],
+      default = [],
+      help = $The list of questions to be asked whenever this question is asked$]
+   ]).
+
+schema(sql, [
+   id : [
+      type = id,
+      display = id,
+      icon = $cdrom.gif$,
+      help = $The name of this object$,
+      help_url = $object_sql.html$,
+      object_help = $A fact value that is retrieved from a SQL database$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$],
+   query : [
+      type = string,
+      display = text_box,
+      vars = true,
+      xref = text,
+      default = $$,
+      help = $The query text; use %'s around object names to insert their values$],
+   type : [
+      type = atom,
+      display = menu, 
+      choices = [text, integer, float, date],
+      default = string,
+      help = $The type of data returned by the SQL query$],
+   length : [
+      type = number,
+      display = text_line,
+      default = 20,
+      help = $The length of the field$]
+   ]).
+
+schema(rule_set, [
+   id : [
+      type = id,
+      display = id,
+      icon = $ruler.gif$,
+      help = $The name of this object$,
+      help_url = $object_rule.html$,
+      object_help = $Rules that define values for goals and facts$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$],
+   type : [
+      type = atom,
+      display = menu, 
+      choices = [single_value, multiple_values],
+      default = single_value,
+      help = $Whether the rules for this goal have one or possibly more than one value$],
+   rules : [
+      type = list_of_terms, 
+      display = text_table, 
+      vars = true, 
+      xref = rules,
+      default = [[conditions, value]]]
+   ]).
+
+schema(rules_table, [
+   id : [
+      type = id, 
+      display = id,
+      icon = $graph.gif$,
+      help = $The name of this object$,
+      help_url = $object_rules_table.html$,
+      object_help = $Rules in table format$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box,
+      default = $$],
+   type : [
+      type = atom, 
+      display = menu, 
+      choices = [single_value, multiple_values],
+      default = single_value,
+      help = $Whether the rules for this goal have one or possibly more than one value$],
+   rules : [
+      type = list_of_terms, 
+      display = table, 
+      vars = true, 
+      xref = table,
+      % Must not have a default if create_column is true
+      create_column = true,
+      help = $If the conditions in all the lefthand columns are met, the last column is the result$]
+   ]).
+
+schema(data_table, [
+   id : [
+      type = id, 
+      display = id, 
+      icon = $file_cabinet.gif$,
+      help = $The name of this object$,
+      help_url = $object_data_table.html$,
+      object_help = $Data table that can be queried$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box, 
+      default = $$],
+   data : [
+      type = list_of_terms, 
+      display = table, 
+      vars = true, 
+      xref = data_table,
+      default = [],
+      help = $Data can be of any type in any column or row including object names$]
+      ]).
+
+/*
+% This is currently not used, its a translation object intended
+% to support multi-lingual applications.
+schema(translation, [
+   id : [
+      type = id, 
+      display = id, 
+      icon = $textpage.gif$,
+      help = $The name of this object$,
+      help_url = $object_text.html$,
+      object_help = $Text that is displayed for the user when a goal is proven$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box, 
+      default = $$],
+   type : [
+      type = atom, 
+      display = menu, 
+      choices = [text, file],
+      default = text,
+      help = $The source of the text$,
+      related_slots = [
+         text : [text] : [file],
+         file : [file] : [text] ] ],
+   file : [
+      type = string, 
+      display = text_line, 
+      default = $$],
+   text : [
+      type = string, 
+      display = text_box, 
+      vars = true,
+      default = $$ ]
+   ]).
+*/
+
+schema(text, [
+   id : [
+      type = id, 
+      display = id, 
+      icon = $textpage.gif$,
+      help = $The name of this object$,
+      help_url = $object_text.html$,
+      object_help = $Text that is displayed for the user when a goal is proven$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box, 
+      default = $$],
+   type : [
+      type = atom, 
+      display = menu, 
+      choices = [text, file],
+      default = text,
+      help = $The source of the text$,
+      related_slots = [
+         text : [text] : [file],
+         file : [file] : [text] ] ],
+   file : [
+      type = string, 
+      display = file_path, 
+      default = $$],
+   text : [
+      type = string, 
+      display = text_box, 
+      vars = true, 
+      xref = text,
+      default = $$ ]
+   ]).
+   
+schema(factor, [
+   id : [
+      type = id,
+      display = id,
+      icon = $factor.gif$ ],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$ ],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$ ],
+   goal : [
+      type = atom,
+      display = text_line,
+      default = ''],
+   conditions : [
+      type = term,
+      display = text_box,
+      xref = conditions,
+      default = ''],
+   weight : [
+      type = list_of_terms,
+      display = list_object,
+      % cannot xref if/then's
+      default = []],
+   data : [
+      type = list_of_terms,
+      display = table,
+      xref = table,
+      create_column = true]
+   ]).

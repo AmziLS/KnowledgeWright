@@ -1,0 +1,131 @@
+<HTML>
+<!-- #BeginTemplate "/Templates/chapter_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Advanced KWI Programming</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->Advanced KWI Programming<!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><a name="introduction"></a><font color="#990000">Introduction</font></h2>
+<p> 
+  <! AMZI_INDEX = caller_ask; caller_tell>
+  KnowledgeWright can call-out for two different purposes:</p>
+<ul>
+  <li>To ask for a value from the user</li>
+  <li>To tell the user some information</li>
+</ul>
+
+<h2><a name="answering_questions"></a><font color="#990000">Answering Questions</font></h2>
+<p> 
+  <! AMZI_INDEX = caller_ask>
+  The normal reasoning process when 'solve' is called looks like this:</p>
+<blockquote> 
+  <pre><font color="#990000">{Solve from the top}
+Find value for goal A...
+   Processing rule B...
+      Processing rule C...
+         Found value for D...
+         Found value for E...
+            Processing rule F...
+               No value for G...
+{Assert value for G}
+{Solve from the top again}
+Find value for goal A...
+   Processing rule B...
+      Processing rule C...
+         Found value for D...
+         Found value for E...
+            Processing rule F...
+               Found value for G...
+               No value for H...</font></pre>
+</blockquote>
+<p>For large knowledgebases and very high-performance web-servers, the efficiency 
+  can be improved by some advanced programming techniques. An improvement can 
+  be made because each time 'solve' is called, the reasoning process is restarted 
+  from the top. You can change this process to look like the following instead:</p>
+<blockquote> 
+  <pre><font color="#990000">{Solve}
+Find value for goal A...
+   Processing rule B...
+      Processing rule C...
+         Found value for D...
+         Found value for E...
+            Processing rule F...
+               Asking value for G...
+               Asking value for H...
+            Found value for rule F...
+         Asking value for I...</font></pre>
+</blockquote>
+<p>The way to do this is to define a call-back predicate named caller_ask which 
+  is defined as follows:</p>
+<blockquote> 
+  <pre><font color="#990000">caller_ask(user, +FACT, -VALUE, +PROPERTIES)</font></pre>
+</blockquote>
+<p>Instead of processing the actions with KWI call to get_action, you can return 
+  a value immediately with caller_ask. FACT is the name of the object. PROPERTIES 
+  is the same list of properties that you get from the KWI call to get_action, 
+  e.g.</p>
+<blockquote> 
+  <pre><font color="#990000">caller_ask</font><font color="#990000">(question, colors, VALUE, [prompt = &quot;What are your favorite colors?&quot;, 
+   question_type = menu_multiple_choices, choices = [&quot;red&quot;, &quot;orange&quot;, &quot;yellow&quot;,
+   &quot;green&quot;, &quot;blue&quot;, &quot;idigo&quot;, &quot;violet&quot;] ]) </font></pre>
+</blockquote>
+<p>You return the answer in VALUE in the same format as you would for the KWI 
+  call to assert. Then the KnowledgeWright reasoning engine can continue processing.</p>
+<h2><a name="telling_answers"></a><font color="#990000">Telling Answers</font></h2>
+<p> 
+  <! AMZI_INDEX = caller_tell>
+  If your knowledgebase returns intermediate results, that is it has a list of 
+  goals to solve instead of a single text object, then similar efficiencies can 
+  be achieved by creating a predicate for caller_tell which is defined as follows:</p>
+<blockquote> 
+  <pre><font color="#990000">caller_tell(user, +PROPERTIES)</font></pre>
+</blockquote>
+<p>Like caller_ask the PROPERTIES is the same list of properties you get from 
+  the KW call to get_action, e.g.</p>
+<blockquote> 
+  <pre><font color="#990000">caller_</font><font color="#990000">tell(user, [goal = &quot;moods&quot;, 
+   text = &quot;Your colors indicate you are in a good mood.&quot;] )</font></pre>
+</blockquote>
+<h2><a name="loading_caller_ask_tell"></a><font color="#990000">Loading caller_ask 
+  and caller_tell into KnowledgeWright</font></h2>
+<p> 
+  <! AMZI_INDEX = kwextensions.plm>
+  There are two ways to include your code for caller_ask and caller_tell.</p>
+<ul>
+  <li>A Compiled Prolog file (.plm)</li>
+  <li>Extended Predicates</li>
+  <li>A Logic Server Extension (LSX)</li>
+</ul>
+<h3><a name="compiled_prolog_file"></a>A Compiled Prolog File</h3>
+<p>When the KnowledgeWright reasoning engine starts, it will try to load a file 
+  named 'kwextensions.plm' in the same directory where the .kb file is located. 
+  This is a Prolog object code file created by Amzi! Prolog + Logic Server.</p>
+<h3><a name="extended_predicates"></a>Extended Predicates</h3>
+<p>If you are calling your knowledgebase from a host language like Java or Visual 
+  Basic, you can define extended predicates named caller_ask/4 and caller_tell/2. 
+  You add these predicates when you initialize the Amzi! Logic Server with lsInit 
+  and lsLoad. See the Amzi! Logic Server for documentation and samples on how 
+  to do this.</p>
+<h3><a name="logic_server_extension"></a>A Logic Server Extension</h3>
+<p>Another (and the most difficult) option is to create your own Logic Server 
+  Extension. This is a .dll library under Windows and a .so library under Unix. 
+  LSX's can be written in almost any language. These are most useful when you 
+  want to use a different language to perform input and output than is hosting 
+  the application. See the Amzi! Logic Server for documentation and samples on 
+  how to do this.</p>
+<p></p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

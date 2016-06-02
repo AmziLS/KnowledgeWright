@@ -1,0 +1,152 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Database Queries</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Database 
+  Queries <!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="accessing_external_data"></a>Accessing External Data</h3>
+<p>samples/basic/tutorial/products_2.kb and products.mdb</p>
+<p>
+  <! AMZI_INDEX = sql ; ODBC>
+  Some knowledgebases need to reason over data that is stored in an external database. 
+  To do this under Windows, KnowledgeWright provides <b>sql</b> objects. These 
+  objects allow you to issue SQL queries to any ODBC accessible database.</p>
+<p>In this example we will make a second version of products_1.kb that uses an 
+  external ODBC database instead of an internal <b>data_table</b>.</p>
+<p>To illustrate this, we will query a database to determine the upgrade price 
+  for a product. Before you can start writing the knowledgebase, you need to register 
+  products.mdb as an ODBC data source:</p>
+<ol>
+  <li>Open your control panel and double-click on the ODBC icon.</li>
+  <li>Click on the System DSN tab.</li>
+  <li>Click on 'Add'.</li>
+  <li>Highlight Microsoft Access Driver, then click on 'Finish'.</li>
+  <li>Enter 'products' into the Data Source Name.</li>
+  <li>Click on 'Select' to find the products.mdb file in knowledgewright4/samples/basic/tutorial.</li>
+  <li>Click OK then OK again.</li>
+</ol>
+<p>Now to build the knowledgebase. Our knowledgebase asks three <b>questions</b>, 
+  <i>old_product</i>, <i>old_version</i> and <i>new_product</i>. Using the answers 
+  to those questions, it issues a SQL query to get the price. The price is displayed 
+  in a short document.</p>
+<ol>
+  <li>Create a new knowledgebase named products.</li>
+  <li>Set the goal in the <i>main</i> <b>knowledgebase</b> object to <i>upgrade_price</i>.</li>
+  <li>Set the odbc data source in the <i>main</i> <b>knowledgebase</b> to products.</li>
+  <li>Create the three questions:</li>
+  <ul>
+    <li>A menu_single_choice_display_separate <b>question</b> named <i>old_product</i>, 
+      that prompts the user for the last product purchased. The choices are:<br>
+      <blockquote> 
+        <table border="1" cellpadding="2">
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000"><b>rule_text</b></font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000"><b>display_text</b></font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">ap1pc</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Amzi! Prolog + Logic Server, 
+Personal Edition</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">apxpc</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Amzi! Prolog + Logic Server, <br>Professional Edition or 
+Commercial License</font></pre>
+            </td>
+          </tr>
+        </table>
+      </blockquote>
+    </li>
+    <li> A menu_single_choice <b>question</b> named <i>old_version</i> that prompts 
+      the user for the last version number purchased. The choices are 4.0, 4.1, 
+      and 5.0.</li>
+    <li>A menu_single_choice_display_separate <b>question</b> named <i>new_product</i>, 
+      that prompts the user for the product to upgrade to. The choices are the 
+      same as <i>old_product</i> (above).</li>
+  </ul>
+  <li>Create a <b>text</b> object named <i>upgrade_price</i> with text that reads:<br>
+    The price for this upgrade is %price%.</li>
+  <li> 
+    <div align="left">Now to create the <b>sql</b> object. The SQL query must 
+      be correctly formatted for ODBC, so note carefully the use of quotes ('). 
+      This query retrieves the price which is a floating point number (because 
+      it has a decimal point) from the table named upgrades in the ODBC data source 
+      name products (which is also the name of the Access database). <br>
+      <br>
+    </div>
+    <blockquote> 
+      <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+        <tr valign="top" align="left"> 
+          <td bgcolor="#FFCCCC"> 
+            <pre><font color="#990000">id</font></pre>
+          </td>
+          <td width="306"> 
+            <pre><font color="#990000">price</font></pre>
+          </td>
+        </tr>
+        <tr valign="top" align="left"> 
+          <td bgcolor="#FFCCCC"> 
+            <pre><font color="#990000">path</font></pre>
+          </td>
+          <td width="306"> 
+            <pre><font color="#990000">/</font></pre>
+          </td>
+        </tr>
+        <tr valign="top" align="left"> 
+          <td bgcolor="#FFCCCC"> 
+            <pre><font color="#990000">query</font></pre>
+          </td>
+          <td width="306"> 
+            <pre><font color="#990000">select price from upgrades where <br>old_product = '%old_product%' and <br>version = '%old_version%' and <br>new_product = '%new_product%'</font></pre>
+          </td>
+        </tr>
+        <tr valign="top" align="left"> 
+          <td bgcolor="#FFCCCC"> 
+            <pre><font color="#990000">type</font></pre>
+          </td>
+          <td width="306"> 
+            <pre><font color="#990000">float</font></pre>
+          </td>
+        </tr>
+        <tr valign="top" align="left"> 
+          <td bgcolor="#FFCCCC"> 
+            <pre><font color="#990000">length</font></pre>
+          </td>
+          <td width="306"> 
+            <pre><font color="#990000">20</font></pre>
+          </td>
+        </tr>
+      </table>
+    </blockquote>
+  </li>
+  <li>Run the knowledgebase. If ODBC is not set-up correctly you will get an error 
+    message indicating this. Otherwise, you should get the upgrade price based 
+    on the answers to the questions.</li>
+</ol>
+<p>If you need to select multiple values from the same table, you will need to 
+  create one <b>sql</b> object for each one.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate -->
+</HTML>

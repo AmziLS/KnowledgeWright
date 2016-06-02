@@ -1,0 +1,46 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Solving Multiple Problems</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Multiple Values<!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="solving_multiple_problems"></a>Solving Multiple Problems</h3>
+<p>samples/basic/tutorial/diagnosis_4</p>
+<p><! AMZI_INDEX = multiple values; menu_multiple_choices>The facts we've seen so 
+  far have single values. And those values have typically been text.</p>
+<p>It is also possible to let a fact have multiple values. This decision affects 
+  certain types of knowledge objects. Those are:</p>
+<ul>
+  <li>questions, where the user can enter multiple choices, and</li>
+  <li>rule_sets, where multiple rules might apply.</li>
+</ul>
+<p>To change the diagnostic system so that it can handle multiple problems at 
+  once, make the following changes:</p>
+<ol>
+  <ol>
+    <li>Edit <b>question</b> <i>symptom</i> so that the question_type is menu_multiple_choices.</li>
+    <li>Edit the <b>rule_set</b>s for <i>action</i> and <i>problem</i>, so that 
+      the type is multiple_values. Change all of the '=' to 'include'. This is 
+      needed because facts with multiple values are lists. There are special operators 
+      to check the contents of a list such as include, exclude and number_of_items. 
+      The '=' operator is used to check the entire contents of the list, e.g. 
+      colors = [red, white, blue].</li>
+  </ol>
+</ol>
+<p>Run the system as before, only this time choose both symptoms when asked.</p>
+<p>Notice that the system will now ask as many questions as it needs to find all 
+  the problem(s) that apply.</p>
+<p>Notice that the <i>problem_report</i> has all of the problems and actions listed.</p>
+<p>As before, trace the execution of the system to understand how it works.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

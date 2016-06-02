@@ -1,0 +1,265 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>KnowledgeWright Basic Introduction</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->KnowledgeWright Basic Introduction<!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><a name="dennis"></a><font color="#990000">Introduction</font></h2>
+<p>KnowledgeWright Basic is a KnowledgeWright Jig that is a powerful tool by itself, 
+  but that also provides the foundation for more specialized jigs. So understanding 
+  it is key to understanding a number of jigs.</p>
+<p>Any knowledgebase or expert system tool has rules of one form or another that 
+  are applied to reason over the data gathered during a particular consultation 
+  with the tool.</p>
+<p>When looking at any knowledgebase or expert system tool, there are two key 
+  factors that tell a lot about the system.</p>
+<ol>
+  <ol>
+    <li>The way data used by the system is represented, and</li>
+    <li>The reasoning strategy used to apply the rules to the data.</li>
+  </ol>
+</ol>
+<p>As you might imagine, these factors can range from the simple to the complex 
+  for any given tool. KnowledgeWright Basic is designed to be easy to work so 
+  it opts for simple direct approaches for both.</p>
+<h3><a name="data"></a>Data</h3>
+<p><! AMZI_INDEX = data; fact>Data is represented as <b>fact = value</b> pairs.</p>
+<p>For example:</p>
+<blockquote> 
+  <pre>color = &quot;blue&quot;
+operating_system = &quot;Windows 98&quot;
+Symptom = &quot;Screen is blank&quot;
+quantity = 14
+Problem = &quot;Screen saver on&quot;
+</pre>
+</blockquote>
+<p>Names of facts begin with a letter and have no embedded spaces (otherwise they 
+  must be quoted in single quotes).</p>
+<p>Values can be either text strings enclosed in &quot;&quot; or numbers.</p>
+<p><b>Fact = value</b> pairs are the fundamental building blocks of a KnowledgeWright 
+  Basic knowledge base.</p>
+<h3><a name="rules_and_questions"></a>Rules &amp; Questions</h3>
+<p><! AMZI_INDEX = rule; question>Consider a simple technical support application. 
+  The problem is the user's screen is blank and doesn't know what to do. The solution 
+  depends on whether the video monitor is turned off, or the screen saver has 
+  kicked in. Rules for this system might be:</p>
+<blockquote> 
+  <pre>#1: if
+   symptom = &quot;Screen is blank&quot; and
+   led_light = &quot;on&quot;
+then
+   problem = &quot;Screen saver on&quot;
+
+#2: if
+   symptom = &quot;Screen is blank&quot; and
+   led_light = &quot;off&quot;
+then
+   problem = &quot;Turned off&quot; </pre>
+</blockquote>
+<p><! AMZI_INDEX = conditions>These rules are checking for the values of some 
+  facts on the <b>if</b>, or <b>conditions</b>, side of the rules, and setting 
+  the value of another fact on the <b>then, </b>or<b> action</b>, side of the 
+  rules.</p>
+<p><i>Note - In the actual KnowledgeWright rule editor, you enter the conditions 
+  and actions for a rule in a tabular format, rather than in an if-then syntax 
+  as above.</i></p>
+<p>In addition to rules, some facts get their values simply by asking the user. 
+  In KnowledgeWright you would specify those facts something like this:</p>
+<blockquote> 
+  <pre>question symptom
+   prompt = &quot;What is the symptom of your problem&quot;
+   menu = &quot;Screen is blank&quot;, &quot;other&quot;
+
+question led_light
+   prompt = &quot;What is the state of the LED light?&quot;
+   menu = &quot;on&quot;, &quot;off&quot;</pre>
+</blockquote>
+<p><i>Note - In the actual KnowledgeWright editor, questions have more options 
+  that can be specified</i>.</p>
+<h3><a name="reasoning"></a>Reasoning</h3>
+<p><! AMZI_INDEX = goal-driven>KnowledgeWright Basic uses what is called <b>goal-driven</b> 
+  reasoning. This means it starts with the goal of finding the value for a particular 
+  fact.</p>
+<p>In the case of the example above, the goal of the system is to determine the 
+  value of the fact <b>problem</b>.</p>
+<p>So the reasoning engine would look to see if there are any rules that can be 
+  used to find a value for <b>problem</b>. It would find the first of the rules 
+  above and note that in order to use that rule, it needs to know the value for 
+  the fact <b>symptom</b>.</p>
+<p>So now it gives itself a new goal, which is to find the value of <b>symptom</b>. 
+  There are no rules for <b>symtpom</b>, so it would look to see if there was 
+  another way to get a value. Finding a question for <b>symptom</b>, it would 
+  use that to ask the user.</p>
+<p>Now, depending on the value of symptom, it may or may not have to find a value 
+  of <b>led_light</b>. If the user answered <b>other</b> for symptom, then our 
+  rules don't apply and our user will be out of luck.</p>
+<p>But if the user answered <b>Screen is blank</b>, then our rules might apply 
+  so the reasoning engine will give itself the sub-goal of finding a value for 
+  <b>led_light</b>. Again, there are no rules, but it finds a question specification 
+  and uses that to ask the user.</p>
+<p>Now with the sub-goals of <b>symptom</b> and <b>led_light</b> solved, it can 
+  proceed to find a value for the original goal, <b>problem</b>.</p>
+<h3><a name="running"></a>Running</h3>
+<p>Here's a dialog a user might have with our simple system:</p>
+<blockquote> 
+  <pre>
+goal problem
+
+What is the symptom of your problem?
+(Screen is blank, other)
+
+Screen is blank
+
+What is the state of the LED light?
+(on, off)
+
+on
+
+answer, problem = Screen saver on
+</pre>
+</blockquote>
+<h3><a name="adding_deeper_rules"></a>Adding Deeper Rules</h3>
+<p><! AMZI_INDEX = rule>We might prefer to tell the user what to do, once we've 
+  found out the problem, rather than just state the problem. So we might add some 
+  rules like this:</p>
+<blockquote> 
+  <pre>#1: if
+   problem = &quot;Screen saver on&quot;
+then
+   action = &quot;Move the mouse&quot;
+
+#2: if
+   problem = &quot;Turned off&quot;
+then
+   action = &quot;Turn the monitor on&quot;</pre>
+</blockquote>
+<p>We would now run our system with the goal <b>action</b>.</p>
+<p>The reasoning engine would find these rules for <b>action</b>, and determine 
+  it needed to first find a value for <b>problem</b>. And then it would work as 
+  above, looking for the <b>problem</b>.</p>
+<p>Because of the goal seeking nature of the system, and how rules link to other 
+  rules based on those goals, you can represent both simple and quite complex 
+  diagnostic or advice giving applications with KnowledgeWright Basic.</p>
+<h3><a name="adding_broader_rules"></a>Adding Broader Rules</h3>
+<p><! AMZI_INDEX = rule>The advantage of a rule-based system like KnowledgeWright 
+  Basic, is that you can add additional knowledge to the system without programming. 
+  So we could increase the knowledge in the tech support system by adding these 
+  rules:</p>
+<blockquote> 
+  <pre>#3: if
+   symptom = &quot;Mouse doesn't track well&quot; and
+   rollers_clean = &quot;no&quot;
+then
+   problem = &quot;Dirty rollers&quot;
+
+#4: if
+   symptom = &quot;Mouse doesn't track well&quot; and
+   rollers_clean = &quot;yes&quot;
+then
+   problem = &quot;Mouse is broken&quot;
+
+#3: if
+   problem = &quot;Dirty rollers&quot;
+then
+   action = &quot;Clean the rollers of your mouse&quot;
+
+#4: if
+   problem = &quot;Mouse is broken&quot;
+then
+   action = &quot;Buy new mouse&quot;
+</pre>
+</blockquote>
+<p>We would also add the &quot;Mouse is broken&quot; symptom to our list of symptoms we 
+  can ask about, and a question about whether the rollers have been cleaned recently.</p>
+<p>The reasoning engine will only ask the user for values of facts that it needs. 
+  So if the user's symptom is the faulty mouse, then the engine will not need 
+  to ask the user about the LED light. Likewise, if the symptom is the blank video 
+  screen, then the user will not be asked about mouse rollers being clean.</p>
+<p>A trace of how the reasoning proceeds would look like this:</p>
+<blockquote> 
+  <pre>goal action
+   considering first rule for action (move mouse)
+      subgoal problem
+         considering first rule for problem (screen saver)
+            subgoal symptom
+               asking user symptom
+            found symptom = &quot;Mouse doesn't track well&quot;
+         first rule for problem doesn't apply (screen saver)
+         second rule for problem doesn't apply (turned off)
+         considering third rule for problem (dirty rollers)
+            subgoal rollers_clean
+               asking user rollers_clean
+            found rollers_clean = &quot;no&quot;
+      found problem = &quot;Dirty rollers&quot;
+   first rule for action doesn't apply (move mouse)
+   second rule for action doesn't apply (turn on)
+   considering third rule for action (clean rollers)
+found action = &quot;Clean the rollers...&quot;
+</pre>
+</blockquote>
+<h3><a name="text"></a>Text</h3>
+<p><! AMZI_INDEX = text>KnowledgeWright Basic also supports text objects, which 
+  allow for relatively large chunks of text to be the values of facts. So you 
+  might have a text object like:</p>
+<blockquote> 
+  <pre>text clean_mouse
+Clean your mouse by taking off the
+plate on the bottom and ... </pre>
+</blockquote>
+<p>This gives the directions on how to clean your mouse. It could be used as the 
+  value of one of the rules, so instead of</p>
+<blockquote> 
+  <pre>action = &quot;Clean the rollers of your mouse&quot;</pre>
+</blockquote>
+<p>you would have</p>
+<blockquote> 
+  <pre>action = clean_mouse</pre>
+</blockquote>
+<p>Now the user would get the more detailed information about cleaning mouse rollers.</p>
+<h3><a name="dynamic_text_generation"></a>Dynamic Text Generation</h3>
+<p><! AMZI_INDEX = dynamic text>Text objects can also be dynamically generated 
+  by taking advantage of the goal-seeking behavior of the reasoning engine. That 
+  is, a text object can be made up of the values of other facts.</p>
+<p>For example, our tech support system might want to present the user with a 
+  document explaining the situation. It could do that like this:</p>
+<blockquote> 
+  <pre><b>text: final_report</b>
+The system has determined that the
+problem is %problem%.
+The action(s) you should take to fix
+the problem are: %action%.
+</pre>
+</blockquote>
+<p>The %%s indicate that the reasoning engine should find values for those facts 
+  and to put the values in the text at the indicated places.</p>
+<p>Now you can give the system the goal of finding a value for <b>final_report</b>. 
+  The reasoning engine would then locate the text object for <b>final_report</b> 
+  and notice that it has to get a values for problem and action. It would then 
+  proceed as before, and at the end display to the user the constructed value 
+  of <b>final_report</b>:</p>
+<blockquote> 
+  <pre>The system has determined that the
+problem is dirty rollers.
+The action(s) you should take to fix
+the problem are:
+Clean your mouse by taking off the
+plate on the bottom and ....</pre>
+</blockquote>
+<h3><a name="the_web"></a>The Web</h3>
+<p><! AMZI_INDEX = HTML>Of course, the text objects 
+  can all contain HTML for deployment on the Web. But this is enough talk, its 
+  time to start playing with the system.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

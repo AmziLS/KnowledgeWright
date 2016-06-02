@@ -1,0 +1,180 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: rules_table</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: 
+  rules_table <!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><font color="#990000"><a name="description"></a></font>Description</h3>
+<p>Rules_table objects are just another way of specifying rules, except the conditions 
+  are in a table instead of using the if-then format. For example the following 
+  rules:</p>
+<blockquote> 
+  <pre><font color="#990000">if shape = &quot;circle&quot; then area = pi * radius ** 2, 
+if shape = &quot;square&quot; then area = side * side</font></pre>
+</blockquote>
+<p>can be specified in a rules_table named 'area':</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">area</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">single_value</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">rules</font></pre>
+      </td>
+      <td width="306"> 
+        <table border="1" cellpadding="2">
+          <tr> 
+            <td> 
+              <pre><font color="#990000"><b>shape</b></font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000"><b>area</b></font></pre>
+            </td>
+          </tr>
+          <tr> 
+            <td> 
+              <pre><font color="#990000">&quot;circle&quot;</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">pi * radius ** 2</font></pre>
+            </td>
+          </tr>
+          <tr> 
+            <td> 
+              <pre><font color="#990000">&quot;square&quot;</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">side * side</font></pre>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</center>
+<p><br>
+  Not all rules can be specified in tables, only those whose conditions are 'anded' 
+  together. For example, this rules_table (named 'walk'):</p>
+<blockquote>
+<table border="1">
+  <tr> 
+    <td> 
+      <pre><font color="#990000"><b>pet</b></font></pre>
+    </td>
+    <td> 
+      <pre><font color="#990000"><b>weight</b></font></pre>
+    </td>
+    <td> 
+      <pre><font color="#990000"><b>health</b></font></pre>
+    </td>
+    <td> 
+      <pre><font color="#990000"><b>walk</b></font></pre>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <pre><font color="#990000">&quot;cocker spaniel&quot;</font></pre>
+    </td>
+    <td> 
+      <pre><font color="#990000">&lt; 30</font></pre>
+    </td>
+    <td> 
+      <pre><font color="#990000">good</font></pre>
+    </td>
+    <td> 
+      <pre><font color="#990000">1</font></pre>
+    </td>
+  </tr>
+</table>
+</blockquote>
+<p>is equivalent to:</p>
+<blockquote> 
+  <pre><font color="#990000">if pet = &quot;cocker spaniel&quot; and weight &lt; 30 and health = good <br>then walk = 1 </font></pre>
+</blockquote>
+<p>The KnowledgeWright reasoning engine examines the rows in the rules_table in order 
+  starting with the first row and continuing onto the last. <br>
+</p>
+<h3><font color="#990000"><a name="table_properties"></a></font>Rules_Table Properties</h3>
+<p>Rules_tables can use all the <a href="expressions.html#comparators">comparators</a>, 
+  <a href="expressions.html#functions">functions</a>, <a href="expressions.html#arithmetic_operators">arithmetic 
+  operators</a> and <a href="expressions.html#date_handling">date arithmetic</a> 
+  available for rules, and must following the same <a href="object_rule_set.html#rule_syntax">syntatic 
+  restrictions</a>. The properties of rules_tables are:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td><! AMZI_INDEX = rules_table; type; rules><b>Property Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="object_names.html">Object Names</a> 
+      for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>type</td>
+    <td>Whether or not these rules result in a fact (or goal) having a single 
+      value or multiple values.</td>
+    <td>&nbsp;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>rules</td>
+    <td>Any number of columns representing conditions which are anded together 
+      and a last column with the same name as id which is the resulting value 
+      or values.</td>
+    <td>&nbsp;</td>
+    <td>yes</td>
+  </tr>
+</table>
+<br>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

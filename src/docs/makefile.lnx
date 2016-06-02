@@ -1,0 +1,42 @@
+KW_DIR = /home/dennis/kw4
+HERE = /home/dennis/amzi/dev/kw4/src/docs
+
+_all: _htmlidx _docs
+
+_htmlidx:
+	@echo *** indexing documents ***
+	cd $(HERE)/jigs; cp fig_basic.pro fig.pro; arun $(AMZI_DIR)/src/docs/htmlidx/htmlidx
+	cd $(HERE)/jigs; cp fig_support.pro fig.pro; arun $(AMZI_DIR)/src/docs/htmlidx/htmlidx
+	cd $(HERE)/runtime; arun $(AMZI_DIR)/src/docs/htmlidx/htmlidx
+	cd $(HERE)/workshop; arun $(AMZI_DIR)/src/docs/htmlidx/htmlidx
+
+_docs:
+	@echo *** copying documents ***
+	cp $(HERE)/faq.html $(KW_DIR)/docs
+	cp $(HERE)/install.html $(KW_DIR)/docs
+	cp $(HERE)/license.html $(KW_DIR)/docs
+	cp $(HERE)/whatsnew.html $(KW_DIR)/docs
+	cp $(HERE)/knowledgewright_enterprise.html $(KW_DIR)/docs/knowledgewright_manual.html
+	- cp $(HERE)/*.png $(KW_DIR)/docs
+	cp $(HERE)/images/*.* $(KW_DIR)/docs/images
+	cp $(HERE)/jigs/*.html $(KW_DIR)/docs/jigs
+	- cp $(HERE)/jigs/*.png $(KW_DIR)/docs/jigs
+	cp $(HERE)/jigs/jigs_basic_tutorial.html $(KW_DIR)/docs/jigs/jigs_tutorial.html
+	cp $(HERE)/jigs/basic/*.html $(KW_DIR)/docs/jigs/basic
+	- cp $(HERE)/jigs/basic/*.png $(KW_DIR)/docs/jigs/basic
+	cp $(HERE)/jigs/support/*.html $(KW_DIR)/docs/jigs/support
+	- cp $(HERE)/jigs/support/*.png $(KW_DIR)/docs/jigs/support
+	cp $(HERE)/overview/*.html $(KW_DIR)/docs/overview
+	- cp $(HERE)/overview/*.png $(KW_DIR)/docs/overview
+	cp $(HERE)/runtime/*.html $(KW_DIR)/docs/runtime
+	- cp $(HERE)/runtime/*.png $(KW_DIR)/docs/runtime
+	cp $(HERE)/workshop/*.html $(KW_DIR)/docs/workshop
+	- cp $(HERE)/workshop/*.png $(KW_DIR)/docs/workshop
+	cp $(HERE)/jigs/basic/object_data_table.html $(KW_DIR)/docs/jigs/support
+	cp $(HERE)/jigs/basic/object_fact.html $(KW_DIR)/docs/jigs/support
+	cp $(HERE)/jigs/basic/object_question.html $(KW_DIR)/docs/jigs/support
+	cp $(HERE)/jigs/basic/object_rule_set.html $(KW_DIR)/docs/jigs/support
+	cp $(HERE)/jigs/basic/object_rules_table.html $(KW_DIR)/docs/jigs/support
+	cp $(HERE)/jigs/basic/object_sql.html $(KW_DIR)/docs/jigs/support
+	cp $(HERE)/jigs/basic/object_text.html $(KW_DIR)/docs/jigs/support
+

@@ -1,0 +1,251 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Data_Tables</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Data_Tables 
+  and Queries<!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="accessing_external_data"></a>Accessing Internal Data</h3>
+<p>samples/basic/tutorial/products.kb and products_1.mdb</p>
+<p> 
+  <! AMZI_INDEX = data_table; find()>
+  Some knowledgebases need to reason over data that can be stored in an internal 
+  data table. To do this, KnowledgeWright provides <b>data_table</b> objects and 
+  the find() function. Data_Tables are generally more flexible than external database 
+  tables because each column can contain different types of data, i.e. strings 
+  and numbers. Data_Tables are also more powerful because entries can consist 
+  of formulas and object names. In this case, the KnowledgeWright reasoning engine 
+  is called to determine a value before the find() function returns a value.</p>
+<h3><a name="create_the_data_table"></a>Create the Data_Table and Find() Query</h3>
+<p>To illustrate this, we will query a data_table to determine the upgrade price 
+  for a product. First we need to build a <b>knowledgebase </b>with a<b> data_table 
+  </b> to contain the pricing information and a<b> fact </b> whose value is the 
+  result of a find() function that queries the<b> data_table</b>:</p>
+<ol>
+  <li> Create a new knowledgebase named products.</li>
+  <li>Set the goal in the <i>main</i> <b>knowledgebase</b> object to <i>upgrade_price</i>.</li>
+  <li> Create a new <b>data_table</b> named <i>upgrades</i>. </li>
+  <li>In upgrades, select Column/Add to create 4 columns: product, version, new_product 
+    and price. You can drag the column headers left and right to arrange them 
+    in the order you would like.</li>
+  <li>Use Row/Add to enter the following data:<br>
+    <blockquote> 
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000"><b>old_product</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>version</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>new_product</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>price</b></font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;4.0&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">0</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;4.1&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">0</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;5.0&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">0</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;4.0&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">2500</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;4.1&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">2500</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;ap1pc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;5.0&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">2500</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;4.0&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">1500</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;4.1&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">1000</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;5.0&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;apxpc&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">0</font></pre>
+          </td>
+        </tr>
+      </table>
+    </blockquote>
+  </li>
+  <li>Create new <b>fact</b> named <i>price</i>. For it's value enter:<br>
+    find(price from upgrades where old_product = old_product and version = old_version 
+    and new_product = new_product) </li>
+</ol>
+<h3>Ask the Questions and Display the Answer</h3>
+<p> Our knowledgebase asks the three <b>questions</b>, <i>old_product</i>, <i>old_version</i> 
+  and <i>new_product</i> used in the find() function above. Using the answers 
+  to those questions, the fact <i>price</i> gets the price. The price is displayed 
+  in a short document.</p>
+<ol>
+  <li>Create a new knowledgebase named products.</li>
+  <li>Set the goal in the <i>main</i> <b>knowledgebase</b> object to <i>upgrade_price</i>.</li>
+  <li>Create the three questions:</li>
+  <ul>
+    <li>A menu_single_choice_display_separate <b>question</b> named <i>old_product</i>, 
+      that prompts the user for the last product purchased. The choices are:<br>
+      <blockquote> 
+        <table border="1" cellpadding="2">
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000"><b>rule_text</b></font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000"><b>display_text</b></font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">ap1pc</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Amzi! Prolog + Logic Server, 
+Personal Edition</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">apxpc</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Amzi! Prolog + Logic Server, <br>Professional Edition or 
+Commercial License</font></pre>
+            </td>
+          </tr>
+        </table>
+      </blockquote>
+    </li>
+    <li> A menu_single_choice <b>question</b> named <i>old_version</i> that prompts 
+      the user for the last version number purchased. The choices are 4.0, 4.1, 
+      and 5.0.</li>
+    <li>A menu_single_choice_display_separate <b>question</b> named <i>new_product</i>, 
+      that prompts the user for the product to upgrade to. The choices are the 
+      same as <i>old_product</i> (above).</li>
+  </ul>
+  <li>Create a <b>text</b> object named <i>upgrade_price</i> with text that reads:<br>
+    The price for this upgrade is %price%.</li>
+  <li>Run the knowledgebase. </li>
+</ol>
+<p>Note, you can use the find() function anywhere any object name is allowed. 
+  You do not have to create a <b>fact</b> object to issue a query In this case 
+  we needed a separate <b>fact</b> object because the result of query is embedded 
+  in a <b>text</b> object.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate -->
+</HTML>

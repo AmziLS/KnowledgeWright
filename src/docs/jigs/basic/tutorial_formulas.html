@@ -1,0 +1,106 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Numbers and Formulas</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Numbers 
+  and Formulas<!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="playing_with_shapes"></a>Playing with shapes</h3>
+<p>samples/basic/tutorial/shapes.kb</p>
+<p><! AMZI_INDEX = expressions; arithmetic expressions>The values of facts can 
+  be mathematical expressions. Those expressions can refer to other facts. And, 
+  in keeping with its goal-seeking behavior, when the reasoning engine needs to 
+  evaluate an expression that refers to another fact, it will set a sub-goal of 
+  finding a value for that fact.</p>
+<p><! AMZI_INDEX = question; rule_set; fact>We'll see this behavior with a toy 
+  system that computes the area and perimeter of a variety of shapes.</p>
+<ol>
+  <ol>
+    <li>Create a new <b>knowledgebase</b>, named <i>shapes</i>.</li>
+    <li>Set the goals of the <b>knowledgebase</b> to <i>area</i> and <i>perimeter</i>.</li>
+    <li>Create a <b>question</b>, named <i>shape</i>, that asks the user to choose 
+      between a rectangle and a circle.</li>
+    <li>Create a <b>rule_set</b>, named <i>area</i>, that has two rules: <br>
+      <br>
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><b><font color="#990000">conditions</font></b></pre>
+          </td>
+          <td> 
+            <pre><b><font color="#990000">value</font></b></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">shape = &quot;circle&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">pi * radius ** 2</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">shape = &quot;rectangle&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">height * width</font></pre>
+          </td>
+        </tr>
+      </table>
+      <br>
+    </li>
+    <li>Create a <b>rule_set</b>, named <i>perimeter</i>, that has two rules: 
+      <br>
+      <br>
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><b><font color="#990000">conditions</font></b></pre>
+          </td>
+          <td> 
+            <pre><b><font color="#990000">value</font></b></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">shape = &quot;circle&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">2 * pi * radius</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">shape = &quot;rectangle&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">2 * (height + width)</font></pre>
+          </td>
+        </tr>
+      </table>
+      <br>
+    </li>
+    <li>Create a <b>fact</b>, named <i>pi</i>, that has the value 3.14159.</li>
+    <li>Create three <b>question</b>s, named <i>radius</i>, <i>height</i>, and 
+      <i>width</i>, that ask 'fill_in_the_blank' questions to get the values of 
+      each. Make sure each has an answer_type of 'number'. (Otherwise, a 3 will 
+      be a &quot;3&quot;.)</li>
+    <li>Run it, noticing that it only asks for radius when dealing with a circle, 
+      and height and width when dealing with a rectangle.</li>
+    <li>Study the trace to understand its behavior.</li>
+  </ol>
+</ol>
+<p>Mathematical expressions like these can be used pretty much anywhere a straight 
+  value can be used.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

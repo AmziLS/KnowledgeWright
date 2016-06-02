@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>jigs_basic</name>
+	<comment></comment>
+	<projects>
+		<project>jigs_core</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.amzi.prolog.ui.PrologBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.amzi.prolog.ui.PrologNature</nature>
+	</natures>
+</projectDescription>

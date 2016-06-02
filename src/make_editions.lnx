@@ -1,0 +1,43 @@
+KW_DIR = /home/dennis/kw4
+KWG_DIR = /home/dennis/knowledgewright_guide_4-2-4
+KWS_DIR = /home/dennis/knowledgewright_support_4-2-4
+HERE = /home/dennis/amzi/dev/kw4/src
+
+all: guide support
+
+guide:
+	@echo *** making guide ***
+	-mkdir $(KWG_DIR)
+	cp -Rf $(KW_DIR)/* $(KWG_DIR)
+	rm -Rf $(KWG_DIR)/runtime/java
+	rm -Rf $(KWG_DIR)/runtime/cgi/acgi
+	rm -f $(KWG_DIR)/runtime/cgi/*.pro
+	rm -f $(KWG_DIR)/runtime/cgi/kwcgisupport
+	rm -f $(KWG_DIR)/runtime/cgi/kwcgisupport.xpl
+	rm -f $(KWG_DIR)/runtime/cgi/printer_1.kb
+	rm -f $(KWG_DIR)/runtime/servlet/servlet_run.jpx
+	rm -f $(KWG_DIR)/runtime/servlet/*.java
+	rm -f $(KWG_DIR)/runtime/servlet/WEB-INF/classes/amzi/ls/*.java
+	rm -Rf $(KWG_DIR)/samples/support
+	rm -f $(KWG_DIR)/workshop/jigs/support.*
+	rm -Rf $(KWG_DIR)/docs/jigs/support
+	rm -f $(KWG_DIR)/docs/jigs/*support*.html
+	cp $(KWG_DIR)/docs/jigs/jigs_basic_tutorial.html $(KWG_DIR)/docs/jigs/jigs_tutorial.html
+	cp -f $(HERE)/docs/knowledgewright_guide.html $(KWG_DIR)/docs/knowledgewright_manual.html
+
+support:
+	@echo *** making support ***
+	-mkdir $(KWS_DIR)
+	cp -Rf $(KW_DIR)/* $(KWS_DIR)
+	rm -Rf $(KWS_DIR)/runtime/java
+	rm -Rf $(KWS_DIR)/runtime/cgi/acgi
+	rm -f $(KWS_DIR)/runtime/cgi/*.pro
+	rm -f $(KWS_DIR)/runtime/cgi/kwcgibasic
+	rm -f $(KWS_DIR)/runtime/cgi/kwcgibasic.xpl
+	rm -f $(KWS_DIR)/runtime/cgi/hello_1.kb
+	rm -f $(KWS_DIR)/runtime/servlet/servlet_run.jpx
+	rm -f $(KWS_DIR)/runtime/servlet/*.java
+	rm -f $(KWS_DIR)/runtime/servlet/WEB-INF/classes/amzi/ls/*.java
+	rm -f $(KWS_DIR)/samples/basic/*.*
+	cp $(KWS_DIR)/docs/jigs/jigs_support_tutorial.html $(KWS_DIR)/docs/jigs/jigs_tutorial.html
+	cp -f $(HERE)/docs/knowledgewright_support.html $(KWS_DIR)/docs/knowledgewright_manual.html

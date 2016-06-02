@@ -1,0 +1,16 @@
+KW_DIR = c:\kw4
+
+_all: _samples
+
+_samples:
+        @echo *** copying samples ***
+        copy basic\*.kb $(KW_DIR)\samples\basic
+        copy basic\tutorial\*.kb $(KW_DIR)\samples\basic\tutorial
+        copy basic\tutorial\*.mdb $(KW_DIR)\samples\basic\tutorial
+        copy basic\tutorial\hello_1.kb $(KW_DIR)\runtime\cgi\hello_1.kb
+        copy support\*.kb $(KW_DIR)\samples\support
+        copy support\tutorial\*.kb $(KW_DIR)\samples\support\tutorial
+	copy support\tutorial\printer_1.kb $(KW_DIR)\runtime\cgi\printer_1.kb
+
+        
+

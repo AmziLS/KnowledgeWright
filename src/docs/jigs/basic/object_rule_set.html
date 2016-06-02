@@ -1,0 +1,241 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: rule_set</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: 
+  rule_set <!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><font color="#990000"><a name="description"></a></font>Description</h3>
+<p> 
+  <! AMZI_INDEX = rule_set ; conditions>
+  The heart of the knowledgebase is the rules. Rules can either directly determine 
+  the value of a top-level goal (see <a href="object_knowledgebase.html">knowledgebase</a>), 
+  or they can determine the values of other facts. All the rules for a specific 
+  goal are in the same rule object. For example, all the rules that determine 
+  a value for problem are contained in the rule object named 'problem'.</p>
+<p>Here is a simple rule for 'problem': </p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">errorMessage = &quot;Code too long to load&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">srcbufTooSmall</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>It says if the fact 'errorMessage' has the value specified then the problem 
+  is 'srcbufTooSmall'. Now there is nothing particularly difficult or remarkable 
+  about this rule, nor is there about most of the rules in <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem -->. 
+  What is notable is that the rules are easy to read and can appear in the object 
+  in any order. The <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> 
+  'reasoning engine' (that's a fancy way to say search and pattern matching engine) 
+  scans the rules looking for ones that 'succeed.' A rule is said to succeed when 
+  all of the facts on the 'if' side match correctly. </p>
+<p>Before we examine the inference engine, lets look at some more rules. This 
+  one is for the rule 'language':</p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">languageTool = &quot;Visual C++&quot; or
+languageTool = &quot;Borland C++&quot; or
+languageTool = &quot;Watcom C++&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;C/C++&quot;</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>This rule distills the fact 'language' from the user-provided fact 'languageTool'. 
+  This allows us to simplify rules such as the following for 'problem': </p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">language = &quot;C/C++&quot; and
+apiFunction = &quot;lsInit&quot; and
+((errorMessage = &quot;GPF (General Protection Fault)&quot; and&nbsp;
+environmentNameVer = &quot;Windows 3.x&quot;) or
+environmentNameVer = &quot;DOS&quot;)</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">cLargeModelRequired</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>Note here that more of the power of the rule language becomes evident. We can 
+  use 'and', 'or' and parenthesis to check facts. </p>
+<h3><a name="default_values"></a>Default Values</h3>
+<p> 
+  <! AMZI_INDEX = default>
+  You can also use a simple formula in a rule to specify a default value. For 
+  example, here are some rules for 'gifts':</p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">behavior = &quot;good&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;lots&quot;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">behavior = &quot;bad&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;little&quot;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">default</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">&quot;some&quot;</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>If behavior is neither 'good' nor 'bad' then the value of gifts is 'some'. 
+</p>
+<h3><a name="comparators_operators_functions_constants"></a>Comparators, Operators, 
+  Functions and Constants</h3>
+<p>You can use a variety of comparators, operators, functions and constants in 
+  the conditions column. See <a href="expressions.html">Expressions</a> for details.</p>
+<div align="center"> 
+  <div align="left"></div>
+  <blockquote> 
+    <div align="left"></div>
+  </blockquote>
+</div>
+<div align="center"> 
+  <blockquote> 
+    <div align="left"></div>
+  </blockquote>
+</div>
+<h3><a name="rule_order"></a>Rule Order</h3>
+<p> 
+  <! AMZI_INDEX = rule order>
+  The order in which the rules appear in the table is significant. The KnowledgeWright 
+  reasoning engine examines the table in order starting with the first row, and 
+  examines the rule conditions from left to right. </p>
+<p>In general, this means you want to put the more general conditions at the top 
+  left, and the more specific conditions at the bottom right. The reason to do 
+  this is because the reasoning engine in KnowledgeWright will ask the user a 
+  question as soon as it encounters a fact it doesn't have a value for. If the 
+  more general questions are asked first, then KnowledgeWright will more quickly 
+  filter out the rules that do not apply.</p>
+<h3><a name="rule_syntax"></a>Rule Syntax</h3>
+<p> 
+  <! AMZI_INDEX = rule syntax>
+  Rules must follow these syntatic guidelines:</p>
+<ul>
+  <li><b>Object names that begin with an underscore or number, have spaces in 
+    them or contain any characters other than letters, numbers and underscores, 
+    must be enclosed in single quotes, e.g. 'Educational institution' or 'ERR*10'</b></li>
+  <li> Strings are enclosed in double quotes, e.g. &quot;none&quot;</li>
+  <li> Tabs, extra spaces and line breaks have no syntatic meaning.</li>
+</ul>
+<blockquote> </blockquote>
+<h3><a name="rule_properties"></a>Rule_Set Properties</h3>
+<p>Rules have the following properties:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td> 
+      <! AMZI_INDEX = type; rules>
+      <b>Property Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="object_names.html">Object Names</a> 
+      for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>type</td>
+    <td>Whether or not these rules result in a fact (or goal) having a single 
+      value or multiple values.</td>
+    <td>&nbsp;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>rules</td>
+    <td>A table of conditions and their associated values. That is, when the conditions 
+      in the left column are met, the value of the rule_set object in the value 
+      in the right column.</td>
+    <td>&nbsp;</td>
+    <td>yes</td>
+  </tr>
+</table>
+<br>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

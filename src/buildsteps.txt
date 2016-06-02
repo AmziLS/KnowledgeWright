@@ -1,0 +1,12 @@
+1. Change version number in IDE
+2. Change version numbers in jigs (if needed)
+3. Build ide jar file
+4. Build delphi exe
+5. Build java jar
+6. Build vb exe
+7. Build vbnet exe
+8. Export makefile in acgi
+9. Register Amzi! Prolog
+10. bmake makefile
+11. bmake make_editions
+

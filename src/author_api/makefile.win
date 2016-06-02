@@ -1,0 +1,21 @@
+.SUFFIXES: .plm .pro
+
+OBJECTS = author.plm convert.plm error_check.plm find_replace.plm register.plm utilities.plm webls324.plm xref.plm
+ACMP_OBJECTS = $(ACMP)\assemb.plm $(ACMP)\builtins.plm $(ACMP)\cclause.plm $(ACMP)\compile.plm $(ACMP)\writeplm.plm
+ACMP = $(AMZI_DIR)\src\acore\compile
+KW_DIR = c:\kw4
+HERE = c:\amzi\dev\kw4\src
+
+_all: _author _copy
+
+.pro.plm:
+        acmp $<
+
+_author: $(OBJECTS)
+        @echo *** making author_api ***
+        alnk kwauthor.xpl $(AMZI_DIR)\abin\list.plm $(OBJECTS) $(ACMP_OBJECTS)
+
+_copy:
+        copy kwauthor.xpl $(KW_DIR)\workshop
+        copy kwauthor.xpl $(HERE)\ide
+

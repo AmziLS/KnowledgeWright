@@ -1,0 +1,133 @@
+KW_DIR = c:\kw4
+HERE = c:\amzi\dev\kw4\src
+TOP = c:\amzi\dev\kw4
+
+all: _dirs _copy _jre _author _jigs _aspnet _servlet _cgi _delphi _docs _java _samples _vb _vbnet
+
+_dirs:
+        @echo *** making directories ***
+        -md $(KW_DIR)
+        -md $(KW_DIR)\workshop
+        -md $(KW_DIR)\workshop\jigs
+        -md $(KW_DIR)\workshop\jre
+        -md $(KW_DIR)\docs
+        -md $(KW_DIR)\docs\images
+        -md $(KW_DIR)\docs\jigs
+        -md $(KW_DIR)\docs\jigs\basic
+        -md $(KW_DIR)\docs\jigs\support
+        -md $(KW_DIR)\docs\runtime
+        -md $(KW_DIR)\docs\workshop
+        -md $(KW_DIR)\docs\overview
+        -md $(KW_DIR)\samples
+        -md $(KW_DIR)\samples\basic
+        -md $(KW_DIR)\samples\basic\tutorial
+        -md $(KW_DIR)\samples\support
+        -md $(KW_DIR)\samples\support\tutorial
+        -md $(KW_DIR)\runtime
+        -md $(KW_DIR)\runtime\asp.net
+	-md $(KW_DIR)\runtime\asp.net\bin
+        -md $(KW_DIR)\runtime\vb
+        -md $(KW_DIR)\runtime\vbnet
+        -md $(KW_DIR)\runtime\vbnet\bin
+        -md $(KW_DIR)\runtime\cgi
+        -md $(KW_DIR)\runtime\cgi\acgi
+        -md $(KW_DIR)\runtime\java
+        -md $(KW_DIR)\runtime\java\amzi
+        -md $(KW_DIR)\runtime\java\amzi\ls
+        -md $(KW_DIR)\runtime\delphi
+        -md $(KW_DIR)\runtime\servlet
+        -md $(KW_DIR)\runtime\servlet\WEB-INF
+        -md $(KW_DIR)\runtime\servlet\WEB-INF\classes
+        -md $(KW_DIR)\runtime\servlet\WEB-INF\classes\amzi
+        -md $(KW_DIR)\runtime\servlet\WEB-INF\classes\amzi\ls
+        -md $(KW_DIR)\temp
+
+_copy:
+        @echo *** copying files ***
+        copy $(HERE)\temp\empty.kws $(KW_DIR)\temp
+        copy %AMZI_DIR%\bin\amzi.dll $(KW_DIR)\workshop
+        copy %AMZI_DIR%\bin\amzijni.dll $(KW_DIR)\workshop
+        copy %AMZI_DIR%\bin\aosutils.lsx $(KW_DIR)\workshop
+        copy %AMZI_DIR%\bin\aodbc.lsx $(KW_DIR)\workshop
+        copy $(HERE)\workshop\amzi.cfg $(KW_DIR)\workshop
+        copy $(HERE)\workshop\kw.bat $(KW_DIR)\workshop
+        copy $(HERE)\workshop\kw_orig.cfg $(KW_DIR)\workshop\kw.cfg
+        copy $(HERE)\workshop\kw.jar $(KW_DIR)\workshop
+        copy $(HERE)\installshield\kw_multi.ico $(KW_DIR)\workshop
+
+_jre:
+        xcopy $(TOP)\workshop\jre $(KW_DIR)\workshop\jre /S
+        -del $(KW_DIR)\workshop\jre\bin\beans.ocx
+        -del $(KW_DIR)\workshop\jre\bin\keytool.exe
+        -del $(KW_DIR)\workshop\jre\bin\policytool.exe
+        -del $(KW_DIR)\workshop\jre\bin\rmid.exe
+        -del $(KW_DIR)\workshop\jre\bin\rmiregistry.exe
+        -del $(KW_DIR)\workshop\jre\bin\tnameserv.exe
+        -del $(KW_DIR)\workshop\jre\lib\jaws.jar
+
+_author:
+        @echo *** making author ***
+        cd author_api
+        bmake -f makefile.win
+        cd $(HERE)
+        
+_aspnet:
+	@echo *** making asp.net ***
+	cd aspnet_run
+	bmake -f makefile.win
+	cd $(HERE)
+	
+_servlet:
+	@echo *** making servlet ***
+	cd servlet_run
+	bmake -f makefile.win
+	cd $(HERE)
+
+_cgi:
+        @echo *** making cgi ***
+        cd cgi_run
+        bmake -f makefile.win
+        cd $(HERE)
+
+_delphi:
+        @echo *** making delphi ***
+        cd delphi_run
+        bmake -f makefile.win
+        cd $(HERE)
+
+_docs:
+        @echo *** making docs ***
+        cd docs
+        bmake -f makefile.win
+        cd $(HERE)
+
+_java:
+        @echo *** making java ***
+        cd java_run
+        bmake -f makefile.win
+        cd $(HERE)
+
+_jigs:
+        @echo *** making jigs ***
+        cd jigs
+        bmake -f makefile.win
+        cd $(HERE)
+
+_samples:
+        @echo *** making samples ***
+        cd samples
+        bmake -f makefile.win
+        cd $(HERE)
+
+_vb:
+        @echo *** making vb ***
+        cd vb_run
+        bmake -f makefile.win
+        cd $(HERE)
+
+_vbnet:
+	@echo *** making vb.net ***
+	cd vbnet_run
+	bmake -f makefile.win
+	cd $(HERE)
+	

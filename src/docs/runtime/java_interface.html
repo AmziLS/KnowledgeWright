@@ -1,0 +1,40 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Java Interface</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Java 
+Interface (Full Version)<!-- #EndEditable --></font></font> </h2><!-- #BeginEditable "Contents" --> 
+<h3><a name="setting_up_java"></a>Setting Up Java</h3><p> <! AMZI_INDEX = Java; PATH; CLASSPATH> 
+The Java interface is in the runtime/java subdirectory. Before you can run this 
+program, you must set-up the Amzi! Logic Server.</p><p>You can do this by either:</p><ul> 
+<li>Put the knowledgewright4/workshop directory on your PATH environment variable 
+<p>or</p></li><li>Copy amzi.cfg, amzi.dll, aosutils.lsx, aodbc.lsx to the directory 
+containing the Java code. </li></ul><p>Then you need to:</p><ul> <li>Copy the 
+jig reasoning engine (.xpl) file from the workshop/jigs subdirectory. For the 
+basic jig, this is basic.xpl, for the support jig, this is support.xpl, etc. </li><li>Copy 
+the knowledgebase (.kb) file you want to run to the directory containing the Java 
+code.</li><li> Put the Borland libraries in workshop/lib on your CLASSPATH, for 
+example:<br> <pre> <font color="#990000">CLASSPATH= /knowledgewright4/workshop/lib/dbswing.jar;/knowledgewright4/workshop/lib/dx.jar</font></pre></li></ul><p><font color="#990000"></font>This 
+will let you run the sample as provided. In order to write your own Java programs, 
+you need to install the Amzi! Logic Server Java Classes. They are located in the 
+'amzi/ls' directory tree under runtime/java. You can simply add this to your CLASSPATH 
+environment variable:</p><blockquote> <pre><font color="#990000">CLASSPATH=/knowledgewright4/runtime/java;/knowledgewright4/workshop/lib/dbswing.jar;/knowledgewright4/workshop/lib/dx.jar;...</font></pre></blockquote><h3><a name="setting_path_and_classpath_windows"></a>Setting 
+Your Path and Classpath Under Windows</h3><p> <! AMZI_INDEX = PATH; CLASSPATH; Windows> 
+To change your PATH environment variable you need to open the Control Panel and 
+then open System. One on of the tabs you will find a button labelled 'Environment 
+Variables'. Press it and modify your PATH according to the instructions above.</p><p>You 
+can use the same method to change your CLASSPATH. Alternatively, some development 
+environments (like Borland's JBuilder) let you specify a CLASSPATH in your Java 
+Project. Finally, you can use the -cp flag on the Java Compiler, javac, to specify 
+a CLASSPATH for each compilation.</p><!-- #EndEditable --> <hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

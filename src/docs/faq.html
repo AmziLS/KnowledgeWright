@@ -1,0 +1,44 @@
+<HTML>
+<!-- #BeginTemplate "/Templates/chapter_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>FAQ</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+<font color="#990000"><!-- #BeginEditable "Title" -->Frequently Asked Questions<!-- #EndEditable --></font> 
+</h1><hr> <!-- #BeginEditable "Contents" --> <h3>Topics:</h3><ul> <li><A HREF="#display">Display 
+Problems</A></li><li><a href="#internet">Internet Deployment</a></li><li><A HREF="#user_interface">User 
+Interface</A></li></ul><h3><A NAME="display"></A>Display Problems</h3><H4>Why 
+is garbage left behind the mouse pointer as I move it across the menus and screen?</H4><P>Java 
+is not compatible with some mouse trails and non-standard mouse cursors. Try turning 
+off mouse trails and using the standard arrow mouse cursor in your Control Panel 
+settings.</P><h3><a name="internet"></a>Internet Deployment</h3><h4>Can I run 
+KnowledgeWright knowledgebases under JSP or ASP?</h4><p>For any internet programming 
+environment you can use the KWI to interact with the KnowledgeWright reasoning 
+engine. The KWI is a full-featured interface that lets the caller handle user 
+input and display.</p><p>For JSP, you can start with the existing Java interface 
+in runtime/java and adapt it to the JSP calling environment.</p><p>For ASP, you 
+can start with the Visual Basic interface in runtime/vb and create a COM object 
+to call from ASP.</p><H3><A NAME="user_interface"></A>User Interface</H3><p><B>How 
+can the user backup to a previous question?</B></p><p>For users who modify one 
+of KnowledgeWright's runtime interfaces for Java, VB and Delphi, there are times 
+when you want to allow the user to back-up to a previous question so that a new 
+answer can be entered.<BR>To do this you need to keep a list of the questions 
+as they are asked. When you call:</p><BLOCKQUOTE><PRE><FONT COLOR="#990000">kwi(ID,get_action,ACTION)</FONT></PRE></BLOCKQUOTE><p>the 
+ACTION will be set to a term of the form:<BR> </p><BLOCKQUOTE><PRE><FONT COLOR="#990000">ask(user,QUESTIONNAME,SLOTS)</FONT></PRE></BLOCKQUOTE><P>Save 
+each QUESTIONNAME as it comes up in an ordered list (e.g. vector or collection).</P><P>When 
+the user wants to back-up to one of these questions call:<BR> </P><BLOCKQUOTE><PRE><FONT COLOR="#990000">kwi(ID,backup,fact(QUESTIONNNAME,_),_)</FONT></PRE></BLOCKQUOTE><P>This 
+deletes all the answers to the named question and all questions asked after it. 
+This is necessary because a new answer to the question may lead down a different 
+line of reasoning, and if the other answers are used, erroneous results may be 
+returned.</P><P>Both the Java Servlet and CGI interfaces use the backup call when 
+the user presses the 'back' button in their web browser. See KW.java and kwcgirun.pro.</P><p>&nbsp;</p><!-- #EndEditable --> 
+<hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

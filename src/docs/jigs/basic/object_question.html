@@ -1,0 +1,516 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: question</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: question <!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="description"></a>Description</h3>
+<p>For each fact whose value is entered by the user, you need to define how the 
+  question is asked of the user. If the knowledgebase is run on the web, you can 
+  use HTML formatting in your prompt and menu choices. </p>
+<!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem -->implements three basic methods. They are: 
+<ol>
+  <ol>
+    <li> Fill-in-the-blank</li>
+    <li> Select one item from a menu</li>
+    <li>Select multiple items from a menu</li>
+  </ol>
+</ol>
+<p>For menus, you have the option of have separate text for display purposes and 
+  for use in rules and tables. This is useful if you want to include HTML formatting 
+  in your menu choices (perhaps using an image), or if your choices have many 
+  words in them.</p>
+<h3><font color="#990000"><a name="question_properties"></a></font>Question Properties</h3>
+<p>All questions share the following properties:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td><! AMZI_INDEX = question; prompt; question_ type; ask_also ; default; question_style><b>Property 
+      Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="object_names.html">Object Names</a> 
+      for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>prompt</td>
+    <td>The text used to ask the user for a value. The prompt may contain other 
+      object names.</td>
+    <td>&nbsp; </td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>question_type</td>
+    <td>Type of question: fill_in_the_blank, menu_single_choice, menu_multiple_choices, 
+      menu_single_choice_display_separate, or menu_multiple_choices_display_separate 
+      (the latter two are for advanced users).</td>
+    <td>&nbsp; </td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top">
+    <td>question_style</td>
+    <td>The HTML style in which the question is presented to the user. 'listbox' 
+      is a box containing the list of choices. 'checkbox_radio' is radio buttons 
+      for single choice, and checkboxes for multiple choice.</td>
+    <td>listbox</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>ask_also</td>
+    <td>The list of related questions to ask when asking this question. It is 
+      a convenient way to group related questions together. Note, if the questions 
+      in the ask_also list use object names in their prompts, the values of those 
+      objects must be already known or the question will not be asked.</td>
+    <td>&nbsp;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>default</td>
+    <td>The default answer for the question.</td>
+    <td>&nbsp;</td>
+    <td>no</td>
+  </tr>
+</table>
+<p>The following properties apply only to fill-in-the-blank questions: &nbsp; 
+</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td><! AMZI_INDEX = answer_type; length><b>Property Name</b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>answer_type</td>
+    <td>The type of the value: text, number, date or boolean. Dates are entered 
+      as YYYY-MM-DD. Boolean is entered as 'true' or 'false'.</td>
+    <td>text</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>length</td>
+    <td>The maximum length of the fact value.</td>
+    <td>20</td>
+    <td>yes</td>
+  </tr>
+</table>
+<p>The following property applies only to menu questions if question_type is one 
+  of menu_single_choice or menu_multiple_choices:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td><! AMZI_INDEX = choices><b>Property Name</b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>choices</td>
+    <td>The menu choices the user selects from.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+</table>
+<p>The following property applies only to menu questions if question_type is one 
+  of menu_single_choice_display_separate or menu_multiple_choices_display_separate:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td><! AMZI_INDEX = rule-display_choices ; conditions><b>Property Name</b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>rule-display_choices</td>
+    <td>A table containing the text value to be used in rules (conditions), and 
+      the text value to be displayed to the user. This is especially useful when 
+      your menu choice is long or contains HTML attributes or images.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+</table>
+<h3><a name="fill_in_the_blank_questions"></a>Fill-in-the-Blank Questions</h3>
+<p><! AMZI_INDEX = fill-in-the-blank>Fill in the blank questions allow the user 
+  to type in a value. For example:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">error_code</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">prompt</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">What error code was displayed or 'none'?</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">fill_in_the_blank</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">length</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">5</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">default</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">none</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">ask_also</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">&nbsp;&nbsp;&nbsp; </font></pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+</center>
+<h3> <a name="menu_questions"></a>Menu Questions</h3>
+<p><! AMZI_INDEX = menu>There are two types of menus. 
+  Single choice means that the fact can have only one value. Multiple choices 
+  means that the fact can have zero or more values. Single choice questions might 
+  have values like 'yes' and 'no', whereas a multiple choice question might ask 
+  what pets do you have and could have values like 'dogs', 'cats', 'fish', 'birds' 
+  and 'horses'. </p>
+<p>For example:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">env_ver</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">prompt</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">Environment and Version</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">menu_single_choice</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_style</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">checkbox_radio</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">choices</font>
+    </pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">Windows 98
+Windows NT
+Windows 2000
+Linux</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">default</font></pre>
+      </td>
+      <td width="306"> 
+        <pre>&nbsp; </pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">ask_also</font></pre>
+      </td>
+      <td width="306"> 
+        <pre>&nbsp;  </pre>
+      </td>
+    </tr>
+  </table>
+</center>
+<p>&nbsp;</p>
+<p>If you want to use separate values for display and the rules, your question 
+  might look like this:</p>
+<div align="center"> 
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">env_ver</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">prompt</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">Environment and Version</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">menu_single_choice</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_style</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">listbox</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">rule-display_choices</font>
+    </pre>
+      </td>
+      <td width="306"> 
+        <table border="1" cellpadding="2">
+          <tr valign="top"> 
+            <td> 
+              <pre><b><font color="#990000">rule_text</font></b></pre>
+            </td>
+            <td> 
+              <pre><b><font color="#990000">display_text</font></b></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">win98</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Windows 98</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">winnt</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Windows NT 4.0</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">win2k</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Windows 2000</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">linux</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">Linux</font></pre>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">default</font></pre>
+      </td>
+      <td width="306"> 
+        <pre>&nbsp; </pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">ask_also</font></pre>
+      </td>
+      <td width="306"> 
+        <pre>&nbsp;  </pre>
+      </td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+<p>The user will see 'Windows 98', 'Windows NT 4.0', etc. as menu choices, whereas, 
+  your rule conditions will read:</p>
+<blockquote> 
+  <pre>env_ver = win98 or env_ver = win2k</pre>
+</blockquote>
+<h3> <a name="grouping_questions_with_ask_also"></a>Grouping Question with ask_also</h3>
+<! AMZI_INDEX = ask_also>In order to reduce the number of interactions with the 
+user, <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> supports the concept of related questions. Entirely optional, 
+they allow you to specify what questions should be asked together. It lets you 
+'group' facts together, so all the questions for a particular hypothesis can be 
+gathered at one time. 
+<p>Here is how related facts are added to a question: <br>
+<p>&nbsp; 
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">env_ver</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">prompt</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">Environment and Version</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">menu_single_choice</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">question_style</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">checkbox_radio</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">choices</font>
+    </pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">Windows 98
+Windows NT
+Windows 2000
+Linux</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">default</font></pre>
+      </td>
+      <td width="306"> 
+        <pre>&nbsp;</pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">ask_also</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">memory_size
+processor_type</font></pre>
+      </td>
+    </tr>
+  </table>
+</center>
+<p>&nbsp;</p>
+<p>This says that 'memory_size' and 'processor_type' are related to 'env_ver'. 
+  When the rules are executed, if <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem -->is going to ask the user for env_ver, it will also ask 
+  for the other two questions as well. However, if the other two questions use 
+  object names in their prompts, and the values for those objects are not know, 
+  that question will not be asked.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

@@ -1,0 +1,131 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: text</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: text <!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="description"></a>Description </h3>
+<p><! AMZI_INDEX = text>Text objects represent text output to be displayed to 
+  the user and are associated with goal values. For example with this rule: </p>
+<ul>
+  <pre>if errorMessage = &quot;Code too long to load&quot;
+then problem = srcbuf_too_small</pre>
+</ul>
+<p>There would be a text object named 'srcbufTooSmall' that explains the problem 
+  for the user:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#ffcccc">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">srcbuf_too_small</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/ code</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">text</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">text</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">One of your predicates is too large
+to load. You can either increase 'srcbuf' 
+in your .INI file, or break up the 
+predicate into multiple predicates.</font></pre>
+      </td>
+    </tr>
+  </table>
+</center>
+<p><br>
+  Text field can contain the values of other facts or text fields. For example:</p>
+<blockquote> 
+  <pre>%header%
+We recommend you run %num_miles% today.
+%footer%</pre>
+</blockquote>
+<p>Assuming there are text objects named 'header' and 'footer', the <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> reasoning engine will replace the names in percent signs 
+  with the text from those objects. Further, <!-- #BeginLibraryItem "/Library/Product.lbi" -->
+KnowledgeWright
+<!-- #EndLibraryItem --> will determine the value of num_miles and replace it 
+  before displaying the text for the user. The value can come from a fact, question, 
+  sql query, rule or table. </p>
+<h3><font color="#990000"><a name="text_properties"></a></font>Text Properties</h3>
+<p>The properties of text objects are:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td><! AMZI_INDEX = text; type; file><b>Property Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="object_names.html">Object Names</a> 
+      for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>type</td>
+    <td>Whether this text is presented here or read from a file.</td>
+    <td>text</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>text</td>
+    <td>The text to be displayed.</td>
+    <td></td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top">
+    <td>file</td>
+    <td>The name of the file to be displayed, in which case it must reside in 
+      the same directory as the .kb file. Otherwise, it can be the full pathname 
+      of a file..</td>
+    <td></td>
+    <td>yes</td>
+  </tr>
+</table>
+<font color="#990000"> </font> <!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

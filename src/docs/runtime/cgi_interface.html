@@ -1,0 +1,184 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>CGI Web Server Interface</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->CGI 
+Web Server Interface<!-- #EndEditable --></font></font> </h2><!-- #BeginEditable "Contents" --> 
+<p>The CGI web server interface is located in the runtime/cgi subdirectory. To 
+use it, copy the following files to the cgi-bin (or Scripts for PWS or IIS) directory 
+of your web server:</p><ul> <li> a CGI jig file (e.g. kwcgibasic.xpl) from runtime/cgi</li><li> 
+a CGI executable file (e.g. kwcgibasic.exe (Windows) or kwcgibasic (Unix)) from 
+runtime/cgi. Note this file has the same name as the jig .xpl file.</li><li>kwcgirun.plm 
+from runtime/cgi</li><li>amzi.cfg from workshop</li><li>amzi.dll (Windows) or 
+libamzi.so (Unix) from workshop</li><li>aodbc.lsx from workshop (Windows)</li><li>aosutils.lsx 
+from workshop</li><li>a knowledgebase file (.kb) from samples modifed as described 
+in the following section </li></ul><h3><a name="document_format"></a>Question_Top 
+and Output_Continue</h3><p> <! AMZI_INDEX = question_top, question_bottom, output_continue> 
+In your main knowledgebase object, you must have these minimal HTML elements which 
+are inserted above and below all questions asked of the user:</p><table border="1" cellpadding="3"> 
+<tr> <td valign="top">Property Name</td><td valign="top">Windows Minimal Value</td><td valign="top">Unix 
+Minimal Value</td></tr> <tr> <td valign="top"> <pre><font color="#990000">question_top</font></pre></td><td valign="top"> 
+<pre><font color="#990000">&lt;HTML&gt;<br>&lt;HEAD&gt;&lt;/HEAD&gt;<br>&lt;BODY&gt; 
+&lt;FORM METHOD=&quot;POST&quot; ACTION=<br>&quot;/Scripts/kwcgibasic.exe%system(cgi_parameters)%&quot;&gt;</font></pre></td><td valign="top"> 
+<pre><font color="#990000">&lt;HTML&gt; &lt;HEAD&gt;&lt;/HEAD&gt; &lt;BODY&gt; 
+&lt;FORM METHOD=&quot;POST&quot; ACTION=<br>&quot;/cgi-bin/kwcgibasic%system(cgi_parameters)%&quot;&gt;</font></pre></td></tr> 
+<tr> <td valign="top"> <pre><font color="#990000">question_bottom</font></pre></td><td valign="top"> 
+<pre><font color="#990000">&lt;INPUT NAME=&quot;Submit&quot; TYPE=&quot;Submit&quot; 
+VALUE=&quot;Continue&quot;&gt; &lt;/INPUT&gt; &lt;/FORM&gt; &lt;/BODY&gt; &lt;/HTML&gt;</font></pre></td><td valign="top"> 
+<pre><font color="#990000">&lt;INPUT NAME=&quot;Submit&quot; TYPE=&quot;Submit&quot; 
+VALUE=&quot;Continue&quot;&gt;<br>&lt;/INPUT&gt;<br>&lt;/FORM&gt;<br>&lt;/BODY&gt;<br>&lt;/HTML&gt;</font></pre></td></tr> 
+<tr> <td valign="top"> <pre><font color="#990000">output_continue <i><br>(not 
+in all Jigs)</i></font></pre></td><td valign="top"> <pre><font color="#990000">&lt;FORM 
+METHOD="POST" ACTION=<br>"/cgi-bin/kwcgibasic.exe%system(cgi_parameters)%"> <br>&lt;INPUT 
+NAME="Submit" TYPE="Submit" VALUE="Continue"&gt; <br>&lt;/INPUT&gt; <br>&lt;/FORM&gt; 
+</font></pre></td><td valign="top"> <pre><font color="#990000">&lt;FORM METHOD="POST" 
+ACTION=<br>"/cgi-bin/kwcgibasic%system(cgi_parameters)%"> &lt;INPUT NAME="Submit" 
+TYPE="Submit" VALUE="Continue"&gt; <br>&lt;/INPUT&gt; &lt;/FORM&gt; </font></pre></td></tr> 
+</table><p>In addition, some jigs (notably Basic) also have an output_continue 
+property in the knowledgebase object. This is used when there is output for the 
+user and the reasoning process is not complete. That is, some intermediate results 
+or information are being displayed for the user. In this case the output_continue 
+contents are added to the web page and are an empty HTML form that continues the 
+reasoning process. The program name used in question_bottom and output_continue 
+must be the same and must match the name of the executable program in your cgi-bin 
+or Scripts directory. </p><p>In addition the following properties are passed to 
+your web server:</p><table border="1" cellpadding="3" width="100%"> <tr> <td> 
+<pre><b><font color="#990000"><! AMZI_INDEX = charset>Parameter</font></b></pre></td><td> 
+<pre><b><font color="#990000">Description</font></b></pre></td><td> <pre><b><font color="#990000">Example</font></b></pre></td></tr> 
+<tr valign="top"> <td> <pre><font color="#990000">charset</font></pre></td><td> 
+<p><font color="#990000">The character set used in your knowledgebase</font></p></td><td> 
+<pre><font color="#990000">big5</font></pre></td></tr> </table><h3><a name="running_in_your_web_browser"></a>Running 
+in Your Web Browser</h3><p>To run your knowledgebase, type into your browser one 
+of the following URLs:</p><blockquote> <pre><font color="#990000">Unix: http://127.0.0.1/cgi-bin/kwcgibasic?[kb_file='hello.kb']<br>Windows: 
+http://localhost/Scripts/kwcgibasic.exe?[kb_file='hello.kb']</font></pre></blockquote><p>Replace 
+the 127.0.0.1 or 'localhost' with the name (www.company.com) or IP address of 
+the server you have installed the KnowledgeWright CGI script on.</p><h3><a name="cgi_parameters"></a>CGI 
+Parameters</h3><p> <! AMZI_INDEX = kb_file; directory; temp_directory; log_file; results_file> 
+There are additional parameters that you can specify in the square brackets. The 
+full set of parameters are:</p><table border="1" cellpadding="3" width="100%"> 
+<tr> <td> <pre><b><font color="#990000">Parameter</font></b></pre></td><td> <pre><b><font color="#990000">Description</font></b></pre></td><td> 
+<pre><b><font color="#990000">Examples</font></b></pre></td></tr> <tr valign="top"> 
+<td> <pre><font color="#990000">kb_file</font></pre></td><td> <p><font color="#990000">The 
+name of the knowledgebase file</font></p></td><td> <pre><font color="#990000">'amzi_website_advisor.kb'</font></pre></td></tr> 
+<tr valign="top"> <td> <pre><font color="#990000">directory</font></pre></td><td> 
+<p><font color="#990000">The directory where the kb_file is located. <i></i></font></p></td><td> 
+<pre><font color="#990000">'c:\InetPub\Scripts' '/usr/local/apache/cgi-bin'</font></pre></td></tr> 
+<tr valign="top"> <td> <pre><font color="#990000">temp_directory</font></pre></td><td> 
+<p><font color="#990000">The directory where the temporary session files are created 
+as well as log files (if you have specified one) and any other temporary files 
+needed by KnowledgeWright. <i><b>Note CGI programs must have write access to this 
+directory.</b></i></font></p></td><td> <pre><font color="#990000">'c:\InetPub\temp' 
+'/usr/local/apache/cgi-bin/temp'</font></pre></td></tr> <tr valign="top"> <td> 
+<pre><font color="#990000">log_file</font></pre></td><td> <p><font color="#990000">The 
+name of the log file that details the execution. It will have the same contents 
+as the log in the KnowledgeWright Workshop.</font></p></td><td> <pre><font color="#990000">'kwrun.log'</font></pre></td></tr> 
+<tr valign="top"> <td> <pre><font color="#990000">results_file</font></pre></td><td> 
+<p><font color="#990000">The pathname of a file to write the session results to.</font></p></td><td> 
+<pre><font color="#990000">'c:/InetPub/Scripts/results.log'</font></pre></td></tr> 
+</table><h3><a name="results_file_format"></a>Results File Format</h3><p> <! AMZI_INDEX = results_file> 
+If you specify a results file in your CGI parameters, KnowledgeWright will create 
+a file of the following format:</p><blockquote> <pre><font color="#990000">session(&quot;&lt;GMT 
+Date/Time&gt;&quot;, [&lt;Known Name&gt; : &lt;Known Value&gt;, ...], [&lt;CGI 
+Parameter Name&gt; : &lt;CGI Parameter Value&gt;, ...]).</font></pre></blockquote><p>The 
+list of known values is everything that KnowledgeWright determines during its 
+reasoning process. So it includes answers from the user, values of goals, results 
+of queries, etc. The CGI parameters follow the CGI standard and include the IP 
+address, browser name, script, etc.</p><h3><a name="debugging_cgi_problems"></a>Debugging 
+CGI Problems</h3><p> <! AMZI_INDEX = kwtestcgi> KnowledgeWright includes a Windows 
+test program called 'kwtestcgi.exe'. It can be used in multiple ways. </p><p>First, 
+you can just run it from your browser by typing one of the following URLs:</p><blockquote> 
+<pre><font color="#990000">Unix</font><font color="#990000">: http://127.0.0.1/cgi-bin/kwtestcgi<br>Windows: 
+http://localhost/scripts/kwtestcgi.exe</font></pre></blockquote><p>Run in this 
+way, it will print out the current directory and then an error message about not 
+being able to load kwtestcgi.xpl. This will let you determine if the the .xpl 
+file can be found. </p><p>If you still get an error (usually incomplete HTTP headers), 
+see the sections <a href="#setting_up_microsofts_pws">below</a> on setting up 
+IIS/PWS and Apache. Under Windows, double-check that amzi.dll, aosutils.lsx and 
+aodbc.lsx are in your Scripts directory. Check your file owner and read permissions 
+in either the IIS/PWS Control Console or under Unix via the command line.</p><p>If 
+you are still having problems, copy 'kwtestcgi.xpl' to your cgi-bin/scripts directory. 
+Then run it again as specified above. You should get an error message saying there 
+is no kb file specified. If you get any other message, there is a problem with 
+your web server's configuration.</p><p>Next try specifying a kb file. First try 
+a very simple one like 'hello_1.kb'. Copy it to your cgi-bin/scripts directory 
+and run it as follows:</p><blockquote> <pre><font color="#990000">Unix</font><font color="#990000">: 
+http://127.0.0.1/cgi-bin/kwtestcgi?[kb_file='hello_1.kb']<br>Windows: http://localhost/scripts/kwtestcgi.exe?[kb_file='hello_1.kb']</font></pre></blockquote><p>If 
+the kb file is not being read and exists in the directory kwtestcgi is looking 
+for it is, then check your file owner and read permissions in either the IIS/PWS 
+Control Console or under Unix via the command line.</p><h4>Open a KnowledgeWright 
+Log File</h4><p>The next thing to do when you encounter a problem is to specify 
+a log_file in the query string where you invoke kwcgirun.exe. </p><p>To specify 
+your kb file and a log file:</p><blockquote> <pre><font color="#990000">Unix</font><font color="#990000">: 
+http://127.0.0.1/cgi-bin/kwtestcgi?[kb_file='hello.kb',log_file='kwrun.log']<br>Windows: 
+http://localhost/scripts/kwtestcgi.exe?[kb_file='hello.kb',log_file='kwrun.log']</font></pre></blockquote><p>This 
+will create a log file in the same directory as kwtestcgi. Study its contents, 
+especially at the bottom to see if the problem is explained. If you do not get 
+an obvious error message, then in your cgi-bin or Scripts directory, create two 
+blank files; one named 'kwrun.log' and the other named 'session_127.0.0.1.kws'. 
+If it still fails under Windows, use the IIS/PWS Control Panel or File Manager 
+to check the owner and permissions on these files to ensure they can be written 
+to. Under Unix, use the command line to do the same.</p><h4>Double-Check the CGI 
+Program Name in the Knowledgebase Object</h4><p>If the knowledgebase does not 
+start-up correctly, check the knowledgebase object to ensure the program name 
+being executed in question_top corresponds with your operating system. For example, 
+using the Basic jig under Windows, the program name is 'kwcgibasic.exe' and under 
+Unix it is 'kwcgibasic'. Check the directory too. Under Windows it is usually 
+'Scripts' and under Unix it is usually 'cgi-bin'. Also, some jigs also have an 
+output_continue property. If so, ensure the directory and program name specified 
+there is correct.</p><h4>Open an Amzi! Logic Server Trace File for Amzi! Tech 
+Support</h4><p>If that does not make the problem clear, the next step is to specify 
+a log file in Amzi! Prolog + Logic Server. To do this, add the following lines 
+to your amzi.cfg file in the cgi-bin or scripts directory:</p><blockquote> <pre><font color="#990000">apitrace 
+= on logfile = c:\amziapi.log </font></pre></blockquote><p>If you need technical 
+support, please e-mail the browser output when you run kwtestcgi, your KnowledgeWright 
+log file and Amzi! Logic Server trace file along with your knowledgebase to support@amzi.com.<br> 
+</p><h3><a name="setting_up_microsofts_pws"></a>Setting Up Microsoft's PWS and 
+IIS</h3><p>By default, Personal Web Server (PWS) and IIS, do not have a directory 
+named &quot;cgi-bin&quot;. Instead their is a directory named &quot;scripts&quot; 
+under &quot;wwwroot&quot; and this is where you can run CGI programs from. However, 
+the URL to invoke KnowledgeWright from scripts reads a like this:</p><blockquote> 
+<pre><font color="#990000">http://127.0.0.1/scripts/kwcgibasic.exe?[kb_file='hello.kb']</font></pre></blockquote>Also 
+by default PWS and IIS do not allow the execution of CGI programs. In order to 
+allow this, you must enable &quot;Execute&quot; permission on your 'Scripts' directory. 
+How you do this varies widely by your version of PWS/IIS. Here are some methods 
+to try: <ul> <li> Right-click on the directory name and selecting the &quot;Properties&quot; 
+command, then choose the &quot;Web Sharing&quot; tab on the pop-up window. Select 
+the folder name, click &quot;Edit Properties&quot; then make sure that &quot;Execute&quot; 
+is checked.</li><li>Open up PWS/IIS Manager and select the &quot;Advanced&quot; 
+icon. Select the folder named 'Scripts', click &quot;Edit Properties&quot; then 
+make sure that &quot;Execute&quot; is checked.</li><li> Open the Control Console 
+(usually found under 'Administrative Tools' in your 'Settings' / 'Control Panel') 
+to make sure the properties for 'Scripts' directory have execute permissions for 
+'Scripts and Executables' and NOT 'Scripts Only'.</li></ul><p>You may also need 
+to create a temporary directory (we recommend you put it outside the wwwroot subtree 
+on a production server). Make sure your web server process has full access to 
+that directory (to read, write, create and delete files). Then specify that directory 
+as temp_directory when invoking your knowledgebase as follows:</p><blockquote> 
+<pre><font color="#990000">Unix</font><font color="#990000">: http://127.0.0.1/cgi-bin/kwtestcgi?[kb_file='hello.kb',temp_directory='/usr/local/apache/temp']<br>Windows: 
+http://localhost/scripts/kwtestcgi.exe?[kb_file='hello.kb',temp_directory='C:\\InetPub\\temp']</font></pre></blockquote><h3><a name="setting_up_apache"></a>Setting 
+Up Apache</h3><p>In order to use Apache with KnowledgeWright you need to set the 
+LD_LIBRARY_PATH environment variable in your configuration file (normally apache/conf/httpd.conf) 
+by adding the following line:</p><blockquote> <pre><font color="#990000">SetEnv 
+LD_LIBRARY_PATH .</font></pre></blockquote><p>(note the lone period). If you already 
+have set this variable, then make sure dot (.) is included in the list of directories. 
+This is needed so that Apache can find libamzi.so and aosutils.lsx.</p><p>You 
+will also need to create a temporary directory (we recommend you put it outside 
+the htdocs and cgi-bin subtrees on a production server). Make sure your web server 
+process has full access to that directory (to read, write, create and delete files). 
+Then specify that directory as temp_directory when invoking your knowledgebase.</p><h3><a name="modifying_cgi_interface"></a>Modifying 
+the CGI Interface (Full Version)</h3><p>In order to modify the CGI interface you 
+will need the current version of Amzi! Prolog + Logic Server, which can be downloaded 
+from www.amzi.com. The interface is in kwcgirun.pro. To install your changes simply 
+compile that file with acmp and replace your current kwcgirun.plm with the new 
+one.</p><!-- #EndEditable --> <hr> <!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate -->
+</HTML>

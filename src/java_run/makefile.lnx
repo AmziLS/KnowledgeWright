@@ -1,0 +1,17 @@
+KW_DIR = /home/dennis/kw4
+
+_all: _java
+
+_java:
+	@echo *** making java runtime ***
+	cp $(AMZI_DIR)/src/lsapis/java20/amzi/ls/*.java $(KW_DIR)/runtime/java/amzi/ls
+	cp $(AMZI_DIR)/lsapis/java20/amzi/ls/*.class $(KW_DIR)/runtime/java/amzi/ls
+	cp Application.java $(KW_DIR)/runtime/java
+	cp AskFieldDialog.java $(KW_DIR)/runtime/java
+	cp AskMenuDialog.java $(KW_DIR)/runtime/java
+	cp MainFrame.java $(KW_DIR)/runtime/java
+	cp Utils.java $(KW_DIR)/runtime/java
+	cp java_run.jpx $(KW_DIR)/runtime/java
+	cp java_run.jar $(KW_DIR)/runtime/java
+
+

@@ -1,0 +1,113 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>KWI Reference</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+<font color="#990000"><!-- #BeginEditable "Title" -->KWI Reference <!-- #EndEditable --></font> 
+</h1><hr> <!-- #BeginEditable "Contents" --> <h2><font color="#990000">(Full Version)</font></h2><h2><font color="#990000"><a name="preparing_to_run_a_knowledgebase"></a>Preparing 
+to Run a Knowledgebase</font></h2><p>Before the knowledgebase can be run, the 
+KWI must be initialized, a knowledgebase file opened and session started. The 
+following KWI calls provide those services.</p><h3><a name="initialize"></a>initialize</h3><p> 
+<! AMZI_INDEX = initialize> kwi(kw_init, initialize([directory = &lt;kb_pathname&gt;, 
+session_directory = &lt;session_pathname&gt;, log_file = &lt;log_file&gt;, message_level 
+= &lt;level&gt;, goals=&lt;list&gt;, save_session = &lt;true | false&gt;]), INFO)</p><p>Parameters:</p><ul> 
+<li>&lt;kb_pathname&gt; The fully qualified name of the directory where the knowledgebase 
+is located and the log file will be opened.</li><li>&lt;session_pathname&gt; The 
+fully qualified name of the directory where the temporary session files will be 
+created.</li><li>&lt;log_file&gt; The name of the log file. OPTIONAL.</li><li>&lt;level&gt; 
+The message level for the log file: hi, medium, low, none. OPTIONAL. </li><li>&lt;list&gt; 
+The list of goals to solve the knowledgebase for. This list supercedes the goals 
+in the 'main' knowledgebase object. OPTIONAL.</li><li>save_session Determines 
+whether or not the session state is saved to disk after each KWI call to get the 
+actions. This is used in environments like CGI programs on webservers that restart 
+the reasoning engine each time the user answers some questions.</li></ul><p>Returns 
+the property list INFO containing:</p><ul> <li>system = &lt;string&gt; The name 
+of the reasoning engine.</li><li>version = &lt;string&gt; The version number of 
+the reasoning engine.</li></ul><p>Initializes the reasoning engine.</p><p>Examples:</p><blockquote> 
+<pre><font color="#990000">kwi(kw_init, initialize([directory = \&quot;" + doubleSlashes(App.path) 
++ "\\&quot;, session_directory = \&quot;" + doubleSlashes(App.path) + "\\&quot;, 
+log_file = &quot;vbrun.log&quot;, message_level = high]), INFO) INFO = [system 
+= &quot;basic&quot;, version = &quot;4-1-1&quot;] kwi(kw_init, initialize([directory 
+= \&quot;" + doubleSlashes(App.path) + "\\&quot;, session_directory = \&quot;" 
++ doubleSlashes(App.path) + "\\&quot;]), INFO) INFO = [system = &quot;support&quot;, 
+version = &quot;4-2-2&quot;]</font></pre></blockquote><h3><a name="open"></a>open</h3><p> 
+<! AMZI_INDEX = open> kwi(kw_init, open(&lt;knowledgebase_file&gt;), _)</p><p>Parameters:</p><ul> 
+<li>&lt;knowledgebase_file&gt; The name of the knowledgebase file. It must reside 
+in the directory specified in kwi / initialize.</li></ul><p>Returns:</p><ul> <li>Nothing.</li></ul><p>Opens 
+the specified knowledgebase file.</p><p>Examples:</p><blockquote> <pre><font color="#990000">kwi(kw_init, 
+open(&quot;amzi_website_advisor.kb&quot;), _)</font></pre></blockquote><h3><a name="new_session"></a>new_session</h3><p> 
+<! AMZI_INDEX = new_session> kwi(&lt;id&gt;, new_session, _)</p><p>Parameters:</p><ul> 
+<li>&lt;id&gt; The identifier for this session.</li></ul><p>Returns:</p><ul> <li>Nothing.</li></ul><p>Creates 
+a new reasoning session with the specified identifier. The identifier is used 
+in all subsequent KWI calls.</p><p>Examples:</p><blockquote> <pre><font color="#990000">kwi(s22, 
+new_session, _)</font></pre></blockquote><h2><font color="#990000"><a name="running_the_knowledgebase"></a>Running 
+the Knowledgebase</font></h2><h3><a name="solve"></a>solve</h3><p> <! AMZI_INDEX = solve> 
+kwi(&lt;id&gt;, solve, MORE)</p><p>Parameters:</p><ul> <li>&lt;id&gt; The identifier 
+for this session.</li></ul><p>Returns:</p><ul> <li>MORE = 'more' if the reasoning 
+process has more work to do, else 'no_more'</li></ul><p>Tells the inference engine 
+to start or continue reasoning. After each call to solve, get_action needs to 
+be called and acted upon until there are no more actions.</p><p>Examples:</p><blockquote> 
+<pre><font color="#990000">kwi(session0, solve, MORE) MORE = more kwi(s22, solve, 
+MORE) MORE = no_more</font></pre></blockquote><h3><a name="backup"></a>backup</h3><blockquote> 
+<p> <! AMZI_INDEX = backup> kwi(&lt;id&gt;, backup(fact(&lt;name&gt;, &lt;value&gt;), 
+SUCCESS)</p><p>Parameters:</p><ul> <li>&lt;fact&gt; The name of the fact.</li><li>&lt;value&gt; 
+The value of the fact (currently ignored).</li></ul><p>Returns:</p><ul> <li>SUCCESS 
+= 'true' if the reasoning process was able to backup to when the specified fact 
+became known</li></ul><p>Tells the inference engine to backup the reasoning process 
+to when the specified fact became known. This truncates the list of known facts 
+back to and including named fact, so that all questions asked since that fact 
+will be re-asked. Also, all intermediate goals proven, will be reproven. This 
+call is useful for CGI programs on web servers that back-up to prior screens. 
+It can be used in any application where the inputs to the reasoning process need 
+to be changed.</p><p>Examples:</p><blockquote> <pre><font color="#990000">kwi(session0, 
+backup(fact(colors, _)), SUCCESS) SUCCESS = true kwi(s22, backup(fact(name, _)), 
+SUCCESS) SUCCESS = false</font></pre></blockquote></blockquote><h2><font color="#990000"><a name="interacting_with_the_user"></a>Interacting 
+with the User</font></h2><h3><a name="get_action"></a>get_action </h3><p> <! AMZI_INDEX = get_action> 
+kwi(&lt;id&gt;, get_action, ACTION)</p><p>Parameters:</p><ul> <li>&lt;id&gt; The 
+identifier for this session.</li></ul><p>Returns the property list ACTION containing:</p><ul> 
+<li>ask(user, object_name, &lt;property_list&gt;) The list of properties from 
+the question object that the reasoning engine needs a value for. </li><li>tell(user, 
+&lt;property_list&gt;) The list of properties from the text object for the goal 
+the reasoning engine has deduced is true.</li><li>none No more actions to perform. 
+Call solve again.</li></ul><p>Returns an action to be performed. It can be a question 
+to ask the user, in which case the reasoning engine expects an KWI assert to tell 
+the reasoning engine what the user answered. The action can also be a conclusion 
+the reasoning engine has determined is true. If that conclusion is associated 
+with a text object, the fields of that object are returned.</p><p>The list of 
+'ask' actions always contains a special action to ask 'html' that provides all 
+the questions already formatted for display in a browser according to the values 
+in the main knowledgebase object.</p><p>Examples:</p><blockquote> <pre><font color="#990000">kwi(session0, 
+get_action, ACTION) ACTION = ask(user, colors, [prompt = &quot;What are your favorite 
+colors?&quot;, question_type = menu_multiple_choices, choices = [&quot;red&quot;, 
+&quot;orange&quot;, &quot;yellow&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;idigo&quot;, 
+&quot;violet&quot;] ]) ACTION = ask(html, colors, [html = &quot;&lt;FORM METHOD=&quot;POST&quot; 
+ACTION=&quot;/cgi-bin/knowledgewright4/kwcgibasic?[kb_file='amzi_website_advisor.kb']&quot;&gt; 
+What are your favorite colors&lt;BR&gt; &lt;INPUT NAME=&quot;colors&quot; TYPE=CHECKBOX 
+VALUE=&quot;red&quot;&gt;red&lt;/INPUT&gt;&lt;BR&gt; &lt;INPUT NAME=&quot;colors&quot; 
+TYPE=CHECKBOX VALUE=&quot;orange&quot;&gt;orange&lt;/INPUT&gt;&lt;BR&gt; ... &lt;INPUT 
+NAME=&quot;colors&quot; TYPE=CHECKBOX VALUE=&quot;violet&quot;&gt;violet&lt;/INPUT&gt;&lt;BR&gt; 
+&lt;P&gt;&lt;INPUT NAME=&quot;submit&quot; TYPE=&quot;submit&quot; VALUE=&quot;Continue&quot;&gt;&lt;/INPUT&gt;<br> 
+&lt;/FORM&gt;&quot; ]) kwi(s22, get_action, ACTION) ACTION = tell(user, [goal 
+= &quot;moods&quot;, text = &quot;Your colors indicate you are in a good mood.&quot;] 
+)</font></pre></blockquote><p></p><h3></h3><h3></h3><h2><font color="#990000"><a name="asserting_new_fact_values"></a>Asserting 
+New Fact Values</font></h2><p> <! AMZI_INDEX = assert> kwi(&lt;id&gt;, assert(fact(&lt;name&gt;, 
+&lt;value&gt;)), _)</p><p>Parameters:</p><ul> <li>&lt;id&gt; The identifier for 
+this session.</li><li>&lt;name&gt; The name of the question (fact).</li><li>&lt;value&gt; 
+The value selected by the user using appropriate quoting, if needed, for strings, 
+and square brackets for lists (multiple values).</li></ul><p>Returns:</p><ul> 
+<li>Nothing.</li></ul><p>Asserts a new fact value for the reasoning engine to 
+use. String values should be passed in &quot;'s. Lists of values are passed in 
+square brackets, separated by commas (also quoted if necessary).</p><p>Examples:</p><blockquote> 
+<pre><font color="#990000">kwi(session0, assert(fact(age, 33)), _)<br></font><font color="#990000"> 
+kwi(s22, assert(fact(colors, [&quot;blue&quot;, &quot;orange&quot;, &quot;violet&quot;])), 
+_)</font></pre></blockquote><p></p><h3></h3><h3></h3><!-- #EndEditable --> <hr> 
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --> 
+</BODY>
+<!-- #EndTemplate --></HTML>

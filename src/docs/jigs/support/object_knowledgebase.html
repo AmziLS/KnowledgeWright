@@ -1,0 +1,128 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: knowledgebase</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#993300"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: knowledgebase<!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="description"></a>Description</h3>
+<p>A knowledgebase needs one knowledgebase object to define various global properties: 
+</p>
+<ul>
+  <li>If this knowledgebase makes SQL queries then the ODBC source must be specified.</li>
+  <li>The remainder of the properties apply when a knowledgebase is used in a 
+    web (HTML) environment. In this case, it needs HTML bits to define how the 
+    questions and solutions are formatted. </li>
+</ul>
+<h3><font color="#993300"><a name="knowledgebase_properties"></a></font>Knowledgebase 
+  Properties</h3>
+<p>These are:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td>
+      <! AMZI_INDEX = knowledgebase; goals; odbc; date_format; question_separator; menu_separator; value_separator; question_top; question_bottom; solution_top; solution_bottom>
+      <b>Property Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="../basic/object_names.html">Object Names</a> 
+      for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="../basic/folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&nbsp;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>date_format</td>
+    <td>The input format for user input of dates and string/date conversions which 
+      are represented internally as date(year, month, day).</td>
+    <td>m/d/y</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>odbc</td>
+    <td>Under Windows, the name of the ODBC data source (defined in your Control 
+      Panel) to be used for SQL queries.</td>
+    <td>&nbsp;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>question_separator</td>
+    <td>The HTML or text to be inserted after each question.</td>
+    <td> 
+      <p>&lt;P&gt; 
+    </td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>menu_separator</td>
+    <td>The HTML or text to be inserted after each item in a menu.</td>
+    <td>&lt;BR&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>value_separator</td>
+    <td>The HTML or text to be inserted after each goal value, which may be a 
+      text object.</td>
+    <td>&lt;P&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>question_top</td>
+    <td>The HTML for the top of the form that asks the user questions. It must 
+      contain all the elements in the default value. <b></b></td>
+    <td> 
+      <p>&lt;HTML&gt; &lt;HEAD&gt; &lt;/HEAD&gt; &lt;BODY&gt; <br>
+        &lt;FORM METHOD=&quot;POST&quot; ACTION=&quot;/cgi-bin/kwcgirun.exe%system(cgi_parameters)%&quot;&gt;</p>
+    </td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>question_bottom</td>
+    <td>THE HTML for the bottom of the form that asks the user questions. <b><i>Note: 
+      It must contain a submit button with a name of &quot;Submit&quot;.</i></b></td>
+    <td>&lt;INPUT TYPE=&quot;Submit&quot; Value=&quot;Submit&quot;&gt; &lt;/INPUT&gt;<br>
+      &lt;INPUT TYPE=&quot;Reset&quot; VALUE=&quot;Reset&quot;&gt; &lt;/INPUT&gt; 
+      <br>
+      &lt;/FORM&gt; &lt;/BODY&gt; &lt;/HTML&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>solution_top</td>
+    <td>The HTML that is inserted in front of the solution text.</td>
+    <td>&lt;HTML&gt;&lt;HEAD&gt;&lt;/HEAD&gt;&lt;BODY&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>solution_bottom</td>
+    <td>The HTML that is appended to the bottom of the solution text.</td>
+    <td>&lt;/BODY&gt;&lt;/HTML&gt;</td>
+    <td>yes</td>
+  </tr>
+</table>
+<br>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

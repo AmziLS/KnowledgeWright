@@ -1,0 +1,93 @@
+knowledgewright_jig(basic, 11).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "A version of 'hello' where the goal hello will be satisfied by a text object that has a sub-goal.",
+   goals = [hello],
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """><INPUT NAME=""Continue"" TYPE=""Submit"" VALUE=""Submit""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>"),
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(name, /, [
+   prompt = text("What is your name?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = text,
+   length = 40,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+
+text(hello, /, [
+   description = "A text object with an embedded goal. When the reasoning engine considers this object, it will form a sub-goal of finding 'name', and put its value in the %name% spot.",
+   type = text,
+   file = "",
+   text = text("Hello " + name + ", welcome!")
+   ]).
+

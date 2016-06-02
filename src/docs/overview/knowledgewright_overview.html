@@ -1,0 +1,241 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/chapter_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>KnowledgeWright Overview</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->KnowledgeWright Overview<!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<p>KnowledgeWright is an embeddable, extendable expert system and knowledge engineering 
+  environment from Amzi!. It can be embedded in everything from web servers to 
+  Visual Basic. The reasoning engine can be extended to accomodate a wide variety 
+  of knowledge structures and reasoning algorithms. And KnowledgeWright has a 
+  full graphical user interface for developing your own knowledgebases called 
+  the Workshop.</p>
+<ul>
+  <li><a href="#overview">Expert System/Knowledgebase Overview</a></li>
+  <li><a href="#architecture">KnowledgeWright Architecture</a></li>
+  <li><a href="#workshop">KnowledgeWright Workshop</a> - The development environment</li>
+  <li><a href="#kwi">KnowledgeWright API</a> - The knowledgebase calling interface</li>
+  <li><a href="#runtimes">KnowledgeWright Runtimes</a> - The runtime environments</li>
+  <li><a href="#jigs">KnowledgeWright Jigs</a> - The Basic, Sales, and Support 
+    Jigs </li>
+  <li><a href="#customization">KnowledgeWright Customization</a> - How custom 
+    jigs can be built to fit your needs</li>
+</ul>
+<h2><a name="overview"></a><font color="#990000">Expert System/Knowledgebase Overview</font></h2>
+<p>Knowledgebases, also called expert systems, allow expertise of the few to be 
+  disseminated to the many.</p>
+<p>They do this by encoding an expert's knowledge in discrete, declarative 'chunks' 
+  of knowledge, without the need for conventional programming. A reasoning engine 
+  applies that knowledge to specific cases, very much the way a human expert would, 
+  by having a dialog with the user.</p>
+<p>Unlike other ways of disseminating knowledge, the user does not have to find 
+  what they are looking for in a knowledge base. Instead, the reasoning engine, 
+  using the knowledgebase, probes the user for information about a particular 
+  situation as needed, and finds the appropriate recommendations for that user, 
+  based on their situation.</p>
+<p>For example, the diagnostic knowledge of a company's technical support people 
+  can be stored in a knowledge base and deployed on the Web. A user dialog with 
+  the reasoning engine would be very similar to a conversation with a technical 
+  support person, and, if successful, the reasoning engine would tell the user 
+  how to resolve the problem at hand.</p>
+<p>Similarly, the sales expertise of a company could be encoded in a knowledgebase, 
+  allowing visitors to a Web site to have the benefit of carrying out a dialog 
+  with a reasoning engine that helps them find the right products for them.</p>
+<p>These are two general examples, but there are many other advisor type, expert 
+  system, knowledgebase applications. For example, a coaching software product 
+  that has a knowledgebase for making workout recommendations, or insurance form 
+  expert for helping file Medicare claims, or a job advisor on a work placement 
+  website.</p>
+<h2><a name="architecture"></a><font color="#990000">KnowledgeWright Architecture</font></h2>
+<p><! AMZI_INDEX = architecture>One of the major difficulties with building expert 
+  system/knowledgebases is that the sort of non-precise knowledge that typifies 
+  them varies widely from one problem domain to another. Further, the way in which 
+  the knowledge is applied varies as well. And the expertise quite often requires 
+  integration with other sources of information.</p>
+<p>KnowledgeWright is designed to be easily molded to any sort of domain expertise, 
+  type of reasoning, collection of supporting data, types of actions triggered, 
+  and deployment. This means KnowledgeWright can be configured to provide a near-perfect 
+  knowledge development, test, and deployment environment for a given domain of 
+  expertise.</p>
+<blockquote> 
+  <h4 align="center"><img src="architecture.png" width="430" height="250"> </h4>
+  <p align="center"><i>KnowledgeWright Architecture</i></p>
+</blockquote>
+<h3><a name="jigs"></a>Jigs</h3>
+<p><! AMZI_INDEX = jig>A particular molding of KnowledgeWright for a domain is 
+  called a Jig. Its function is similar to its manufacturing counterpart, being 
+  its a specialized tool for building a certain type of thing.</p>
+<p>KnowledgeWright has a Basic Jig that is the foundation of the other jigs, and 
+  provides generalized advice and problem solving expert system capabilities. 
+  Other specialized jigs are available as well, and it is possible to create customized 
+  jigs for particular situations.</p>
+<h4></h4>
+<h3><a name="knowledgebase"></a>Knowledgebase</h3>
+<p><! AMZI_INDEX = knowledgebase>A Knowledgebase is composed of a number of different 
+  types of knowledge objects. These objects contain the actual knowledge. Examples 
+  of knowledge objects include: question objects, for asking the user questions; 
+  rule set objects for expressing relationships; table objects similarly used; 
+  and text objects for dynamically composing documents. Different jigs might support 
+  different types of objects.</p>
+<p>Each object has properties that define that object. For example, a question 
+  has a &quot;prompt&quot; property which is the query to display to the user. 
+  A text object, not surprisingly, has a &quot;text&quot; property which is the 
+  document or a piece of a document.</p>
+<h3><a name="workshop"></a>Workshop</h3>
+<p>The Workshop is a graphical environment and contains both editing tools and 
+  testing/debugging tools. These allow for the creating and maintenance of a knowledgebase, 
+  and for the test execution of that knowledgebase.</p>
+<p>The editing tools are driven by a schema describing the particular knowledge 
+  objects used in a particular jig.</p>
+<p>The test and debug tools make use of the particular reasoning strategy used 
+  for a particular jig. They access that reasoning engine through a standard KnowledgeWright 
+  API (Application Program Interface) that provides a uniform dialog for runtime 
+  communication.<! AMZI_INDEX = KWI></p>
+<h3><a name="runtime"></a>Runtime</h3>
+<p>Because the knowledgebase and reasoning engine communicate via the standard 
+  KnowledgeWright API, it is possible to have a variety of runtime deployment 
+  options. A Web CGI interface and stand-alone Java and Visual Basic interfaces 
+  are included with the package, as well as samples for how to embed KnowledgeWright 
+  in applications written with other development tools.<! AMZI_INDEX = CGI; Visual Basic; Java></p>
+<h2><a name="workshop"></a><font color="#990000">KnowledgeWright Workshop</font></h2>
+<p>The Workshop provides a graphical environment for creating, editing, maintaining 
+  and testing a knowledgebase. The editing environment is shown below.</p>
+<p><img src="site_edit.png" width="862" height="623"></p>
+<p>The screen shot shows a sample of a knowledgebase being developed with the 
+  Basic Jig. Notice the trees on the left which can offer different organizational 
+  views of the knowledgebase, and the knowledge object edit windows on the right.</p>
+<p>You can run, test, and debug a knowledgebase from within the KnowledgeWright 
+  Workshop. Here's a sample question dialog box from running a knowledbase in 
+  the Workshop.</p>
+<p><img src="site_question.png" width="444" height="392"></p>
+<p>After gathering a bunch of information, the test runtime puts the solution 
+  up. In this case, its actually a generated HTML document. You can see also the 
+  status and trace windows that let you know how and what the reasoning engine 
+  is doing.</p>
+<p><img src="site_solution.png" width="862" height="623"></p>
+<p>Here you see the answer to the 'goal' called &quot;main_doc&quot; which recommends 
+  resources and products to a visitor to our Web site.</p>
+<h2><a name="kwi"></a><font color="#990000">KnowledgeWright API</font></h2>
+<p>Part of the KnowledgeWright architecture is a standard API (application program 
+  interface) for communicating with a knowledbase, called the KWI. This makes 
+  it easy for any application program to communicate with a conforming knowledgebase 
+  and reasoning engine.</p>
+<p>The nature of the API is relatively abstract, and defines a dialog between 
+  a calling program and the reasoning engine. It basically allows the caller to 
+  initiate problem solving and assert known information, and allows the reasoning 
+  engine to report on results or specify actions to take, and to ask for further 
+  information to be gathered as needed.</p>
+<p>It is the KWI that makes it possible for the KnowledgeWright Workshop to test 
+  run and debug knowledgebases developed with any pre-provided or custom built 
+  KnowledgeWright Jigs.</p>
+<p>The KWI is also used to implement the various runtime interfaces provided with 
+  KnowledgeWright, including a stand-alone runtime and a Web-based interface. 
+  Sample applications using the interfaces are provided for other application 
+  programming environments.</p>
+<h2><a name="runtimes"></a><font color="#990000">KnowledgeWright Runtimes</font></h2>
+<p>The KWI makes it possible to provide a number of runtime environments for KnowledgeWright, 
+  as well as make it easy to integrate KnowledgeWright components in other larger 
+  application frameworks.</p>
+<p>Runtimes distributed with the product include:</p>
+<ul>
+  <li>A stand-alone runtime for running consultations.</li>
+  <li>A Web-based runtime for deploying on the Web.</li>
+  <li>Samples of runtimes for other application development environments (Java, 
+    Delphi, Visual Basic, etc.)</li>
+</ul>
+<h2><a name="jigs"></a><font color="#990000">KnowledgeWright Jigs</font></h2>
+<p>The KnowledgeWright product line has a number of pre-built jigs. We can build 
+  custom jigs for you as well.</p>
+<h3><a name="the_basic_jig"></a>The Basic Jig</h3>
+<p>The Basic Jig is the foundation on which many other jigs can be built. It provides 
+  a basic goal-seeking reasoning engine and can be used for a wide variety of 
+  advisor-type applications. It includes knowledge objects for:</p>
+<ul>
+  <li>rules and rules_tables, which define relationships,</li>
+  <li>user questions and database queries, which are called to gather information 
+    when needed,</li>
+  <li>dynamic text, which can be used to dynamically construct output documents,</li>
+  <li>formatting information, which control the look and feel of Web-based deployments, 
+    and</li>
+  <li>action items, which dictate actions a calling program should take, such 
+    as send an e-mail.</li>
+</ul>
+<p>The reasoning engine starts with one or more goals, and seeks to find values 
+  for them. These can have simple values, or be complex text objects.</p>
+<p>For example, the goal might be to find 'advice' and the value for advice is 
+  determined by a number of rules, and those rules depend on asking questions 
+  of the user and/or a database. Or, the goal might be to generate 'proposal' 
+  where the proposal is a text object that is composed of dynamic entities whose 
+  values are determined by rules which in turn ask questions, etc.</p>
+<h3><a name="support_jig"></a>Support Jig</h3>
+<p>The Support Jig recognizes that technical support people think of two types 
+  of conditions in determining a resolution to a support problem. The first are 
+  environment and release conditions, as a particular problem might occur in a 
+  given release on a given operating system. The second are the actual diagnostic 
+  symptoms used to determine the particular problem.</p>
+<p>Accordingly, the 'solution' knowledge objects of the Support Jig separate these 
+  two types of conditions. This makes it much easier to maintain a support knowledgebase 
+  in the world of changing environments.</p>
+<p>There are different types of advice that a 'solution' might entail, and the 
+  knowledge objects recognize this as well. These include background information, 
+  pointers to document, workarounds if its a bug, fixes if its not, etc.</p>
+<p>Further the Support Jig includes the ability to e-mail the information gathered 
+  from any session that did not resolve the user's problem, to the technical support 
+  staff. </p>
+<h2><a name="customization"></a><font color="#990000">Customized Features</font></h2>
+<p>There are a number of ways in which KnowledgeWright Jigs can be customized 
+  for a particular application:</p>
+<ul>
+  <li>Domain Expertise - The way in which knowledge is represented and organized 
+    can be customized for a given application domain.<br>
+    <br>
+  </li>
+  <li>Reasoning - The reasoning that is applied to knowledge in a particular domain 
+    can be customized.<br>
+    <br>
+  </li>
+  <li>Data Gathering - The facts for a particular situation that the reasoning 
+    engine uses can be gathered from the user, external database, or any other 
+    customized source of information.<br>
+    <br>
+  </li>
+  <li>Action Triggers - The actions recommended can be simple text output, Web 
+    pages, e-mail or any other sort of action you would like to customize.<br>
+    <br>
+  </li>
+  <li>Deployment - The working application can be deployed on the Web or stand-alone 
+    or as part of a larger application.</li>
+</ul>
+<p>For example, one customer wanted to provide detailed workout advice to athletes 
+  based on a large number of physiological factors. The domain expert organized 
+  the knowledge about the effects of each factor in tables, and wanted to see 
+  those tables used in a cumulative, weighted way in determining a final workout 
+  recommendation.</p>
+<p>The custom prototype for that client was based on the Basic Jig, and included 
+  additional knowledge objects for representing the physiological factors. These 
+  'factor' objects contain the tables defining the effects of the factor, and 
+  places to specify when the table will apply and how to weight the recommendations 
+  of the table based on conditions.</p>
+<p><img src="editor.png" width="862" height="739"></p>
+<p>The reasoning engine incorporates a strategic layer that uses the Basic Jig 
+  goal seeking behavior for getting what's needed for each factor, but then combines 
+  the factors using a weighted average algorithm.</p>
+<p>This particular application gathers information both from the athlete him/herself 
+  and a database of workout history kept for the athlete by the calling program, 
+  which in this case is a Visual Basic application.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate -->
+</HTML>

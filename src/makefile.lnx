@@ -1,0 +1,90 @@
+KW_DIR = /home/dennis/kw4
+HERE = /home/dennis/amzi/dev/kw4/src
+TOP = /home/dennis/amzi/dev/kw4
+
+all: _dirs _copy _jre _author _jigs _cgi _docs _java _servlet _samples
+
+_dirs:
+	@echo *** making directories ***
+	-mkdir $(KW_DIR)
+	-mkdir $(KW_DIR)/workshop
+	-mkdir $(KW_DIR)/workshop/jigs
+	-mkdir $(KW_DIR)/workshop/jre
+	-mkdir $(KW_DIR)/docs
+	-mkdir $(KW_DIR)/docs/images
+	-mkdir $(KW_DIR)/docs/jigs
+	-mkdir $(KW_DIR)/docs/jigs/basic
+	-mkdir $(KW_DIR)/docs/jigs/support
+	-mkdir $(KW_DIR)/docs/runtime
+	-mkdir $(KW_DIR)/docs/workshop
+	-mkdir $(KW_DIR)/docs/overview
+	-mkdir $(KW_DIR)/samples
+	-mkdir $(KW_DIR)/samples/basic
+	-mkdir $(KW_DIR)/samples/basic/tutorial
+	-mkdir $(KW_DIR)/samples/support
+	-mkdir $(KW_DIR)/samples/support/tutorial
+	-mkdir $(KW_DIR)/runtime
+	-mkdir $(KW_DIR)/runtime/cgi
+	-mkdir $(KW_DIR)/runtime/cgi/acgi
+	-mkdir $(KW_DIR)/runtime/java
+	-mkdir $(KW_DIR)/runtime/java/amzi
+	-mkdir $(KW_DIR)/runtime/java/amzi/ls
+	-mkdir $(KW_DIR)/runtime/servlet
+	-mkdir $(KW_DIR)/runtime/servlet/WEB-INF
+	-mkdir $(KW_DIR)/runtime/servlet/WEB-INF/classes
+	-mkdir $(KW_DIR)/runtime/servlet/WEB-INF/classes/amzi
+	-mkdir $(KW_DIR)/runtime/servlet/WEB-INF/classes/amzi/ls
+	-mkdir $(KW_DIR)/temp
+
+_copy:
+	@echo *** copying files ***
+	cp $(HERE)/temp/empty.kws $(KW_DIR)/temp
+	cp $(AMZI_DIR)/lib/libamzi.so $(KW_DIR)/workshop
+	cp $(AMZI_DIR)/lib/libamzijni.so $(KW_DIR)/workshop
+	cp $(AMZI_DIR)/lib/aosutils.lsx $(KW_DIR)/workshop
+	cp $(HERE)/workshop/amzi.cfg $(KW_DIR)/workshop
+	cp $(HERE)/workshop/kw $(KW_DIR)/workshop
+	cp $(HERE)/workshop/kwtoo $(KW_DIR)/workshop
+	cp $(HERE)/workshop/kw_orig.cfg $(KW_DIR)/workshop/kw.cfg
+	cp $(HERE)/workshop/kw.jar $(KW_DIR)/workshop
+
+_jre:
+	cp -Rf $(TOP)/workshop/jre $(KW_DIR)/workshop
+	-rm -f $(KW_DIR)/workshop/jre/bin/beans.ocx
+	-rm -f $(KW_DIR)/workshop/jre/bin/keytool.exe
+	-rm -f $(KW_DIR)/workshop/jre/bin/policytool.exe
+	-rm -f $(KW_DIR)/workshop/jre/bin/rmid.exe
+	-rm -f $(KW_DIR)/workshop/jre/bin/rmiregistry.exe
+	-rm -f $(KW_DIR)/workshop/jre/bin/tnameserv.exe
+	-rm -f $(KW_DIR)/workshop/jre/lib/jaws.jar
+
+_author:
+	@echo *** making author ***
+	cd author_api; make -f makefile.lnx
+
+_cgi:
+	@echo *** making cgi ***
+	cd cgi_run; make -f makefile.lnx
+
+_servlet:
+	@echo *** making servlet ***
+	cd servlet_run; make -f makefile.lnx
+
+_docs:
+	@echo *** making docs ***
+	cd docs; make -f makefile.lnx
+
+_java:
+	@echo *** making java ***
+	cd java_run; make -f makefile.lnx
+
+_jigs:
+	@echo *** making jigs ***
+	cd jigs; make -f makefile.lnx
+
+_samples:
+	@echo *** making samples ***
+	cd samples; make -f makefile.lnx
+
+
+

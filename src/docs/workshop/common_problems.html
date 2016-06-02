@@ -1,0 +1,33 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/chapter_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Common Workshop Problems</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->Common Workshop Problems<!-- #EndEditable --></font> 
+</h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><a name="international_users"></a><font color="#990000">Asian Users </font></h2>
+<h3><a name="font_not_found"></a>Font specified in font.properties not found [<i>Font_Name</i>]</h3>
+<p>In the knowledgewright4/workshop/jre/lib subdirectory are a set of files named font.properties.CC 
+  where CC is the ISO country code (i.e. ja for Japan, th for Thailand). The top 
+  section of this file defines the local font to be used for the default fonts 
+  in Java (dialog, dialoginput, serif, sansserif and monospaced). You will get 
+  the above error message when the font specified in this file is not installed 
+  on your computer.</p>
+<p>To fix the problem, edit the appropriate font.properties.CC file and change 
+  the name of the missing font to an installed font. Detailed documentation can 
+  be found at <a href="http://java.sun.com/j2se/1.3/docs/guide/intl/fontprop.html">http://java.sun.com/j2se/1.3/docs/guide/intl/fontprop.html</a></p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate -->
+</HTML>

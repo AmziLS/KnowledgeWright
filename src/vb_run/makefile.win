@@ -1,0 +1,13 @@
+KW_DIR = c:\kw4
+
+_all: _vb
+
+_vb:
+        @echo *** making vb runtime ***
+        copy %AMZI_DIR%\lsapis\vb\amzi.bas $(KW_DIR)\runtime\vb
+        copy vb_run.vbp $(KW_DIR)\runtime\vb
+        copy vb_run.exe $(KW_DIR)\runtime\vb
+        copy mainform.frm $(KW_DIR)\runtime\vb
+        copy listInput.frm $(KW_DIR)\runtime\vb
+
+

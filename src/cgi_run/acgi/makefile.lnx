@@ -1,0 +1,18 @@
+#debug
+#C_FLAGS = -g
+#release
+C_FLAGS = -O6
+
+CC = gcc
+
+all: acgi
+
+acgi: amzicgi.c amzisub.c $(AMZI_DEV_DIR)/lib/libamzi.so
+	$(CC) -I$(AMZI_DEV_DIR)/include -L$(AMZI_DEV_DIR)/lib $(C_FLAGS) -o ../kwcgirun \
+	   amzicgi.c amzisub.c -lamzi -lm -lstdc++
+	$(CC) -I$(AMZI_DEV_DIR)/include -L$(AMZI_DEV_DIR)/lib $(C_FLAGS) -o ../kwtestcgi \
+	   amzicgi.c amzisub.c -lamzi -lm -lstdc++ -DTEST
+
+clean:
+	-rm *.o
+

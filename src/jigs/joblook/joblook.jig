@@ -1,0 +1,437 @@
+% Jobs Jig
+
+schema_global(version, 8).
+schema_global(first_object, knowledgebase).
+schema_global(first_object_name, main).
+schema_global(xref_roots, [knowledgebase, job]).
+
+schema_definition(id, id).
+schema_definition(path, path).
+
+schema(knowledgebase, [
+   id : [
+      type = id,
+      display = id,
+      icon = $pencil.gif$,
+      help_url = $object_knowledgebase.html$,
+      help = $The name of this object$, 
+      object_help = $The global definitions for this knowledgebase$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$],
+   primary_questions : [
+      type = list_of_atoms,
+      display = name_list,
+      listof = [question],
+      default = [holland_traits, secondary_holland_traits],
+      xref = list],
+   date_format : [
+      type = atom,
+      display = menu,
+      choices = ['m/d/y', 'd/m/y', 'y/m/d', 'm-d-y', 'd-m-y', 'y-m-d', 'd mon y', 'month d, y'],
+      default = 'm/d/y'],
+   odbc : [
+      type = string,
+      display = text_line,
+      default = $$],
+   charset : [
+      type = string,
+      display = text_line,
+      default = $$],
+   question_separator : [
+      type = string,
+      display = text_line,
+      default = $<P>$],
+   menu_separator : [
+      type = string,
+      display = text_line,
+      default = $<BR>$],
+   value_separator : [
+      type = string,
+      display = text_line,
+      default = $<P>$],
+   question_top : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<HTML><HEAD></HEAD><BODY><FORM METHOD="POST" ACTION="/cgi-bin/kwcgijoblook.exe$ + system(cgi_parameters) + $">$)],
+   question_bottom : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<P><INPUT NAME="Submit" TYPE="Submit" VALUE="Submit"></INPUT> <INPUT TYPE="Reset" VALUE="Reset"></INPUT></FORM></BODY></HTML>$)],
+   output_top : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<HTML><HEAD></HEAD><BODY>$)],
+   output_continue : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($<FORM METHOD="POST" ACTION="/cgi-bin/kwcgijoblook.exe$ + system(cgi_parameters) + $"><INPUT NAME="Submit" TYPE="Submit" VALUE="Continue"></INPUT></FORM>$)],
+   output_bottom : [
+      type = string,
+      display = text_box, 
+      vars = true,
+      xref = text,
+      default = text($</BODY></HTML>$)]
+
+   ]).
+
+schema(fact, [
+   id : [
+      type = id,
+      display = id,
+      icon = $diamond.gif$,
+      help = $The name of this object$, 
+      help_url = $object_fact.html$,
+      object_help = $The definition of a fact$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$,
+      help = $A description of this object for people$],
+   value : [
+      type = term,
+      display = text_line,
+      xref = expression,
+      default = "",
+      help = $A formula, value or data_table query. Use double-quotes around text values.$]
+   ]).
+
+schema(question, [
+   id : [
+      type = id,
+      display = id,
+      icon = $question.gif$,
+      help = $The name of this object$,
+      help_url = $object_question.html$,
+      object_help = $The definition of a fact$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   prompt : [
+      type = string,
+      display = text_box,
+      vars = true,
+      xref = text,
+      default = $$,
+      help = $The text prompt for the user$],
+   question_type : [
+      type = atom,
+      display = menu, 
+      choices = [menu_single_choice, menu_multiple_choices, fill_in_the_blank,
+         menu_single_choice_display_separate, menu_multiple_choices_display_separate],
+      default = menu_single_choice,
+      help = $The way the question is presented to the user$,
+      related_slots = [
+         menu_single_choice : [choices, question_style, answer_type] : ['rule-display_choices', length],
+         menu_multiple_choices : [choices, question_style, answer_type] : ['rule-display_choices', length],
+         menu_single_choice_display_separate : ['rule-display_choices', question_style, answer_type] : [choices, length],
+         menu_multiple_choices_display_separate : ['rule-display_choices', question_style, answer_type] : [choices, length],
+         fill_in_the_blank : [length, answer_type] : [choices, 'rule-display_choices', question_style] ]
+      ],
+   question_style : [
+      type = atom,
+      display = menu,
+      choices = [listbox, checkbox_radio],
+      default = list,
+      help = $For HTML formatting, the style to use$],
+   choices : [
+      type = list_of_strings,
+      display = list_object,
+      default = [],
+      help = $The list of possible choices for a menu$],
+   'rule-display_choices' : [
+      type = list_of_strings, 
+      display = text_table, 
+      default = [[rule_text, display_text]] ],
+   answer_type : [
+      type = atom,
+      display = menu, 
+      choices = [text, number, date, boolean],
+      default = text,
+      help = $The type of response required$],
+   length : [
+      type = number,
+      display = text_line,
+      default = 20,
+      help = $The length of the field for the user to type the answer into$],
+   default : [
+      type = string,
+      display = text_line,
+      default = $$,
+      help = $The default answer for this question$],
+   ask_also : [
+      type = list_of_atoms,
+      display = name_list,
+      listof = [question],
+      xref = list,
+      default = [],
+      help = $The list of questions to be asked whenever this question is asked$]
+   ]).
+
+schema(sql, [
+   id : [
+      type = id,
+      display = id,
+      icon = $cdrom.gif$,
+      help = $The name of this object$,
+      help_url = $object_sql.html$,
+      object_help = $A fact value that is retrieved from a SQL database$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$],
+   query : [
+      type = string,
+      display = text_box,
+      vars = true,
+      xref = text,
+      default = $$,
+      help = $The query text; use %'s around object names to insert their values$],
+   type : [
+      type = atom,
+      display = menu, 
+      choices = [text, integer, float, date],
+      default = string,
+      help = $The type of data returned by the SQL query$],
+   length : [
+      type = number,
+      display = text_line,
+      default = 20,
+      help = $The length of the field$]
+   ]).
+
+schema(rule_set, [
+   id : [
+      type = id,
+      display = id,
+      icon = $ruler.gif$,
+      help = $The name of this object$,
+      help_url = $object_rule_set.html$,
+      object_help = $Rules that define values for goals and facts$],
+   path : [
+      type = id,
+      display = id,
+      help = $The folder this object is in$],
+   description : [
+      type = string,
+      display = text_box,
+      default = $$],
+   type : [
+      type = atom,
+      display = menu, 
+      choices = [single_value, multiple_values],
+      default = single_value,
+      help = $Whether the rules for this goal have one or possibly more than one value$],
+   rules : [
+      type = list_of_terms, 
+      display = text_table, 
+      vars = true, 
+      xref = rules,
+      default = [[conditions, value]]]
+   ]).
+
+schema(rules_table, [
+   id : [
+      type = id, 
+      display = id,
+      icon = $graph.gif$,
+      help = $The name of this object$,
+      help_url = $object_table.html$,
+      object_help = $Rules in table format$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box,
+      default = $$],
+   type : [
+      type = atom, 
+      display = menu, 
+      choices = [single_value, multiple_values],
+      default = single_value,
+      help = $Whether the rules for this goal have one or possibly more than one value$],
+   rules : [
+      type = list_of_terms, 
+      display = table, 
+      vars = true, 
+      xref = table,
+      % Must not have a default if create_column is true
+      create_column = true,
+      help = $If the conditions in all the lefthand columns are met, the last column is the result$]
+   ]).
+
+schema(data_table, [
+   id : [
+      type = id, 
+      display = id, 
+      icon = $file_cabinet.gif$,
+      help = $The name of this object$,
+      help_url = $object_data_table.html$,
+      object_help = $Data table that can be queried$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box, 
+      default = $$],
+   data : [
+      type = list_of_terms, 
+      display = table, 
+      vars = true, 
+      xref = data_table,
+      default = [],
+      help = $Data can be of any type in any column or row including object names$]
+      ]).
+
+/*
+% This is currently not used, its a translation object intended
+% to support multi-lingual applications.
+schema(translation, [
+   id : [
+      type = id, 
+      display = id, 
+      icon = $textpage.gif$,
+      help = $The name of this object$,
+      help_url = $object_text.html$,
+      object_help = $Text that is displayed for the user when a goal is proven$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box, 
+      default = $$],
+   type : [
+      type = atom, 
+      display = menu, 
+      choices = [text, file],
+      default = text,
+      help = $The source of the text$,
+      related_slots = [
+         text : [text] : [file],
+         file : [file] : [text] ] ],
+   file : [
+      type = string, 
+      display = text_line, 
+      default = $$],
+   text : [
+      type = string, 
+      display = text_box, 
+      vars = true,
+      default = $$ ]
+   ]).
+*/
+
+schema(text, [
+   id : [
+      type = id, 
+      display = id, 
+      icon = $textpage.gif$,
+      help = $The name of this object$,
+      help_url = $object_text.html$,
+      object_help = $Text that is displayed for the user when a goal is proven$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box, 
+      default = $$],
+   type : [
+      type = atom, 
+      display = menu, 
+      choices = [text, file],
+      default = text,
+      help = $The source of the text$,
+      related_slots = [
+         text : [text] : [file],
+         file : [file] : [text] ] ],
+   file : [
+      type = string, 
+      display = file_path, 
+      default = $$],
+   text : [
+      type = string, 
+      display = text_box, 
+      vars = true,
+      xref = text, 
+      default = $$]
+   ]).
+
+schema(job, [
+   id : [
+      type = id, 
+      display = id, 
+      icon = $textpage.gif$,
+      help = $The name of this object$,
+      help_url = $object_text.html$,
+      object_help = $It's a job$],
+   path : [
+      type = id, 
+      display = id, 
+      help = $The folder this object is in$],
+   description : [
+      type = string, 
+      display = text_box, 
+      default = $$],
+   holland_traits : [
+      type = list_of_terms,
+      display = list_object,
+      default = [] ],
+   secondary_holland_traits : [
+      type = list_of_terms,
+      display = list_object,
+      default = [] ],
+   education : [
+      type = list_of_terms,
+      display = list_object,
+      xref = conditions,
+      default = [],
+      xref = rules],
+   skills : [
+      type = list_of_terms,
+      display = list_object,
+      xref = conditions,
+      default = [],
+      xref = rules],
+   motivation : [
+      type = list_of_terms,
+      display = list_object,
+      xref = conditions,
+      default = [],
+      xref = rules],
+   preferences : [
+      type = list_of_terms,
+      display = list_object,
+      xref = conditions,
+      default = [],
+      xref = rules]
+   ]).

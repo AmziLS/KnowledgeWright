@@ -1,0 +1,184 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: solution</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: 
+  solution <!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><font color="#990000"><a name="description"></a></font>Description</h3>
+<p>
+  <! AMZI_INDEX = solution; problem; fix>
+  The heart of the knowledgebase is the solutions. Each solution defines the environment 
+  and conditions under which it applies and provides a description and fix or 
+  workaround. A solution can also have actions associated with it, such as sending 
+  an e-mail.</p>
+<p>Here is an example:</p>
+<div align="center"> 
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">missing_XPL</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">priority</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">150</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">environment</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">programType = &quot;My Program&quot;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">conditions</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">errorCode = &quot;600&quot; or errorMessage = &quot;Error loading .XPL file&quot;</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">problem</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">The program is unable to locate the Amzi! Prolog object <br>module, an XPL file. </font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">fix</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">Make sure the the XPL file exists in your path or the current <br>directory.</font></pre>
+        <pre><font color="#990000">Note: Some development environments such as Visual Basic and <br>Delphi set the current directory to a directory you might not <br>have expected.</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC" width="98"> 
+        <pre><font color="#990000">actions</font></pre>
+      </td>
+      <td width="306"><font color="#990000"> &nbsp;</font></td>
+    </tr>
+  </table>
+  <br>
+</div>
+<p>This solution will be selected by the reasoning engine when the constraints 
+  listed under 'environment' and 'conditions' are met.</p>
+<h3><a name="solution_priority"></a>Solution Priority</h3>
+<p>
+  <! AMZI_INDEX = priority>
+  Before walking through the list of solutions to see which one(s) apply, the 
+  reasoning engine orders them in priority order from lowest to highest. This 
+  lets you put most commonly encountered problems or more general problems first 
+  and provides a more efficient set of questions for the user.</p>
+<blockquote> </blockquote>
+<h3><a name="rule_properties"></a>Solution Properties</h3>
+<p>Rules have the following properties:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td>
+      <! AMZI_INDEX = solution; priority; environment; conditions; problem; fix; actions>
+      <b>Property Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="../basic/object_names.html">Object 
+      Names</a> for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="../basic/folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&nbsp;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>priority</td>
+    <td>Where this solution appears on the list of possible solutions for the 
+      reasoning engine to examine.</td>
+    <td>0</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>environment</td>
+    <td>The environmental conditions for this solution. See <a href="../basic/object_rule_set.html">rule_set</a> 
+      objects for details. All the conditions must be proven (i.e. they are 'anded' 
+      together). </td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>conditions</td>
+    <td>The conditions under which this problem occurs. See <a href="../basic/object_rule_set.html">rule_set</a> 
+      objects for details. All the conditions must be proven (i.e. they are 'anded' 
+      together). </td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>problem</td>
+    <td>A description of the problem to be presented to the user. This may contain 
+      other object names.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>fix</td>
+    <td>A description of the fix or workaround for the problem to be presented 
+      to the user. This may contain other object names. For example, if you there 
+      are instructions for setting a configuration value that are repeated in 
+      many different solutions, you may want to put them in a separate text object 
+      and reference it in each solution.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>actions</td>
+    <td>The list of external actions to be performed when this solution is proven 
+      by the reasoning engine.</td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+</table>
+<br>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

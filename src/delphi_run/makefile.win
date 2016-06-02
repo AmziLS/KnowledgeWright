@@ -1,0 +1,17 @@
+KW_DIR = c:\kw4
+
+_all: _delphi
+
+_delphi:
+        @echo *** making delphi runtime ***
+        copy delphi_run.dpr $(KW_DIR)\runtime\delphi
+        copy delphi_run.res $(KW_DIR)\runtime\delphi
+        copy delphi_run.exe $(KW_DIR)\runtime\delphi
+        copy main.pas $(KW_DIR)\runtime\delphi
+        copy main.dfm $(KW_DIR)\runtime\delphi
+        copy askquestion.pas $(KW_DIR)\runtime\delphi
+        copy askquestion.dfm $(KW_DIR)\runtime\delphi
+        copy %AMZI_DIR%\lsapis\delphi\amzi.pas $(KW_DIR)\runtime\delphi
+        copy %AMZI_DIR%\lsapis\delphi\amzi.dcr $(KW_DIR)\runtime\delphi
+
+

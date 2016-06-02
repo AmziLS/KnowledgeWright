@@ -1,0 +1,138 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: sql</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: sql <!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><font color="#990000"><a name="description"></a></font>Description</h3>
+<p> 
+  <! AMZI_INDEX = sql; ODBC>
+  The sql object lets you obtain the value for a fact from a database using a 
+  SQL query. The format of the query depends upon the underlying database. Consult 
+  a user's manual for your database for details. Under Windows, the query is issued 
+  using ODBC. </p>
+<p>For example:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">avg_weight</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/ health</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">query</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">Select avg(weight) from stats 
+where name = '%name%'</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">type</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">integer</font>
+      </pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">length</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">4</font></pre>
+      </td>
+    </tr>
+  </table>
+</center>
+<p><br>
+  This query gets the average weight from the table 'stats' where the person's 
+  name is equal to the value of the fact 'name'. The 'name' can be derived from 
+  a user question, another sql query, a rule or a table.</p>
+<p>The result of the query must be a single value in a single field.</p>
+<h3><a name="setting_up_odbc"></a>Setting Up an ODBC Database</h3>
+<p> 
+  <! AMZI_INDEX = ODBC; Windows>
+  Before you can run a sql object you need to create an ODBC data source. This 
+  is done in the Windows Control Panel. Open the ODBC Administrator or Data Sources 
+  (ODBC) panel and add a new DSN that points to your database. Put the name of 
+  the ODBC Data Source in the main <a href="object_knowledgebase.html">knowledgebase 
+  object</a>. All the sql queries in your knowledgebase will be issued to that 
+  data source.</p>
+<h3><font color="#990000"><a name="sql_properties"></a></font>SQL Properties</h3>
+<p>The properties of the query are:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td> 
+      <! AMZI_INDEX = sql; query; type; length>
+      <b>Property Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="object_names.html">Object Names</a> 
+      for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&lt;none&gt;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>query</td>
+    <td>The SQL query. This may contain other object names in %'s.</td>
+    <td>&nbsp;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>type</td>
+    <td>The type of the value to be returned by the query: text, integer, float 
+      or date.</td>
+    <td>&nbsp;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>length</td>
+    <td>The maximum length of the value returned by the query.</td>
+    <td>&nbsp;</td>
+    <td>yes</td>
+  </tr>
+</table>
+<br>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

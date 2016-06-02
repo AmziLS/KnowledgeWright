@@ -1,0 +1,139 @@
+knowledgewright_jig(basic, 11).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "A knowledgebase that illustrates the use of formulas in rules.  The rules are used to calculate the area and perimeter of different shapes.",
+   goals = [area, perimeter],
+   odbc = "",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text(""),
+   question_bottom = text(""),
+   output_top = text(""),
+   output_continue = text(""),
+   output_bottom = text(""),
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+fact(pi, /, [
+   description = "The constant value for pi",
+   value = 3.14159
+   ]).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(height, /, [
+   prompt = text("What is the height?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(radius, /, [
+   prompt = text("What is the radius?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(shape, /, [
+   prompt = text("What shape are you interested in?"),
+   question_type = menu_single_choice,
+   question_style = listbox,
+   choices = ["circle", "rectangle"],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(width, /, [
+   prompt = text("What is the width?"),
+   question_type = fill_in_the_blank,
+   question_style = listbox,
+   choices = '[]',
+   answer_type = number,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+rule_set(area, /, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [shape = "circle", pi*radius**2], [shape = "rectangle", height*width]]
+   ]).
+
+rule_set(perimeter, /, [
+   description = "",
+   type = single_value,
+   rules = [[conditions, value], [shape = "circle", 2*pi*radius], [shape = "rectangle", 2*(height + width)]]
+   ]).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+

@@ -1,0 +1,186 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Object: external action</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Object: 
+  external action<!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="description"></a>Description </h3>
+<p><! AMZI_INDEX = external_action ; sendmail; email>External actions are used when it 
+  is desirable for the application that is running the knowledgebase execute a 
+  task such as sending e-mail. In fact, the CGI interface provides the ability 
+  to do this on systems that have a 'sendmail' command. </p>
+<p>External actions are described by a table of parameters that are passed to 
+  the application. For example, sendmail uses the following fields:</p>
+<center>
+  <table border="1" cellpadding="2" bordercolor="#ffcccc">
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">id</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">email_support</font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">path</font></pre>
+      </td>
+      <td width="306"> 
+        <pre><font color="#990000">/ </font></pre>
+      </td>
+    </tr>
+    <tr valign="top" align="left"> 
+      <td bgcolor="#FFCCCC"> 
+        <pre><font color="#990000">parameters</font></pre>
+      </td>
+      <td width="306"> 
+        <table border="1" cellpadding="2">
+          <tr valign="top"> 
+            <td> 
+              <pre><b><font color="#990000">parameter</font></b>
+            </pre>
+            </td>
+            <td> 
+              <pre><b><font color="#990000">value</font></b>
+            </pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">type</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">sendmail</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">command</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">/usr/sbin/sendmail -t</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">to</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">support@amzi.com</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">from</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">%userEMail%</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">subject</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">No Solution in Support Knowledgebase</font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">cc</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000"></font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">bcc</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000"></font></pre>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td> 
+              <pre><font color="#990000">message</font></pre>
+            </td>
+            <td> 
+              <pre><font color="#990000">%userName%'s comments:
+%additionalComments% <br>
+Amzi! Version: %amziVersion%
+Operating System: %environmentNameVer%
+
+Known facts:
+</font></pre>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</center>
+<p><br>
+  Notice the value fields can contain other objects.. For example in 'message':</p>
+<blockquote> 
+  <pre>%userName%'s comments:
+%additionalComments% <br>
+Amzi! Version: %amziVersion%
+Operating System: %environmentNameVer%
+
+Known facts:</pre>
+</blockquote>
+<p><! AMZI_INDEX = CGI>The values for the question 'userName', 
+  'additionalComments', 'amziVersion' and 'environmentNameVer' will be inserted 
+  into the message. (The CGI interface appends all the known facts onto the end 
+  of the message.)</p>
+<h3><font color="#990000"><a name="text_properties"></a></font>External Action 
+  Properties</h3>
+<p>The properties of text objects are:</p>
+<table BORDER cellpadding=3 >
+  <tr valign="bottom"> 
+    <td><! AMZI_INDEX = external_action ; parameters><b>Property Name </b></td>
+    <td><b>Description</b></td>
+    <td><b>Default Value</b></td>
+    <td><b>Required</b></td>
+  </tr>
+  <tr valign="top"> 
+    <td>id</td>
+    <td>The name of this object. See <a href="../basic/object_names.html">Object 
+      Names</a> for details.</td>
+    <td>&lt;none&gt;</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>path</td>
+    <td>The folder this object is located in. See <a href="../basic/folders.html">Folders</a> 
+      for details.</td>
+    <td>/</td>
+    <td>yes</td>
+  </tr>
+  <tr valign="top"> 
+    <td>description</td>
+    <td>A text description (comment)--not used during reasoning.</td>
+    <td>&nbsp;</td>
+    <td>no</td>
+  </tr>
+  <tr valign="top"> 
+    <td>parameters</td>
+    <td>A table of parameters to be passed to the calling application. All the 
+      fields are text and may contain object names in %'s.</td>
+    <td></td>
+    <td>yes</td>
+  </tr>
+</table>
+<font color="#990000"> </font> <!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

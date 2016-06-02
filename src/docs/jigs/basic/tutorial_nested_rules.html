@@ -1,0 +1,117 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Chaining Rules</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Chaining 
+  Rules<!-- #EndEditable --></font></font> </h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="recommending_actions_for_problems"></a>Recommending Actions for Problems</h3>
+<p>samples/basic/tutorial/diagnose_2.kb</p>
+<p> 
+  <! AMZI_INDEX = rules; rule_set; single_value>
+  Rules can refer to facts whose values are acquired from other rules. We can 
+  illustrate that point by adding to the diagnostic sample we've already built.</p>
+<p>The application determines what the problem is, but doesn't tell the user what 
+  to do about it. We can add a set of rules that recommend an action for the user 
+  to take, based on what the problem is.</p>
+<ol>
+  <ol>
+    <li>Change the goal of the knowledgebase to <i>action</i>.</li>
+    <li>Create a new <b>rule_set</b>, named <i>action</i>.</li>
+    <li>Make it single_valued.</li>
+    <li>Add the conditions and values below: <br>
+      <br>
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><b><font color="#990000">conditions</font></b></pre>
+          </td>
+          <td> 
+            <pre><b><font color="#990000">value</font></b></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">problem = &quot;Screen saver&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;Move mouse&quot;</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">problem = &quot;Monitor turned off&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;Turn monitor on&quot;</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">problem = &quot;Dirty rollers&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;Clean rollers&quot;</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">problem = &quot;No mouse pad&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;Get a mouse pad&quot;</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">problem = &quot;Broken mouse&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;Buy new mouse&quot;</font></pre>
+          </td>
+        </tr>
+      </table>
+    </li>
+  </ol>
+</ol>
+<h3><a name="run_it"></a>Run It</h3>
+<ol>
+  <ol>
+    <li>Run the system with different answers to questions, and study the traces 
+      to understand how the system is working.</li>
+    <li>Add the goal <i>problem</i> to the knowledgebase to see how multiple goals 
+      can be specified. Use the arrows to make <i>problem</i> the first goal.</li>
+    <li>Note that, because <i>action</i> uses <i>problem</i>, its not necessary 
+      to make <i>problem</i> a goal, but, by doing so you get to report back to 
+      the user both the <i>problem</i> and the <i>action</i> to take. However, 
+      the output is not formatted in a tidy manner for the Web.</li>
+    <li>To fix this, create a new <b>text</b> object named <i>ouput</i>. Set the 
+      text to:</li>
+  </ol>
+  <blockquote><br>
+    <table border="1" cellpadding="2">
+      <tr valign="top"> 
+        <td> 
+          <pre><b><font color="#990000">text</font></b></pre>
+        </td>
+      </tr>
+      <tr valign="top"> 
+        <td> 
+          <pre><font color="#990000">&lt;p&gt;The problem is: %problem%&lt;/p&gt;<br>&lt;p&gt;To fix it: %action%&lt;/p&gt;</font></pre>
+        </td>
+      </tr>
+    </table>
+
+  </blockquote>
+</ol>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

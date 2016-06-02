@@ -1,0 +1,23 @@
+KW_DIR = c:\kw4
+
+_all: _aspnet
+
+        
+_aspnet: $(OBJECTS)
+        @echo *** making asp.net runtime ***
+        copy %AMZI_DIR%\bin\amzinet.dll $(KW_DIR)\runtime\asp.net\bin
+        copy bin\KW.dll          $(KW_DIR)\runtime\asp.net\bin
+        copy AssemblyInfo.vb     $(KW_DIR)\runtime\asp.net
+        copy Global.asax         $(KW_DIR)\runtime\asp.net
+        copy Global.asax.resx    $(KW_DIR)\runtime\asp.net
+        copy Global.asax.vb      $(KW_DIR)\runtime\asp.net
+        copy KW.sln              $(KW_DIR)\runtime\asp.net
+        copy KW.suo              $(KW_DIR)\runtime\asp.net
+        copy KW.vbproj           $(KW_DIR)\runtime\asp.net
+        copy KW.vbproj.webinfo   $(KW_DIR)\runtime\asp.net
+        copy KW.vsdisco          $(KW_DIR)\runtime\asp.net
+        copy KWForm.aspx         $(KW_DIR)\runtime\asp.net
+        copy KWForm.aspx.resx    $(KW_DIR)\runtime\asp.net
+        copy KWForm.aspx.vb      $(KW_DIR)\runtime\asp.net
+        copy Styles.css          $(KW_DIR)\runtime\asp.net
+        copy Web.config          $(KW_DIR)\runtime\asp.net

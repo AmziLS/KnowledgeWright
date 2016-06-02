@@ -1,0 +1,378 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Rules</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Rules<!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="diagnosing_a_problem"></a>Diagnosing a Problem</h3>
+<p>knowledgewright4/samples/basic/tutorial/diagnose_1.kb</p>
+<p>Next we'll build a simple technical support application with a few simple rules. 
+  The goal of the system will be to determine what the <i>problem</i> is.</p>
+<p>KnowledgeWright groups rules that deduce values for the same fact in rule_sets.</p>
+<h3><a name="set_the_goal_to_problem"></a>Set the Goal to 'problem'</h3>
+<ol>
+  <li>Edit the knowledgebase object, <b>main</b>, to have a goal of <i>problem</i>, 
+    just as in earlier parts of this tutorial.</li>
+</ol>
+<h3><a name="create_rules_for_determining_the_problem"></a>Create Rules for Determining 
+  the Problem</h3>
+<p><! AMZI_INDEX = rule>Each rule object in KnowledgeWright Basic contains a number 
+  of individual rules, each of which might be used to determine the <b>value</b> 
+  of a fact. So in this case, we'll create a <b>rule_set</b> object, named <i>problem</i>, 
+  which will have rules that can be used to determine a value for <i>problem</i>.</p>
+<ol>
+  <ol>
+    <li>Use Object/New to create a new <b>rule_set</b> object, with a name of 
+      <i>problem</i>.</li>
+    <li>In the type field, select single_value.</li>
+    <li>In the rule editor, select Row/Add. You'll see a blank row beneath the 
+      headings for conditions and value.</li>
+    <li>Enter these conditions for the first rule: symptom = &quot;video screen 
+      blank&quot; and led_light = &quot;on&quot;.</li>
+    <li>Enter this value for the first rule: &quot;Screen saver on&quot;.</li>
+    <li>Select Row/Add for another row for another rule.</li>
+    <li>Enter condition: symptom = &quot;video screen blank&quot; and led_light 
+      = &quot;off&quot;.</li>
+    <li>And value: &quot;Monitor turned off&quot;.</li>
+    <li>Repeat for the following conditions and values:</li>
+    <li>condition: symptom = &quot;mouse sticky&quot; and mouse_pad = &quot;yes&quot; 
+      and rollers_clean = &quot;no&quot;.</li>
+    <li>value: &quot;Dirty rollers&quot;.</li>
+    <li>condition: symptom = &quot;mouse sticky&quot; and mouse_pad = &quot;no&quot;.</li>
+    <li>value: &quot;No mouse pad&quot;.</li>
+    <li>condition: symptom = &quot;mouse sticky&quot; and mouse_pad = &quot;yes&quot; 
+      and rollers_clean = &quot;yes&quot;.</li>
+    <li>value: &quot;Broken mouse&quot;.</li>
+    <li>The screen should look something like:<br>
+      <br>
+      <img src="diagnose_1a.png" width="698" height="579"></li>
+  </ol>
+</ol>
+<h3><a name="checking_the_knowledgebase"></a>Checking the Knowledgebase</h3>
+<p>The status window at the bottom of the screen provides two tools for analyzing 
+  the connections between knowledge objects.</p>
+<ul>
+  <li>The tab with the web on it shows how a given object is linked to other objects.</li>
+  <li>The tab with the red exclamation mark, shows any links that are undefined, 
+    or circular in a knowledgebase.</li>
+</ul>
+<p>In this example we have so far created a <b>knowledgebase</b> <i>main</i> object 
+  that has as a goal <i>problem</i>, and a <b>rule_set</b> <i>problem</i> that 
+  has conditions that refer to other, as yet undefined facts.</p>
+<p>Click on the exclamation mark tab to see any problems in the structure of the 
+  knowledgebase, and you will see a screen like the following:</p>
+<p><img src="diagnose_1b.png" width="698" height="579"></p>
+<p>and the other status tab looks like this:</p>
+<p><img src="diagnose_1c.png" width="692" height="142"></p>
+<h3><a name="adding_the_questions"></a>Adding the Questions</h3>
+<p>We will get values for the four undefined facts by asking the user. So we need 
+  to define question objects for each of them.</p>
+<p>Using the Object/New menu, create four questions objects with these attributes:</p>
+<div align="left"> 
+  <blockquote> 
+    <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">id</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">symptom</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">path</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">/</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">prompt</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">What symptom are you experiencing?</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_type</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">menu_single_choice</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_style</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">listbox</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">choices</font>
+    </pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">video screen blank
+mouse sticky</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">default</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp; </pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">ask_also</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp;  </pre>
+        </td>
+      </tr>
+    </table>
+  </blockquote>
+  <blockquote> 
+    <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">id</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">led_light</font>         </pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">path</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">/</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">prompt</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">What is the state of the video LED light?</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_type</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">menu_single_choice</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_style</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">listbox</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">choices</font>
+    </pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">on
+off</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">default</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp; </pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">ask_also</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp;  </pre>
+        </td>
+      </tr>
+    </table>
+  </blockquote>
+  <blockquote> 
+    <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">id</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">mouse_pad</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">path</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">/</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">prompt</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">Are you using a mouse pad?</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_type</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">menu_single_choice</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_style</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">listbox</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">choices</font>
+    </pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">yes
+no</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">default</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp; </pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">ask_also</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp;  </pre>
+        </td>
+      </tr>
+    </table>
+  </blockquote>
+  <blockquote> 
+    <table border="1" cellpadding="2" bordercolor="#FFCCCC">
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">id</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">rollers_clean</font>         </pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">path</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">/</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">prompt</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">Have you recently cleaned the rollers?</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_type</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">menu_single_choice</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">question_style</font></pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">listbox</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC"> 
+          <pre><font color="#990000">choices</font>
+    </pre>
+        </td>
+        <td width="306"> 
+          <pre><font color="#990000">yes
+no</font></pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">default</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp; </pre>
+        </td>
+      </tr>
+      <tr valign="top" align="left"> 
+        <td bgcolor="#FFCCCC" width="98"> 
+          <pre><font color="#990000">ask_also</font></pre>
+        </td>
+        <td width="306"> 
+          <pre>&nbsp;  </pre>
+        </td>
+      </tr>
+    </table>
+  </blockquote>
+  <h3><a name="exercises"></a>Exercises</h3>
+  <ol>
+    <ol>
+      <li>Run (using Run/Run menu item) using a variety of responses.</li>
+      <li>Notice that the system only asks the detailed questions that are necessary. 
+      </li>
+      <li>Look at the trace in lower left panel for each, to understand how the 
+        system worked for each set of answers.</li>
+      <li><! AMZI_INDEX = log>Use Run/Log Detail to change the amount of trace 
+        output. Use the high setting to see exactly how the system works. Use 
+        medium or low to get a better overview. (We recommend medium for most 
+        use.)</li>
+    </ol>
+  </ol>
+</div>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

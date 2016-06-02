@@ -1,0 +1,27 @@
+.SUFFIXES: .class .java
+
+OBJECTS = KW.class ExtFilenameFilter.class SessionListener.class Utils.class
+KW_DIR = /home/dennis/kw4
+
+_all: _servlet
+
+.java.class:
+	javac -classpath ./servlet.jar:$(CLASSPATH) $<
+
+_servlet: $(OBJECTS)
+	@echo *** making servlet runtime ***
+	cp $(AMZI_DIR)/src/lsapis/java20/amzi/ls/*.java $(KW_DIR)/runtime/servlet/WEB-INF/classes/amzi/ls
+	cp $(AMZI_DIR)/lsapis/java20/amzi/ls/*.class $(KW_DIR)/runtime/servlet/WEB-INF/classes/amzi/ls
+	cp KW.java $(KW_DIR)/runtime/servlet
+	cp ExtFilenameFilter.java $(KW_DIR)/runtime/servlet
+	cp SessionListener.java $(KW_DIR)/runtime/servlet
+	cp Utils.java $(KW_DIR)/runtime/servlet
+	cp servlet_run.jpx $(KW_DIR)/runtime/servlet
+	cp WEB-INF/web.xml $(KW_DIR)/runtime/servlet/WEB-INF
+	cp WEB-INF/classes/KW.class $(KW_DIR)/runtime/servlet/WEB-INF/classes
+	cp WEB-INF/classes/ExtFilenameFilter.class $(KW_DIR)/runtime/servlet/WEB-INF/classes
+	cp WEB-INF/classes/SessionListener.class $(KW_DIR)/runtime/servlet/WEB-INF/classes
+	cp WEB-INF/classes/Utils.class $(KW_DIR)/runtime/servlet/WEB-INF/classes
+
+
+

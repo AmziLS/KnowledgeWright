@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Development and Deployment</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF">
+<h2><font color="#FF0000">DRAFT - Check with Amzi! for latest version</font></h2>
+<h2><font color="#FF0000">2000-Dec-07</font></h2>
+<h2>Development</h2>
+<p>The basic job of the sales person is to match the needs of a prospect with 
+  the benefits of the product as provided by the features of the product. The 
+  KnowledgeWright Sales Workshop is used to capture that knowledge.</p>
+<h4>Needs-Benefits-Features</h4>
+<p>Benefits are entered into the system with the prospect needs that each benefit 
+  addresses, and the product features that support the benefit.</p>
+<p>Prospect needs are learned by asking the prospect, so questions to the prospect 
+  are also defined in the knowledgebase.</p>
+<p>When the system runs, it starts with a general benefit question, and then dynamically 
+  determines which benefits might apply, and asks further questions as needed 
+  to determine which benefits should be presented to this prospect and why. The 
+  presentation of benefits is intermingled with the questions, making for a natural 
+  dialog with the prospect.</p>
+<p><img src="benefit.png" width="678" height="843"></p>
+<p>The above screen shot is from the KnowledgeWright Sales Workshop, showing a 
+  couple of benefit objects and the conditions that will trigger their presentation.</p>
+<p>Notice that the conditions are used to trim which benefits apply. For example, 
+  if a product had Linux and Windows versions, with only certain features supported 
+  in Linux, then the Windows-only features and benefits would not be presented 
+  to Linux prospects.</p>
+<p>So a sales person using the system would not need to know about Linux-specific 
+  features/benefits until confronted with a prospect using Linux, and at that 
+  time the system would present to the salesperson the features and benefits to 
+  describe to the prospect.</p>
+<h4>Proposal</h4>
+<p>The system can also dynamically generate a proposal document, based on situation 
+  factors, such as financial resources of prospect. The screen shot below shows 
+  a simple proposal template that will be filled out with dynamically generated 
+  values.</p>
+<p>Rules are used to specify under which conditions what text gets displayed in 
+  the document.</p>
+<p><img src="proposal.png" width="678" height="843"></p>
+<p>Within the Workshop you can also test out the knowledge and the flow of dialogs 
+  that it generates for various scenarios. The testing lets you further tune the 
+  knowledge til you rapidly converge on ideal sales dialog generation.</p>
+<p>Because the benefit objects you saw above are all independently specified, 
+  there is no procedural coding involved in the system. This means it can be maintained 
+  simply by adding, modifying, and/or removing benefit objects.</p>
+<h2>Deployment</h2>
+<p>When the system runs, it generates a dialog. Here's a sample dialog from a 
+  scrolling console version of the software that lets you see the flow of questions, 
+  recommendations, and proposal.</p>
+<pre>Welcome system = KnowledgeWright Sales version = 4-1-1
+
+
+KnowledgeWright is a tool for developing, maintaining,
+testing and deploying knowledge-base or expert systems.
+It provides quicker and easier development by having
+knowledge objects that are intuitive to use, a powerful
+development environment, and multiple deployment options.
+
+
+Is this of interest to you?
+1: yes
+2: no
+Enter your choice > 1
+
+What type of knowledgebase or expert system are you
+interested in building?
+
+1: sales support
+2: technical support
+3: basic advice
+4: indentification
+5: configuration
+6: other
+Enter your choice > 3
+
+Benefit:
+KnowledgeWright includes a number of pre-built jigs
+for different types of applications. For a basic
+advice giving system such as yours, the Basic Jig
+will provide the right level of tools for expressing
+the application.
+
+Feature:
+KnowledgeWright Basic Jig, designed for basic advice
+seeking applications.
+
+How do you intend to deploy the system?
+1: stand-alone
+2: Web
+3: component of larger application
+Enter your choice > 2
+
+Benefit:
+KnowledgeWright jigs allow for the specification of
+dynamically created output documents, which can be
+HTML. These documents can contain 'placeholders' whose
+values are filled in as the application gains more
+knowledge about a particular session with a user.
+
+Feature:
+KnowledgeWright Jigs, document objects.
+
+Benefit:
+For Web deployment, KnowledgeWright question objects
+are formatted as HTML queries, so the dialog between
+the expert system and the user can be carried out on a
+Web page.
+
+Feature:
+KnowledgeWright Jigs, question and format_document
+objects.
+
+What type of institution will be using the
+application/software?
+
+1: personal
+2: academic
+3: consulting
+4: commercial
+5: government
+Enter your choice > 4
+
+Proposal:
+
+Based on what we've determined so far, here's our proposal:
+
+1- Download the latest version of KnowledgeWright from the
+Web site.
+
+2- Evaluate its use.
+
+3- Being in a commercial or government institution, you can
+download and use the software at no charge during evaluation.
+Once you have decided to use the software, then you will
+need to purchase a commercial license.</pre>
+</body>
+</html>

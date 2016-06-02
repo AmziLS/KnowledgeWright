@@ -1,0 +1,212 @@
+ 
+<HTML>
+<!-- #BeginTemplate "/Templates/section_page.dwt" --> 
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Rules_Tables</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Tables<!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3><a name="using_tables_instead_of_rule_sets"></a>Using Rules_Tables Instead 
+  of Rule_Sets</h3>
+<p>samples/basic/tutorial/loan.kb</p>
+<p><! AMZI_INDEX = rules_table ; rule_set>In some rule_sets you might find that you 
+  are repeating the same conditions over and over again. For example, if you are 
+  calculating how much money to loan for the purchase of a house, you might have 
+  the following <b>rule_set</b> named <i>max_loan_amount</i>:</p>
+<blockquote> 
+  <table border="1" cellpadding="2">
+    <tr valign="top"> 
+      <td> 
+        <pre><b><font color="#990000">conditions</font></b></pre>
+      </td>
+      <td> 
+        <pre><b><font color="#990000">value</font></b></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">income &gt;= 50000 and debt &lt; 10000 and rating = &quot;poor&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">75000</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">income &gt;= 50000 and debt &lt; 10000 and rating = &quot;good&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">150000</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">income &gt; 35000 and debt &lt; 5000 and rating = &quot;poor&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">50000</font></pre>
+      </td>
+    </tr>
+    <tr valign="top"> 
+      <td> 
+        <pre><font color="#990000">income &gt; 35000 and debt &lt; 5000 and rating = &quot;good&quot;</font></pre>
+      </td>
+      <td> 
+        <pre><font color="#990000">100000</font></pre>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<p>A more readable way to represent this would be a table.</p>
+<p>We'll create a rules_table as part of a knowledgebase that determines the maximum 
+  loan amount based on various factors.</p>
+<ol>
+  <li>Create a new knowledgebase named loan.</li>
+  <li>Set the goal of the <i>main</i><b> knowledgebase</b> object to <i>max_loan_amount</i>.</li>
+  <li>Create the following three questions:</li>
+  <ul>
+    <li>A fill_in_the_blank <b>question</b> named <i>income</i> that has an answer_type 
+      of 'number'.</li>
+    <li>A fill_in_the_blank <b>question</b> named <i>debt</i> that has an answer_type 
+      of 'number'.</li>
+    <li>A menu_single_choice <b>question</b> named <i>rating</i> that has choices 
+      'good' and 'poor'. </li>
+  </ul>
+  <li> Create a <b>rules_table</b> named <i>max_loan_amount</i>. Note that the 
+    column max_loan_amount has been created for you. The values in this column 
+    are the ones the object <i>max_loan_amount</i> may take on.</li>
+  <li><! AMZI_INDEX = column ; row>Using the Column/Add command, add columns for 
+    income, debt and rating. Make sure the max_loan_amount column is last. You 
+    can change order of columns by dragging the column heading.</li>
+  <li>Using the Row/Add command create the following table:<br>
+    <blockquote> 
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000"><b>income</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>debt</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>rating</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>max_loan_amount</b></font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&gt; 50000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&lt; 10000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;poor&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">75000</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&gt; 50000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&lt; 10000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;good&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">150000</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&gt; 35000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&lt; 5000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;poor&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">50000</font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">&gt; 35000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&lt; 5000</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">&quot;good&quot;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">100000</font></pre>
+          </td>
+        </tr>
+      </table>
+      <br>
+      Notice how this multi-column approach is easier to read than long conditions 
+      with lots of 'ands' in them.</blockquote>
+  </li>
+  <li>Run it, note that the order of the rows in the table assures that someone 
+    with income over 50000 does not get the over 35000 max_loan_amount.</li>
+  <li>When using tables, it is a good idea to add a last &quot;catch all&quot; 
+    row to the table so that a value is returned. Add the following row onto the 
+    end of the <b>rules_table</b> <i>max_loan_amount</i>:<br>
+    <blockquote> 
+      <table border="1" cellpadding="2">
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000"><b>income</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>debt</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>rating</b></font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000"><b>max_loan_amount</b></font></pre>
+          </td>
+        </tr>
+        <tr valign="top"> 
+          <td> 
+            <pre><font color="#990000">*</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">*&nbsp;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">*&nbsp;</font></pre>
+          </td>
+          <td> 
+            <pre><font color="#990000">0</font></pre>
+          </td>
+        </tr>
+      </table>
+    </blockquote>
+    The asterisks mean &quot;match any value&quot;. So if none of the rows above 
+    match, the last one will, returning a max_loan_amount of 0. You can test this 
+    by entering an income of 20000 with debt of 10000 and a rating of 'poor'.<br>
+  </li>
+</ol>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate -->
+</HTML>

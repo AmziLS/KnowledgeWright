@@ -1,0 +1,27 @@
+.SUFFIXES: .plm .pro
+
+OBJECTS = acgi.plm exception.plm fact_finder.plm formats.plm kwi.plm logging.plm main.plm session_handler.plm utilities.plm
+
+KW_DIR = /home/dennis/kw4
+HERE = /home/dennis/amzi/dev/kw4/src
+
+_all: _jigs
+
+.pro.plm:
+	acmp $<
+
+_jigs: basic/basic_reasoner.plm support/support_reasoner.plm $(OBJECTS)
+	@echo *** building jigs ***
+	alnk basic.xpl basic/basic_reasoner.plm $(AMZI_DIR)/abin/list.plm $(AMZI_DIR)/abin/date_time.plm $(OBJECTS)
+	alnk support.xpl support/support_reasoner.plm $(AMZI_DIR)/abin/list.plm $(AMZI_DIR)/abin/date_time.plm $(OBJECTS)
+	cp basic.xpl $(KW_DIR)/workshop/jigs
+	cp basic/basic.jig $(KW_DIR)/workshop/jigs
+	cp support.xpl $(KW_DIR)/workshop/jigs
+	cp support/support.jig $(KW_DIR)/workshop/jigs
+	cp basic.xpl $(KW_DIR)/runtime/cgi/kwcgibasic.xpl
+	cp support.xpl $(KW_DIR)/runtime/cgi/kwcgisupport.xpl
+	cp basic.xpl $(KW_DIR)/runtime/cgi/kwtestcgi.xpl
+	
+
+
+

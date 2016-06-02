@@ -1,0 +1,129 @@
+knowledgewright_jig(basic, 11).
+
+knowledgewright_license(academic_personal, '[]').
+
+
+
+% folder
+
+:- indexed folder(1,0,0).
+
+
+
+% knowledgebase
+
+:- indexed knowledgebase(1,0,0).
+
+knowledgebase(main, /, [
+   description = "",
+   goals = [upgrade_price],
+   odbc = "products",
+   question_separator = "<P>",
+   menu_separator = "<BR>",
+   value_separator = "<P>",
+   question_top = text("<HTML><HEAD></HEAD><BODY><FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """>"),
+   question_bottom = text("<P><INPUT NAME=""Submit"" TYPE=""Submit"" VALUE=""Submit""></INPUT> <INPUT TYPE=""Reset"" VALUE=""Reset""></INPUT></FORM></BODY></HTML>"),
+   output_top = text("<HTML><HEAD></HEAD><BODY>"),
+   output_continue = text("<FORM METHOD=""POST"" ACTION=""/cgi-bin/kwcgibasic.exe" + system(cgi_parameters) + """><INPUT NAME=""Continue"" TYPE=""Submit"" VALUE=""Submit""></INPUT></FORM>"),
+   output_bottom = text("</BODY></HTML>"),
+   date_format = 'm/d/y',
+   charset = ""
+   ]).
+
+
+
+% fact
+
+:- indexed fact(1,0,0).
+
+
+
+% question
+
+:- indexed question(1,0,0).
+
+question(new_product, /, [
+   prompt = text("What product do you want to upgrade to?"),
+   question_type = menu_single_choice_display_separate,
+   question_style = checkbox_radio,
+   choices = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"], ["ap1pc", "Amzi! Prolog + Logic Server, Personal License"], ["apxpc", "Amzi! Prolog + Logic Server,
+Commercial License (for 1 developer and 1 runtime)"]],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(old_product, /, [
+   prompt = text("What is the last product you purchased?"),
+   question_type = menu_single_choice_display_separate,
+   question_style = checkbox_radio,
+   choices = '[]',
+   'rule-display_choices' = [["rule_text", "display_text"], ["ap1pc", "Amzi! Prolog + Logic Server, Personal Edition"], ["apxpc", "Amzi! Prolog + Logic Server,
+Professional Edition or Commercial License"]],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+question(old_version, /, [
+   prompt = text("What is the last version number you purchased (i.e. if you got a free upgrade to 5.0, the last version you purchased was 4.1)?"),
+   question_type = menu_single_choice,
+   question_style = checkbox_radio,
+   choices = ["4.0", "4.1", "5.0"],
+   'rule-display_choices' = [["rule_text", "display_text"]],
+   answer_type = text,
+   length = 20,
+   default = "",
+   ask_also = '[]',
+   answer_type = text
+   ]).
+
+
+
+% sql
+
+:- indexed sql(1,0,0).
+
+sql(price, /, [
+   description = "",
+   query = text("select price from upgrades where old_product = '" + old_product + "' and version = '" + old_version + "' and new_product = '" + new_product + "'"),
+   type = float,
+   length = 20
+   ]).
+
+
+
+% rule_set
+
+:- indexed rule_set(1,0,0).
+
+
+
+% rules_table
+
+:- indexed rules_table(1,0,0).
+
+
+
+% data_table
+
+:- indexed data_table(1,0,0).
+
+
+
+% text
+
+:- indexed text(1,0,0).
+
+text(upgrade_price, /, [
+   description = "",
+   type = text,
+   file = "",
+   text = text("The price for this upgrade is " + price + ".")
+   ]).
+

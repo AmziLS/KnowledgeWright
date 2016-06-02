@@ -1,0 +1,62 @@
+KW_DIR = c:\kw4
+KWG_DIR = c:\knowledgewright_guide_current
+KWS_DIR = c:\knowledgewright_support_current
+HERE = c:\amzi\dev\kw4\src
+
+all: guide support
+
+guide:
+	@echo *** making guide ***
+	-mkdir $(KWG_DIR)
+	xcopy  $(KW_DIR)\* $(KWG_DIR) /S
+	del /Q /S $(KWG_DIR)\runtime\java
+	del /Q /S $(KWG_DIR)\runtime\cgi\acgi
+	rmdir $(KWG_DIR)\runtime\cgi\acgi
+	del /Q $(KWG_DIR)\runtime\cgi\kwcgisupport.*
+	del  $(KWG_DIR)\runtime\cgi\printer_1.kb
+	del /Q /S $(KWG_DIR)\runtime\delphi
+	rmdir $(KWG_DIR)\runtime\delphi
+	del /S $(KWG_DIR)\runtime\java
+	rmdir $(KWG_DIR)\runtime\java\amzi\ls
+	rmdir $(KWG_DIR)\runtime\java\amzi
+	rmdir $(KWG_DIR)\runtime\java
+	del /Q /S $(KWG_DIR)\runtime\vb
+	rmdir $(KWG_DIR)\runtime\vb
+	del /Q $(KWG_DIR)\runtime\cgi\*.pro
+	del  $(KWG_DIR)\runtime\servlet\servlet_run.jpx
+	del /Q $(KWG_DIR)\runtime\servlet\*.java
+	del /Q $(KWG_DIR)\runtime\servlet\WEB-INF\classes\amzi\ls\*.java
+	del /Q /S $(KWG_DIR)\samples\support
+	rmdir $(KWG_DIR)\samples\support\tutorial
+	rmdir $(KWG_DIR)\samples\support
+	del /Q $(KWG_DIR)\workshop\jigs\support.*
+	del /Q /S $(KWG_DIR)\docs\jigs\support
+	rmdir $(KWG_DIR)\docs\jigs\support
+	del /Q $(KWG_DIR)\docs\jigs\*support*.html
+	copy $(KWG_DIR)\docs\jigs\jigs_basic_tutorial.html $(KWG_DIR)\docs\jigs\jigs_tutorial.html
+	copy $(HERE)\docs\knowledgewright_guide.html $(KWG_DIR)\docs\knowledgewright_manual.html
+
+support:
+	@echo *** making support ***
+	-mkdir $(KWS_DIR)
+	xcopy $(KW_DIR)\* $(KWS_DIR) /S
+	del /Q /S $(KWS_DIR)\runtime\java
+	del /Q /S $(KWS_DIR)\runtime\cgi\acgi
+	rmdir $(KWS_DIR)\runtime\cgi\acgi
+	del /Q $(KWS_DIR)\runtime\cgi\kwcgibasic.*
+	del  $(KWS_DIR)\runtime\cgi\hello_1.kb
+	del /Q /S $(KWS_DIR)\runtime\delphi
+	rmdir $(KWS_DIR)\runtime\delphi
+	del /Q /S $(KWS_DIR)\runtime\java
+	rmdir $(KWS_DIR)\runtime\java\amzi\ls
+	rmdir $(KWS_DIR)\runtime\java\amzi
+	rmdir $(KWS_DIR)\runtime\java
+	del /Q /S $(KWS_DIR)\runtime\vb
+	rmdir $(KWS_DIR)\runtime\vb
+	del /Q $(KWS_DIR)\runtime\cgi\*.pro
+	del  $(KWS_DIR)\runtime\servlet\servlet_run.jpx
+	del /Q $(KWS_DIR)\runtime\servlet\*.java
+	del /Q $(KWS_DIR)\runtime\servlet\WEB-INF\classes\amzi\ls\*.java
+	del /Q $(KWS_DIR)\samples\basic\*.*
+	copy $(KWS_DIR)\docs\jigs\jigs_support_tutorial.html $(KWS_DIR)\docs\jigs\jigs_tutorial.html
+	copy $(HERE)\docs\knowledgewright_support.html $(KWS_DIR)\docs\knowledgewright_manual.html

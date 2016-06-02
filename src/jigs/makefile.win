@@ -1,0 +1,29 @@
+.SUFFIXES: .plm .pro
+
+OBJECTS = acgi.plm exception.plm fact_finder.plm formats.plm kwi.plm logging.plm main.plm session_handler.plm utilities.plm
+
+KW_DIR = c:\kw4
+HERE = c:\amzi\dev\kw4\src
+
+_all: _jigs
+
+.pro.plm:
+        acmp $<
+
+_jigs: basic\basic_reasoner.plm support\support_reasoner.plm ucwa\ucwa_reasoner.plm $(OBJECTS)
+        @echo *** building jigs ***
+        alnk basic.xpl basic\basic_reasoner.plm $(AMZI_DIR)\abin\date_time.plm $(AMZI_DIR)\abin\list.plm $(AMZI_DIR)\abin\aodbc.plm $(OBJECTS)
+        alnk support.xpl support\support_reasoner.plm $(AMZI_DIR)\abin\date_time.plm $(AMZI_DIR)\abin\list.plm $(AMZI_DIR)\abin\aodbc.plm $(OBJECTS)
+        alnk ucwa.xpl ucwa\ucwa_reasoner.plm $(AMZI_DIR)\abin\date_time.plm $(AMZI_DIR)\abin\list.plm $(AMZI_DIR)\abin\aodbc.plm $(OBJECTS)
+        copy basic.xpl $(KW_DIR)\workshop\jigs
+        copy basic\basic.jig $(KW_DIR)\workshop\jigs
+        copy support.xpl $(KW_DIR)\workshop\jigs
+        copy support\support.jig $(KW_DIR)\workshop\jigs
+        copy basic.xpl $(HERE)\ide\jigs
+        copy basic\basic.jig $(HERE)\ide\jigs
+        copy support.xpl $(HERE)\ide\jigs
+        copy support\support.jig $(HERE)\ide\jigs
+        copy basic.xpl $(KW_DIR)\runtime\cgi\kwcgibasic.xpl
+        copy support.xpl $(KW_DIR)\runtime\cgi\kwcgisupport.xpl
+        copy basic.xpl $(KW_DIR)\runtime\cgi\kwtestcgi.xpl
+

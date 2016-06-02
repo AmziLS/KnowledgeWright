@@ -1,0 +1,19 @@
+KW_DIR = c:\kw4
+
+_all: _vbnet
+
+_vbnet:
+        @echo *** making vb runtime ***
+        copy vbnet_run.sln $(KW_DIR)\runtime\vbnet
+        copy vbnet_run.suo $(KW_DIR)\runtime\vbnet
+        copy vbnet_run.vbproj $(KW_DIR)\runtime\vbnet
+        copy vbnet_run.vbproj.user $(KW_DIR)\runtime\vbnet
+        copy AssemblyInfo.vb $(KW_DIR)\runtime\vbnet
+        copy listInput.resX $(KW_DIR)\runtime\vbnet
+        copy listInput.vb $(KW_DIR)\runtime\vbnet
+        copy mainform.resX $(KW_DIR)\runtime\vbnet
+        copy mainform.vb $(KW_DIR)\runtime\vbnet
+        copy %AMZI_DIR%\bin\amzinet.dll $(KW_DIR)\runtime\vbnet\bin
+        copy bin\AxInterop.MSComctlLib.dll $(KW_DIR)\runtime\vbnet\bin
+        copy bin\Interop.MSComctlLib.dll $(KW_DIR)\runtime\vbnet\bin
+        copy bin\vbnet_run.exe $(KW_DIR)\runtime\vbnet\bin

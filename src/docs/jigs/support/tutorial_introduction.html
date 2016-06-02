@@ -1,0 +1,103 @@
+<HTML><!-- #BeginTemplate "/Templates/chapter_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>KnowledgeWright Support Introduction</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h1><img src="../../images/knowledgewright.gif" align="absmiddle" width="99" height="99"> 
+  <font color="#990000"><!-- #BeginEditable "Title" -->KnowledgeWright Support 
+  Introduction<!-- #EndEditable --></font> </h1>
+<hr>
+<!-- #BeginEditable "Contents" --> 
+<h2><a name="dennis"></a><font color="#990000">Introduction</font></h2>
+<p>KnowledgeWright Support is a KnowledgeWright Jig that is specifically designed 
+  to find a solution that matches the user's problem. It is ideal for a wide range 
+  of support problems including software support, hardware problem diagnosis and 
+  common problem resolution..</p>
+<p>KnowledgeWright Support includes all the powerful features of KnowledgeWright 
+  Basic. This provides a variety of ways to specify multiple levels of rules, 
+  access data from internal or external tables, use sophisticated document formatting 
+  and much more. Please see the <a href="tutorial_introduction.html">Support 
+  Tutorial Introduction</a> for a more information on these capabilities.</p>
+<p>When looking at any knowledgebase or expert system tool, there are two key 
+  factors that tell a lot about the system.</p>
+<ol>
+  <ol>
+    <li>The way data used by the system is represented, and</li>
+    <li>The reasoning strategy used to apply the rules to the data.</li>
+  </ol>
+</ol>
+<p>The Support Jig extends the data representations available in the Basic Jig 
+  by adding solution and external_action objects, and changes the reasoning strategy 
+  by focusing on finding a matching soltuion object as a goal.</p>
+<h3><a name="solutions"></a>Solution Objects</h3>
+<p> 
+  <! AMZI_INDEX = solution>
+  The foundation of the Support Jig are solution objects. Each solution consists 
+  of:</p>
+<ul>
+  <li>The priority of this solution. The reasoning engine examines higher priority 
+    solutions first. In general you want more common or more general problems 
+    to be examined first.</li>
+  <li>The environment this solution applies to. For software support, this may 
+    be an operating system name/version and a product component and version. For 
+    hardware support, this may be a model number or a component name.</li>
+  <li>The conditions this solution applies to. These are the circumstances under 
+    which this solution applies. For software, this might be the error message 
+    or problem type. For hardware, it can be the status of certain indicators 
+    (e.g. lights) or symptoms of the problem.</li>
+  <li>A description of the problem to display to the user.</li>
+  <li>The fix or solution of the problem to display to the user.</li>
+  <li>A list of actions to perform when this solution is selected by the reasoning 
+    engine. </li>
+</ul>
+<h3><a name="external_action_objects"></a>External_Action Objects</h3>
+<p> 
+  <! AMZI_INDEX = external_action>
+  Since support systems can rarely answer every user's problem, most systems need 
+  to forward unsolved problems to human technical support personnel. The external_action 
+  object provides the ability to do this. External actions are implemented by 
+  the calling program, whether it be a CGI interface, JSP/ASP or Java, Delphi 
+  or Visual Basic application. The CGI interface implements an external action 
+  to send an email.</p>
+<h3><a name="reasoning"></a>Reasoning</h3>
+<p> 
+  <! AMZI_INDEX = goal-driven; reasoning engine>
+  KnowledgeWright Support uses what is called <b>goal-driven</b> reasoning. This 
+  means it starts with the goal of finding a solution object that matches the 
+  user's environment and problem conditions.</p>
+<p>The reasoning engine starts by making a list of all the solutions in the knowledgebase 
+  and puts them in priority order, with the ones with the lowest priority coming 
+  first and those with the highest priority coming last.</p>
+<p>Starting with the first solution, it first tries to determine if the environment 
+  conditions are true. So the goal of the system is to prove the first environment 
+  condition. For example, if the environment condition is printer_type = &quot;inkjet&quot;, 
+  now the first sub-goal of the system is to determine a value for printer_type. 
+</p>
+<p>First it looks to see if there is a fact named printer_type. If not, then it 
+  would look for rule_sets or rules_tables that can provide a value for printer_type. 
+  If not, then it would look for a question named printer_type that it can ask 
+  the user.</p>
+<p>(In the case of rule_sets or rules_tables, additional sub-goals may need to 
+  be proven. This can lead to a very sophisticated reasoning process. See the 
+  Basic Jig for details on this.)</p>
+<p>Provided there is a question for printer_type, and the user enters &quot;inkjet&quot; 
+  then the reasoning engine goes on to the next environment condition until all 
+  of them have been proven. Once the environment matches, the reasoning process 
+  works its way through all the conditions. If at any time an environment or condition 
+  does not match, that solution is removed from the list of possible solutions, 
+  and the reasoning process starts again with the next solution.</p>
+<h3><a name="the_web"></a>The Web</h3>
+<p> 
+  <! AMZI_INDEX = HTML; web>
+  Of course, the text objects can all contain HTML for deployment on the Web. 
+  But this is enough talk, its time to start playing with the system.</p>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

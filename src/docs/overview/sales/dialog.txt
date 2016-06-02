@@ -1,0 +1,94 @@
+Welcome
+
+system = KnowledgeWright Sales
+version = 4-1-1
+
+
+KnowledgeWright is a tool for developing, maintaining, testing
+and deploying knowledge-base or expert systems. It provides quicker
+and easier development by having knowledge objects that are intuitive
+to use, a powerful development environment, and multiple deployment
+options. <p>
+Is this of interest to you?
+1: yes
+2: no
+Enter your choice >  1
+
+
+What type of knowledge base or expert system are you interested in building?
+1: sales support
+2: technical support
+3: basic advice
+4: indentification
+5: configuration
+6: other
+Enter your choice >  3
+
+general_benefit_question
+yes
+
+benefit
+Benefit:
+KnowledgeWright includes a number of
+pre-built jigs for different types of
+applications. For a basic advice giving
+system such as yours, the Basic Jig will
+provide the right level of tools for expressing
+the application.
+Feature:
+KnowledgeWright Basic Jig, designed for basic
+advice seeking applications.
+
+
+How do you intend to deploy the system?
+1: stand-alone
+2: Web
+3: component of larger application
+Enter your choice >  2
+
+benefit
+Benefit:
+KnowledgeWright jigs allow for the
+specification of dynamically created output documents,
+which can be HTML.  These documents can contain 'placeholders'
+whose values are filled in as the application gains more
+knowledge about a particular session with a user.
+Feature:
+KnowledgeWright Jigs, document objects.
+
+benefit
+Benefit:
+For Web deployment, KnowledgeWright
+question objects are formatted as HTML queries, so
+the dialog between the expert system and the user
+can be carried out on a Web page.
+Feature:
+KnowledgeWright Jigs, question and
+format_document objects.
+
+
+What type of institution will be using the application/software?
+1: personal
+2: academic
+3: consulting
+4: commercial
+5: government
+Enter your choice >  4
+
+proposal
+Based on what we've determined so far, here's our proposal:
+
+Download the latest version of KnowledgeWright from the Web site.
+
+use it
+
+Being in a commercial or government institution, you can download and use the software at no charge during evaluation.  Once
+you have decided to use the software, then you will need to purchase a commercial license.
+
+
+
+no more for i1
+done
+
+yes
+?- 

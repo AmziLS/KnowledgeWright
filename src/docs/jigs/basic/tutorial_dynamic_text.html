@@ -1,0 +1,72 @@
+<HTML><!-- #BeginTemplate "/Templates/section_page.dwt" -->
+<HEAD>
+<!-- #BeginEditable "doctitle" --> 
+<TITLE>Tutorial: Dynamic Text</TITLE>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" link="#CC0000" vlink="#990000" alink="#FFCC00">
+<h2><font color="#990000"> <font color="#990000"><!-- #BeginEditable "Title" -->Dynamic Text<!-- #EndEditable --></font></font> 
+</h2>
+<!-- #BeginEditable "Contents" --> 
+<h3>The second &quot;hello&quot; application</h3>
+<p>samples/basic/tutorial/hello_2</p>
+<p><! AMZI_INDEX = text; goals; hello>Now it's time to make hello smarter with 
+  a text object. Text objects have textual values that can have embedded goals 
+  in them. So, instead of a simple-valued fact for hello, this time we'll use 
+  a text object that has the embedded goal of putting your name in the message.</p>
+<h3>Set the goal hello &amp; create the text object 'hello'</h3>
+<ol>
+  <ol>
+    <li>Create a new knowledgebase called hello_2.</li>
+    <li>Edit the <b>knowledgebase</b> object, <i>main</i>, to set the goal to 
+      hello, as in the hello_1 sample.</li>
+    <li>Create a new <b>text</b> object, called <i>hello</i>, using the Object/New 
+      menu.</li>
+    <li>In the field labeled text, enter &quot;Hello %name%, welcome!&quot;, only 
+      this time without the &quot;s. You don't need to enter the &quot;s in fields 
+      that are known to only contain textual values, as opposed to numbers.</li>
+  </ol>
+</ol>
+<p><img src="hello_2a.png" width="698" height="579"></p>
+<p>The %name% is the embedded goal. It means, don't actually provide a value for 
+  this text object until we've satisfied the goal <b>name</b>, and put that value 
+  in the text string.</p>
+<h3>Create the question 'name'</h3>
+<p><! AMZI_INDEX = question>How do we find a value for the goal <b>name</b>? Well, 
+  let's ask the user. To do that we create a question object.</p>
+<ol>
+  <ol>
+    <li>Create a new <b>question</b> object and name it <i>name</i>.</li>
+    <li>Pick the type, fill_in_the_blank. Notice the fields change.</li>
+    <li>Select an answer type of text, and a length of a good length.</li>
+    <li>Fill in the prompt field with: &quot;What is your name?&quot;, without 
+      the &quot;s.</li>
+    <li>Save &amp; close the question object.</li>
+    <li>Save the knowledgebase.</li>
+  </ol>
+</ol>
+<h3>Run it</h3>
+<ol>
+  <ol>
+    <li>Select run/run</li>
+    <li>Notice that you are immediately asked your name. Enter it.</li>
+  </ol>
+</ol>
+<p><img src="hello_2b.png" width="698" height="579"></p>
+<p>We can look at more detail of the four panels presented here.</p>
+<blockquote> 
+  <p>Upper Left - The current state of the system, including the unsolved goals 
+    (probably none, represented as [], at the end), and what is known.</p>
+  <p>Lower Left - A trace of the reasoning process. Note the interruption as the 
+    user is asked a question.</p>
+  <p>Upper Right - The goal.</p>
+  <p>Lower Right - The output values of the goal.</p>
+</blockquote>
+<!-- #EndEditable --> 
+<hr>
+<!-- #BeginLibraryItem "/Library/Copyright.lbi" --><i><font size="-2">Copyright &copy;1996-2002 Amzi! inc. All Rights Reserved. Amzi!, 
+KnowledgeWright and WebLS are registered trademarks and Subscription Plus and 
+Logic Server are trademarks of Amzi! inc.</font></i><!-- #EndLibraryItem --></BODY>
+<!-- #EndTemplate --></HTML>

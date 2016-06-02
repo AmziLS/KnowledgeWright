@@ -1,0 +1,79 @@
+knowledgewright_jig(basic).
+
+
+
+% folder
+
+
+
+% knowledgebase
+
+knowledgebase(main, /, [
+   id = main,
+   path = '[]',
+   description = $$,
+   goals = [color],
+   odbc = $$
+   ]).
+
+
+
+% fact
+
+
+
+% question
+
+question(mood, /, [
+   question_style = list,
+   prompt = text($What's the mood?$),
+   question_type = menu_single_choice,
+   choices = [$mellow$,$restless$],
+   answer_type = text,
+   length = 20,
+   default = $$,
+   ask_also = '[]'
+   ]).
+
+
+
+% sql
+
+
+
+% rule
+
+rule(color, /, [
+   id = color,
+   path = '[]',
+   description = $$,
+   type = single_value,
+   rules = [[value,conditions],[text($blue$),mood = $mellow$],[text($orange$),mood = $restless$]]
+   ]).
+
+
+
+% table
+
+
+
+% text
+
+
+
+% question_document
+
+question_document(standard, /, [
+   id = standard,
+   path = '[]',
+   description = $$,
+   separator = $<P>$,
+   item_separator = $<BR>$,
+   top = $<HTML><HEAD></HEAD><BODY>
+<FORM METHOD="POST" ACTION="/cgi-bin/kwcgi.exe">$,
+   bottom = $<INPUT NAME="Submit" TYPE="Submit" VALUE="Submit"></INPUT>
+<INPUT TYPE="Reset" VALUE="Reset"></INPUT>
+</FORM>
+</BODY></HTML>$
+   ]).
+
